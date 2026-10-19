@@ -399,7 +399,9 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .project-head h1 {
-  margin: 0 0 clamp(20px, 2.5vw, 32px);
+  margin: 0;
+  padding-bottom: clamp(20px, 2.5vw, 32px);
+  border-bottom: 1px solid var(--ink); /* full-width rule above the details */
   font-size: clamp(2rem, 4.2vw, 3.6rem);
   font-weight: 700;
   letter-spacing: -0.025em;
@@ -413,7 +415,22 @@ html.menu-entering .layout > :not(.menu) {
   gap: 14px 24px;
   margin: 0 0 28px;
   padding-top: 14px;
-  border-top: 1px solid var(--ink);
+}
+
+/* desktop: details span exactly the paragraph's width — first item at the left
+   edge, last item's right edge on the paragraph's right edge. Same font size and
+   ch limit as .lede, so the widths match. */
+@media (min-width: 761px) {
+  .meta {
+    display: flex;
+    justify-content: space-between;
+    max-width: 75ch;
+    font-size: 1.05rem;
+  }
+
+  .meta dd {
+    font-size: 0.9375rem;
+  }
 }
 
 .meta dt {
