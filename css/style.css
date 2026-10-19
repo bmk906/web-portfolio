@@ -9,6 +9,23 @@
   font-display: swap;
 }
 
+/* Gandhi Sans — on trial for the desktop resume */
+@font-face {
+  font-family: "Gandhi Sans";
+  src: url("../assets/fonts/GandhiSans-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gandhi Sans";
+  src: url("../assets/fonts/GandhiSans-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- Tokens ---------- */
 
 :root {
@@ -470,6 +487,13 @@ img {
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   column-gap: clamp(32px, 4vw, 64px);
   border-top: 1px solid var(--ink);
+}
+
+/* TRIAL: Gandhi Sans for all resume text on desktop. Delete this block to revert to Arial. */
+@media (min-width: 761px) {
+  .resume {
+    font-family: "Gandhi Sans", var(--font);
+  }
 }
 
 /* desktop: skills/software span both rows on the right, so Previous Experience
