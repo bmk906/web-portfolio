@@ -84,7 +84,7 @@
     function shrinkAt(y) {
       if (!desktop.matches || !practiceStrip || !resume) return 0;
       const strip = practiceStrip.getBoundingClientRect();
-      const start = scrollY + strip.top + strip.height / 2 - header.getBoundingClientRect().bottom;
+      const start = scrollY + strip.top + strip.height / 2 - header.offsetHeight; // header is pinned at the top; offsetHeight ignores its slide
       const end = scrollY + resume.getBoundingClientRect().top - innerHeight * ACTIVE_LINE;
       if (end <= start) return y >= end ? 1 : 0;
       return Math.min(1, Math.max(0, (y - start) / (end - start)));
@@ -137,6 +137,7 @@
 
         menuLocked = true;
         menu.classList.add("is-resizing");
+        document.documentElement.classList.add("is-resizing"); // header slides in step
         setShrink(shrinkAt(destY));
 
         const scrolled = new Promise((done) => {
@@ -147,6 +148,7 @@
         Promise.all([scrolled, resized]).then(() => {
           menuLocked = false;
           menu.classList.remove("is-resizing");
+          document.documentElement.classList.remove("is-resizing");
           update();
         });
       });

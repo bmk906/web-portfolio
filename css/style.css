@@ -168,13 +168,21 @@ html.menu-entering .layout > :not(.menu) {
   border-bottom: 1px solid var(--ink);
 }
 
-/* desktop: header stays pinned while scrolling */
+/* desktop, home page: header stays pinned while browsing projects, then slides up
+   out of view on the way to the resume, in step with the menu shrinking
+   (--menu-shrink, 0 → 1, set by main.js). Project pages: header scrolls away. */
 @media (min-width: 761px) {
-  .site-header {
+  body[data-page="index"] .site-header {
     position: sticky;
     top: 0;
     z-index: 20;
     background: var(--paper);
+    transform: translateY(calc(-100% * var(--menu-shrink, 0)));
+  }
+
+  /* menu click: the header slides with the same timing as the menu resize */
+  html.is-resizing .site-header {
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
@@ -214,7 +222,8 @@ html.menu-entering .layout > :not(.menu) {
 /* box hugs the words, so between pages the menu scales evenly instead of stretching */
 .menu {
   position: sticky;
-  top: calc(var(--header-h) + var(--top));
+  /* below the pinned header; moves up as the header slides away (home page) */
+  top: calc(var(--header-h) * (1 - var(--menu-shrink, 0)) + var(--top));
   align-self: start;
   justify-self: start;
   width: max-content;
@@ -248,6 +257,10 @@ html.menu-entering .layout > :not(.menu) {
 /* menu click on the home page: size change matches the page-transition timing */
 .menu.is-resizing a {
   transition: color 0.25s, font-size 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.menu.is-resizing {
+  transition: top 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* desktop project pages: smaller menu in a narrower column, so the project gets the room */
@@ -557,7 +570,8 @@ html.menu-entering .layout > :not(.menu) {
   margin-left: calc(-1 * var(--resume-pull, 0px)); /* widen leftward; set by main.js */
   margin-top: 22vh;
   padding-bottom: 64px;
-  min-height: calc(100vh - var(--header-h) - 2 * var(--top));
+  min-height: calc(100vh - 2 * var(--top));
+  scroll-margin-top: var(--top); /* the header has slid away by the time the resume is active */
 }
 
 .resume-top {
