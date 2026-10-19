@@ -188,19 +188,31 @@
       ["Location", p.location],
       ["Type", p.type],
       [p.category === "academic" ? "Studio" : "Office / Role", p.context],
+      ["Collaborators", p.collaborators],
     ]
       .filter(([, v]) => v)
       .map(([k, v]) => `<div><dt>${k}</dt><dd>${escapeHTML(v)}</dd></div>`)
       .join("");
 
+    const summary = [].concat(p.summary).map((para) => `<p>${escapeHTML(para)}</p>`).join("");
+
+    const image = (img) => `<img src="${img.src}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">`;
+    const caption = (text) => (text ? `<figcaption>${escapeHTML(text)}</figcaption>` : "");
+
+    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid", images }
     const gallery = p.images
-      .map(
-        (img) => `
-      <figure>
-        <img src="${img.src}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">
-        ${img.caption ? `<figcaption>${escapeHTML(img.caption)}</figcaption>` : ""}
-      </figure>`
-      )
+      .map((block) => {
+        if (!block.layout) return `<figure>${image(block)}${caption(block.caption)}</figure>`;
+        const style =
+          block.layout === "bands"
+            ? ` style="--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}"`
+            : "";
+        return `
+      <figure class="gallery-${block.layout}"${style}>
+        <div class="gallery-group">${block.images.map(image).join("")}</div>
+        ${caption(block.caption)}
+      </figure>`;
+      })
       .join("");
 
     root.innerHTML = `
@@ -208,7 +220,7 @@
         <p class="eyebrow">${code(p)} &nbsp;/&nbsp; ${cat.label}</p>
         <h1>${escapeHTML(p.title)}</h1>
         <dl class="meta">${meta}</dl>
-        <p class="lede">${escapeHTML(p.summary)}</p>
+        <div class="lede">${summary}</div>
       </header>
       <div class="gallery">${gallery}</div>
       <nav class="pager" aria-label="More projects">

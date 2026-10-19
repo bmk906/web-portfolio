@@ -407,10 +407,18 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .lede {
-  max-width: 58ch;
+  max-width: 62ch;
   margin: 0 0 clamp(32px, 4vw, 56px);
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+.lede p {
+  margin: 0;
+}
+
+.lede p + p {
+  margin-top: 1em;
 }
 
 .gallery figure {
@@ -428,6 +436,30 @@ html.menu-entering .layout > :not(.menu) {
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   color: var(--mute);
+}
+
+/* image groups (see projects.js) */
+.gallery-stack .gallery-group,
+.gallery-bands .gallery-group {
+  display: grid; /* no gap: related drawings read as one */
+}
+
+.gallery-bands img {
+  aspect-ratio: var(--band-ratio);
+  object-fit: cover;
+  object-position: var(--band-focus);
+}
+
+.gallery-grid .gallery-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 14px);
+}
+
+@media (max-width: 760px) {
+  .gallery-grid .gallery-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .pager {
