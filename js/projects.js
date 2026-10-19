@@ -21,7 +21,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 3;
+const IMAGE_VERSION = 4;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -45,7 +45,7 @@ const PROJECTS = [
     images: [
       { src: "assets/img/projects/sinusoidal/site-plan.jpg", caption: "Site plan" },
       {
-        src: "assets/img/projects/sinusoidal/01.png", // labels are part of the image
+        src: "assets/img/projects/sinusoidal/01.jpg", // labels are part of the image; saved at high quality (95) for crisp text
         caption: "Form Exploration",
         mobileList: [
           "01 Cell Division",
