@@ -177,7 +177,7 @@
     const next = PROJECTS[(i + 1) % PROJECTS.length];
     const cat = CATEGORIES.find((c) => c.id === p.category);
 
-    document.title = p.title + " — " + document.title;
+    document.title = p.title + " - " + document.title;
     setActiveMenu(p.category);
 
     const meta = [
