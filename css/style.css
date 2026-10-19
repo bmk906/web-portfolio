@@ -207,7 +207,9 @@ img {
 
 .menu a {
   display: block; /* height comes from the word alone, so it scales with font-size */
-  font-size: clamp(2.16rem, 4.05vw, 3.51rem); /* 1.35 × the name */
+  /* 1.35 × the name, easing down to the name's size as --menu-shrink goes 0 → 1
+     (set by main.js on the home page as you scroll toward the resume) */
+  font-size: calc(clamp(2.16rem, 4.05vw, 3.51rem) * (1 - (1 - 1 / 1.35) * var(--menu-shrink, 0)));
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 0.92;
@@ -219,6 +221,11 @@ img {
 .menu a:hover,
 .menu a.is-active {
   color: var(--ink);
+}
+
+/* menu click on the home page: size change matches the page-transition timing */
+.menu.is-resizing a {
+  transition: color 0.25s, font-size 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* desktop project pages: smaller menu in a narrower column, so the project gets the room */

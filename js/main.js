@@ -67,25 +67,79 @@
     const fromHash = sections.find((s) => "#" + s.id === location.hash);
     activate((fromHash || sections[0]).id);
 
-    // Active section = the last one whose top has passed ~1/3 down the viewport
-    window.addEventListener(
-      "scroll",
-      () => {
-        const line = innerHeight * 0.35;
-        const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop() || sections[0];
-        activate(current.id);
-      },
-      { passive: true }
-    );
+    /* Desktop: the menu shrinks to project-page size on the way down to the resume.
+       0 = full size, 1 = project-page size. Starts when the Practice strips are half
+       hidden behind the header; ends when the resume becomes active (un-greyed). */
+    const desktop = matchMedia("(min-width: 761px)");
+    const menu = document.querySelector(".menu");
+    const practiceStrip = document.querySelector("#practice .strip-frame");
+    const resume = document.getElementById("resume");
+    const ACTIVE_LINE = 0.35; // fraction of viewport height a section's top must pass to become active
+    let menuLocked = false; // while a menu click animates the size, scrolling doesn't drive it
 
-    // Arriving from another page with #section: jump there once the name font has loaded,
-    // since it changes the header height
+    function shrinkAt(y) {
+      if (!desktop.matches || !practiceStrip || !resume) return 0;
+      const strip = practiceStrip.getBoundingClientRect();
+      const start = scrollY + strip.top + strip.height / 2 - header.getBoundingClientRect().bottom;
+      const end = scrollY + resume.getBoundingClientRect().top - innerHeight * ACTIVE_LINE;
+      if (end <= start) return y >= end ? 1 : 0;
+      return Math.min(1, Math.max(0, (y - start) / (end - start)));
+    }
+
+    function setShrink(p) {
+      document.documentElement.style.setProperty("--menu-shrink", p.toFixed(4));
+    }
+
+    function update() {
+      const line = innerHeight * ACTIVE_LINE;
+      const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop() || sections[0];
+      activate(current.id);
+      if (!menuLocked) setShrink(shrinkAt(scrollY));
+    }
+
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    // Menu click: animate straight to the destination's size (same timing as the
+    // page transition) while the page scrolls, then hand control back to scrolling
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => {
+        const target = document.getElementById(a.dataset.target);
+        if (!target || !desktop.matches) return;
+
+        const margin = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+        const maxY = document.documentElement.scrollHeight - innerHeight;
+        const destY = Math.min(maxY, scrollY + target.getBoundingClientRect().top - margin);
+
+        menuLocked = true;
+        menu.classList.add("is-resizing");
+        setShrink(shrinkAt(destY));
+
+        const scrolled = new Promise((done) => {
+          addEventListener("scrollend", done, { once: true });
+          setTimeout(done, 1200); // no scrollend (already there, or unsupported)
+        });
+        const resized = new Promise((done) => setTimeout(done, 550));
+        Promise.all([scrolled, resized]).then(() => {
+          menuLocked = false;
+          menu.classList.remove("is-resizing");
+          update();
+        });
+      });
+    });
+
+    // Arriving from another page with #section: jump there now so the first frame
+    // (and the page transition) shows the right menu size, then again once the
+    // name font has loaded, since it changes the header height
     if (fromHash) {
+      fromHash.scrollIntoView({ behavior: "instant" });
       document.fonts.ready.then(() => {
         setHeaderHeight();
         fromHash.scrollIntoView({ behavior: "instant" });
+        update();
       });
     }
+    update();
   }
 
   /* ---------- Project ---------- */
