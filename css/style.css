@@ -132,6 +132,11 @@ img {
   }
 }
 
+/* same fade for browsers without cross-page View Transitions (class set by main.js) */
+.page-enter .layout > :not(.menu) {
+  animation: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s both page-in;
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),

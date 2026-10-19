@@ -267,4 +267,49 @@
 
   if (page === "index") renderIndex();
   if (page === "project") renderProject();
+
+  /* ---------- Page-change animation for browsers without cross-page View Transitions ----------
+     Chrome/Edge/Safari animate the menu between pages natively (see style.css). Elsewhere
+     (e.g. Firefox), remember the menu's size when leaving a page, then on the next page
+     start the menu at that size and ease it to its own size, fading the content in. */
+
+  const nativePageTransitions = "PageRevealEvent" in window;
+  const isDesktop = () => matchMedia("(min-width: 761px)").matches;
+  const MENU_KEY = "menuSizeOnLeave";
+
+  if (!nativePageTransitions) {
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[href]");
+      if (!a || !isDesktop() || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      const to = new URL(a.href, location.href);
+      const sameDocument = to.pathname === location.pathname && to.search === location.search;
+      if (to.origin !== location.origin || sameDocument) return; // in-page links animate on their own
+      const size = parseFloat(getComputedStyle(document.querySelector(".menu a")).fontSize);
+      try {
+        sessionStorage.setItem(MENU_KEY, JSON.stringify({ size, at: Date.now() }));
+      } catch (err) {}
+    });
+
+    let saved = null;
+    try {
+      saved = JSON.parse(sessionStorage.getItem(MENU_KEY));
+      sessionStorage.removeItem(MENU_KEY);
+    } catch (err) {}
+
+    if (saved && Date.now() - saved.at < 3000 && isDesktop()) {
+      const menu = document.querySelector(".menu");
+      const links = menu.querySelectorAll("a");
+
+      links.forEach((a) => (a.style.fontSize = saved.size + "px")); // start at the old page's size
+      void menu.offsetWidth; // commit it before turning the transition on
+      menu.classList.add("is-resizing");
+      links.forEach((a) => (a.style.fontSize = "")); // ease to this page's size
+      document.body.classList.add("page-enter");
+
+      setTimeout(() => {
+        menu.classList.remove("is-resizing");
+        document.body.classList.remove("page-enter");
+      }, 600);
+    }
+  }
 })();
