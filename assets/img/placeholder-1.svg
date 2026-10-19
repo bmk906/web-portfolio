@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" width="1500" height="1000">
+  <defs>
+    <pattern id="fins" width="60" height="1000" patternUnits="userSpaceOnUse">
+      <rect width="22" height="1000" fill="#1d1d1b"/>
+    </pattern>
+  </defs>
+  <rect width="1500" height="1000" fill="#d2aa4e"/>
+  <rect width="900" height="1000" fill="url(#fins)"/>
+  <polygon points="900,0 1500,0 1500,1000 1180,1000" fill="#ece6d8"/>
+  <rect x="900" y="640" width="600" height="360" fill="#1d1d1b" opacity=".14"/>
+</svg>

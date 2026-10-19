@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" width="1500" height="1000">
+  <defs>
+    <pattern id="form" width="250" height="200" patternUnits="userSpaceOnUse">
+      <rect width="250" height="200" fill="none" stroke="#a49e93" stroke-width="3"/>
+      <circle cx="62" cy="50" r="7" fill="#76716a"/>
+      <circle cx="188" cy="50" r="7" fill="#76716a"/>
+      <circle cx="62" cy="150" r="7" fill="#76716a"/>
+      <circle cx="188" cy="150" r="7" fill="#76716a"/>
+    </pattern>
+  </defs>
+  <rect width="1500" height="1000" fill="#bdb7ac"/>
+  <rect width="1500" height="1000" fill="url(#form)"/>
+  <rect y="700" width="1500" height="56" fill="#2b2a28"/>
+  <polygon points="0,756 1500,756 1500,1000 600,1000" fill="#2b2a28" opacity=".18"/>
+</svg>

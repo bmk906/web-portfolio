@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1000" width="1500" height="1000">
+  <defs>
+    <pattern id="mullion" width="150" height="200" patternUnits="userSpaceOnUse">
+      <rect width="150" height="200" fill="none" stroke="#283035" stroke-width="10"/>
+    </pattern>
+  </defs>
+  <rect width="1500" height="1000" fill="#7b8d99"/>
+  <rect x="300" y="200" width="150" height="400" fill="#c9d4da" opacity=".55"/>
+  <rect x="900" y="0" width="300" height="200" fill="#c9d4da" opacity=".45"/>
+  <rect x="1050" y="600" width="150" height="400" fill="#3d4a52" opacity=".6"/>
+  <polygon points="0,1000 0,620 1500,80 1500,460" fill="#fff" opacity=".12"/>
+  <rect width="1500" height="1000" fill="url(#mullion)"/>
+</svg>
