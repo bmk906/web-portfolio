@@ -140,6 +140,46 @@
       </nav>`;
   }
 
+  /* ---------- Header: stretch tagline to the width of the name ---------- */
+
+  function fitTagline() {
+    const name = document.querySelector(".name");
+    const tagline = document.querySelector(".tagline");
+    if (!name || !tagline) return;
+
+    const textWidth = (el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      return range.getBoundingClientRect().width;
+    };
+
+    // Blank space built into the first/last glyph, so we can align visible ink, not letter boxes
+    const ctx = document.createElement("canvas").getContext("2d");
+    const bearings = (el) => {
+      const cs = getComputedStyle(el);
+      ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+      const text = el.textContent.trim().toUpperCase();
+      const first = ctx.measureText(text[0]);
+      const last = ctx.measureText(text[text.length - 1]);
+      return { left: -first.actualBoundingBoxLeft, right: last.width - last.actualBoundingBoxRight };
+    };
+
+    tagline.style.letterSpacing = "0px";
+    tagline.style.marginLeft = "0px";
+    const n = bearings(name);
+    const t = bearings(tagline);
+    const nameInk = textWidth(name) - n.left - n.right;
+    const taglineInk = textWidth(tagline) - t.left - t.right;
+    const gaps = tagline.textContent.length - 1; // spacing after the last letter doesn't count
+
+    tagline.style.letterSpacing = Math.max(0, (nameInk - taglineInk) / gaps) + "px";
+    tagline.style.marginLeft = n.left - t.left + "px";
+  }
+
+  fitTagline();
+  document.fonts.ready.then(fitTagline);
+  window.addEventListener("resize", fitTagline);
+
   if (page === "index") renderIndex();
   if (page === "project") renderProject();
   if (page === "resume") setActiveMenu("resume");
