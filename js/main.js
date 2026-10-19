@@ -62,6 +62,7 @@
         s.classList.toggle("is-dim", s.id !== id);
       });
       setActiveMenu(id);
+      document.title = id === "resume" ? "Resume" : "Portfolio"; // tab shows what is on screen
     }
 
     const fromHash = sections.find((s) => "#" + s.id === location.hash);
@@ -177,7 +178,7 @@
     const next = PROJECTS[(i + 1) % PROJECTS.length];
     const cat = CATEGORIES.find((c) => c.id === p.category);
 
-    document.title = p.title + " - " + document.title;
+    document.title = p.title; // tab shows the project; link previews keep the HTML title
     setActiveMenu(p.category);
 
     const meta = [
