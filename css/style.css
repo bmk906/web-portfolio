@@ -463,29 +463,52 @@ img {
   margin: 0;
 }
 
-.resume-section {
+/* two columns, like the PDF: wide main column + narrow side column */
+.resume-body {
   display: grid;
-  grid-template-columns: minmax(110px, 1fr) 4fr;
-  gap: 8px 24px;
-  padding-block: 18px 22px;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  column-gap: clamp(32px, 4vw, 64px);
   border-top: 1px solid var(--ink);
 }
 
-.resume-section h3 {
-  margin: 2px 0 0;
+.resume-block {
+  padding-block: 18px 26px;
+}
+
+.resume-block + .resume-block {
+  border-top: 1px solid var(--faint);
+}
+
+.resume-block h3 {
+  margin: 0 0 12px;
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
-.resume-section p {
+.resume-block p {
   margin: 0;
-  max-width: 62ch;
+  max-width: 68ch;
+}
+
+.resume-profile {
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.plain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.plain-list li + li {
+  margin-top: 2px;
 }
 
 .entry + .entry {
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .entry-head {
@@ -499,6 +522,10 @@ img {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 700;
+}
+
+.entry-title {
+  font-weight: 400;
 }
 
 .entry-date {
@@ -519,12 +546,6 @@ img {
 
 .entry li + li {
   margin-top: 3px;
-}
-
-.inline-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 /* ---------- Mobile ---------- */
@@ -624,7 +645,12 @@ img {
     padding-top: 28px;
   }
 
-  .resume-section {
-    grid-template-columns: 1fr;
+  .resume-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* stacked: rule between the main column's last block and the side column's first */
+  .resume-col + .resume-col {
+    border-top: 1px solid var(--faint);
   }
 }
