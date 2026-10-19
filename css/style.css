@@ -522,7 +522,10 @@ img {
 /* ---------- Mobile ---------- */
 
 @media (max-width: 760px) {
+  /* rule runs edge to edge, like the menu bar below it */
   .site-header {
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
     padding-top: clamp(22px, 3vw, 38px);
   }
 

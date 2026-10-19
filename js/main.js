@@ -78,9 +78,13 @@
       { passive: true }
     );
 
-    if (location.hash) {
-      const target = document.getElementById(location.hash.slice(1));
-      if (target) target.scrollIntoView();
+    // Arriving from another page with #section: jump there once the name font has loaded,
+    // since it changes the header height
+    if (fromHash) {
+      document.fonts.ready.then(() => {
+        setHeaderHeight();
+        fromHash.scrollIntoView({ behavior: "instant" });
+      });
     }
   }
 
@@ -181,10 +185,12 @@
 
   // Sticky header (desktop): expose its height so the menu and scroll targets sit below it
   const header = document.querySelector(".site-header");
-  new ResizeObserver(() => {
+  function setHeaderHeight() {
     const sticky = getComputedStyle(header).position === "sticky";
     document.documentElement.style.setProperty("--header-h", sticky ? header.offsetHeight + "px" : "0px");
-  }).observe(header);
+  }
+  setHeaderHeight(); // now, so arriving at index.html#section lands below the header
+  new ResizeObserver(setHeaderHeight).observe(header);
 
   if (page === "index") renderIndex();
   if (page === "project") renderProject();
