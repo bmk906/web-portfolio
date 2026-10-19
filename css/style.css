@@ -540,8 +540,10 @@ img {
   flex-basis: 100%;
 }
 
-.edu-class {
-  display: none; /* "Class of" shows on mobile only */
+/* logo and "|" show on mobile only */
+.edu-logo,
+.edu-sep {
+  display: none;
 }
 
 .entry + .entry {
@@ -694,41 +696,46 @@ img {
     margin-left: 0.3em; /* matches the word space after it, which comes from the HTML */
   }
 
-  /* Education: degree in the display face on the left, a rule, then the details */
+  /* Education: logo on the left, a rule, then the details */
   .edu-list {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     column-gap: 14px;
   }
 
+  .edu-list li + li {
+    margin-top: 0; /* rows touch so the rule is continuous */
+  }
+
   .edu-school {
     display: contents; /* let its pieces sit directly in the grid */
   }
 
-  .edu-degree {
+  /* spans the 4 text lines: top of "University" to the bottom of the "g" in
+     "Program" (Arial at line-height 1.5; allows for the PNG's transparent edge) */
+  .edu-logo {
+    display: block;
     grid-column: 1;
     grid-row: 1 / span 4;
-    padding-right: 14px;
-    border-right: 1px solid var(--ink);
-    font-family: var(--display);
-    font-size: 2.2rem;
-    line-height: 0.9;
+    height: 5.83em;
+    width: auto;
+    margin-top: 0.17em;
+    filter: grayscale(1);
   }
 
   .edu-school strong,
-  .edu-year,
+  .edu-line,
   .edu-list > li:not(.edu-school) {
     grid-column: 2;
+    padding-left: 14px;
+    border-left: 1px solid var(--ink);
   }
 
-  .edu-school strong {
-    font-weight: 400;
-  }
-
-  .edu-class {
+  .edu-sep {
     display: inline;
   }
 
+  .edu-sep,
   .edu-year,
   .edu-list > li:not(.edu-school) {
     color: var(--mute);
