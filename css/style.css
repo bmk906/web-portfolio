@@ -151,7 +151,7 @@ img {
 
 .menu a {
   display: inline-block;
-  font-size: clamp(1.6rem, 3vw, 2.6rem); /* same as the name */
+  font-size: clamp(2.16rem, 4.05vw, 3.51rem); /* 1.35 × the name */
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 0.92;
@@ -165,16 +165,23 @@ img {
   color: var(--ink);
 }
 
+/* desktop project pages: smaller menu in a narrower column, so the project gets the room */
+@media (min-width: 761px) {
+  body[data-page="project"] .layout {
+    grid-template-columns: max-content minmax(0, 1fr);
+  }
+
+  body[data-page="project"] .menu a {
+    font-size: clamp(1.6rem, 3vw, 2.6rem); /* same as the name */
+  }
+}
+
 /* ---------- Home: categories + strips ---------- */
 
 .category {
   min-height: 72vh;
   scroll-margin-top: calc(var(--header-h) + var(--top));
   transition: opacity 0.45s;
-}
-
-.category:last-child {
-  min-height: calc(100vh - var(--header-h) - 2 * var(--top));
 }
 
 .category.is-dim {
@@ -374,8 +381,11 @@ img {
 
 /* ---------- Resume ---------- */
 
+/* extra space above keeps the resume mostly off screen while browsing projects */
 .resume {
+  margin-top: 22vh;
   padding-bottom: 64px;
+  min-height: calc(100vh - var(--header-h) - 2 * var(--top));
 }
 
 .resume-top {
@@ -383,6 +393,10 @@ img {
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
+}
+
+.resume-top .eyebrow {
+  margin: 0;
 }
 
 .resume-section {
@@ -393,7 +407,7 @@ img {
   border-top: 1px solid var(--ink);
 }
 
-.resume-section h2 {
+.resume-section h3 {
   margin: 2px 0 0;
   font-size: 0.68rem;
   font-weight: 700;
@@ -417,7 +431,7 @@ img {
   gap: 0 1rem;
 }
 
-.entry h3 {
+.entry h4 {
   margin: 0;
   font-size: 0.95rem;
   font-weight: 700;
@@ -486,12 +500,13 @@ img {
     scroll-margin-top: 56px;
   }
 
-  .category:last-child {
-    min-height: 65vh;
-  }
-
   .category.is-dim {
     opacity: 0.4;
+  }
+
+  .resume {
+    min-height: 0;
+    margin-top: 12vh;
   }
 
   /* strips scroll sideways */
@@ -536,8 +551,7 @@ img {
     margin-top: 3px;
   }
 
-  .project,
-  .resume {
+  .project {
     padding-top: 28px;
   }
 

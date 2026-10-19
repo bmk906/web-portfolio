@@ -5,9 +5,8 @@ Architecture Portfolio — plain HTML/CSS/JS, no build step.
 Open `index.html` in a browser. Everything works from the file system.
 
 ## Files
-- `index.html` — home: menu + project strips
+- `index.html` — home: menu, project strips, and the resume at the bottom (edit the HTML directly; put the PDF at `assets/resume.pdf`)
 - `project.html` — one template for every project (`project.html?p=<slug>`)
-- `resume.html` — resume (edit the HTML directly; put the PDF at `assets/resume.pdf`)
 - `js/projects.js` — **all project content lives here**
 - `js/main.js` — renders the strips and project pages
 - `css/style.css` — all styling

@@ -54,7 +54,7 @@
       </section>`;
     }).join("");
 
-    const sections = [...root.querySelectorAll(".category")];
+    const sections = [...document.querySelectorAll(".category")]; // project categories + resume
 
     function activate(id) {
       sections.forEach((s) => {
@@ -67,17 +67,16 @@
     const fromHash = sections.find((s) => "#" + s.id === location.hash);
     activate((fromHash || sections[0]).id);
 
-    // The section crossing a thin band ~1/3 down the viewport is the active one
-    const visible = new Set();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => (e.isIntersecting ? visible.add(e.target) : visible.delete(e.target)));
-        const current = sections.filter((s) => visible.has(s)).pop();
-        if (current) activate(current.id);
+    // Active section = the last one whose top has passed ~1/3 down the viewport
+    window.addEventListener(
+      "scroll",
+      () => {
+        const line = innerHeight * 0.35;
+        const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop() || sections[0];
+        activate(current.id);
       },
-      { rootMargin: "-30% 0px -60% 0px" }
+      { passive: true }
     );
-    sections.forEach((s) => observer.observe(s));
 
     if (location.hash) {
       const target = document.getElementById(location.hash.slice(1));
@@ -189,5 +188,4 @@
 
   if (page === "index") renderIndex();
   if (page === "project") renderProject();
-  if (page === "resume") setActiveMenu("resume");
 })();
