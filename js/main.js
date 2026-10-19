@@ -218,16 +218,20 @@
     // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid", images }
     const gallery = p.images
       .map((block) => {
-        if (!block.layout) return `<figure>${image(block)}${caption(block.caption)}</figure>`;
+        // mobile: on-image labels (and any mobileList lines) are listed below instead
+        const listed = [
+          ...(block.layout ? block.images : [block]).flatMap((img) => (img.labels || []).map((l) => l.text)),
+          ...(block.mobileList || []),
+        ];
+        const list = listed.length
+          ? `<ul class="label-list">${listed.map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>`
+          : "";
+
+        if (!block.layout) return `<figure>${image(block)}${list}${caption(block.caption)}</figure>`;
         const style =
           block.layout === "bands"
             ? ` style="--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}"`
             : "";
-        // mobile: labels are listed below the group instead of sitting on the image
-        const listed = block.images.flatMap((img) => img.labels || []);
-        const list = listed.length
-          ? `<ul class="label-list">${listed.map((l) => `<li>${escapeHTML(l.text)}</li>`).join("")}</ul>`
-          : "";
         return `
       <figure class="gallery-${block.layout}"${style}>
         <div class="gallery-group">${block.images.map((img) => image(img, true)).join("")}</div>

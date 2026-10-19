@@ -16,10 +16,12 @@
               labels: white text placed on top of an image, at x/y percentages of the
               (cropped) image; centred on that point unless align: "left". On mobile
               they're listed under the group instead.
+              mobileList: lines listed under an image or group on mobile only (for
+              text that's part of the image and too small to read on a phone).
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 2;
+const IMAGE_VERSION = 3;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -43,27 +45,15 @@ const PROJECTS = [
     images: [
       { src: "assets/img/projects/sinusoidal/site-plan.jpg", caption: "Site plan" },
       {
-        layout: "bands", // trimmed to just past the arrows so the two read as one diagram
-        ratio: "1.94 / 1",
-        focus: "50% 38%",
+        src: "assets/img/projects/sinusoidal/01.png", // labels are part of the image
         caption: "Form Exploration",
-        images: [
-          {
-            src: "assets/img/projects/sinusoidal/01.jpg",
-            labels: [
-              { text: "01 Cell Division", x: "17.5%", y: "81.6%" },
-              { text: "02 Horizontal Sine Waves", x: "50%", y: "81.6%" },
-              { text: "03 Vertical Sine Waves", x: "82.5%", y: "81.6%" },
-            ],
-          },
-          {
-            src: "assets/img/projects/sinusoidal/02.jpg",
-            labels: [
-              { text: "04 Lofting Into Waves", x: "17.5%", y: "81.6%" },
-              { text: "05 Warp Waves to Bring Troughs to Ground", x: "50%", y: "81.6%" },
-              { text: "06 Oscillating Mezzanine Added", x: "82.5%", y: "81.6%" },
-            ],
-          },
+        mobileList: [
+          "01 Cell Division",
+          "02 Horizontal Sine Waves",
+          "03 Vertical Sine Waves",
+          "04 Lofting Into Waves",
+          "05 Warp Waves to Bring Troughs to Ground",
+          "06 Oscillating Mezzanine Added",
         ],
       },
       {
@@ -71,9 +61,9 @@ const PROJECTS = [
         ratio: "4 / 1",
         focus: "50% 87%",
         images: [
-          { src: "assets/img/projects/sinusoidal/03.jpg", labels: [{ text: "Elevation", x: "2.5%", y: "92.7%", align: "left" }] },
-          { src: "assets/img/projects/sinusoidal/04.jpg", labels: [{ text: "Section 1", x: "2.5%", y: "92.7%", align: "left" }] },
-          { src: "assets/img/projects/sinusoidal/05.jpg", labels: [{ text: "Section 2", x: "2.5%", y: "92.7%", align: "left" }] },
+          { src: "assets/img/projects/sinusoidal/03.jpg", labels: [{ text: "Elevation", x: "2.5%", y: "89%", align: "left" }] },
+          { src: "assets/img/projects/sinusoidal/04.jpg", labels: [{ text: "Section 1", x: "2.5%", y: "89%", align: "left" }] },
+          { src: "assets/img/projects/sinusoidal/05.jpg", labels: [{ text: "Section 2", x: "2.5%", y: "89%", align: "left" }] },
         ],
       },
       {
