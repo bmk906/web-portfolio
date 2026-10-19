@@ -690,7 +690,7 @@ img {
     margin-left: 0.3em; /* matches the word space after it, which comes from the HTML */
   }
 
-  /* Education: large year in the display face, a rule, then the details */
+  /* Education: degree in the display face on the left, a rule, then the details */
   .edu-list {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
@@ -701,22 +701,27 @@ img {
     display: contents; /* let its pieces sit directly in the grid */
   }
 
-  .edu-year {
+  .edu-degree {
     grid-column: 1;
     grid-row: 1 / span 4;
     padding-right: 14px;
     border-right: 1px solid var(--ink);
     font-family: var(--display);
-    font-size: 3.1rem;
-    line-height: 0.85;
+    font-size: 2.2rem;
+    line-height: 0.9;
   }
 
-  .edu-list > :not(.edu-school),
   .edu-school strong,
-  .edu-degree {
+  .edu-year,
+  .edu-list > li:not(.edu-school) {
     grid-column: 2;
   }
 
+  .edu-school strong {
+    font-weight: 400;
+  }
+
+  .edu-year,
   .edu-list > li:not(.edu-school) {
     color: var(--mute);
   }
