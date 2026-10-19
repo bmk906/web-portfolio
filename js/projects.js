@@ -14,10 +14,12 @@
                 { layout: "grid", images: [...] }    two columns (one on mobile)
               A group can have a caption, and its images can have their own captions.
               labels: white text placed on top of an image, at x/y percentages of the
-              (cropped) image; centred on that point unless align: "left". On mobile,
-              centred labels are listed under the group instead (too small to read
-              on the image); left-aligned ones stay on the image.
+              (cropped) image; centred on that point unless align: "left". On mobile
+              they're listed under the group instead.
 */
+
+// Bump whenever an image file is replaced under the same name, so browsers fetch the new one
+const IMAGE_VERSION = 2;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -33,7 +35,7 @@ const PROJECTS = [
     location: "Toronto, Canada",
     type: "Commercial",
     strip: "assets/img/projects/sinusoidal/07.jpg",
-    stripFocus: "46% 50%", // centred on the mullion just left of the middle
+    stripFocus: "58% 50%", // centred on the mullion just right of the middle
     summary: [
       "Set in a developing neighborhood in Toronto, Sinusoidal is a market hall: a floor of market stalls beneath a single undulating roof, with a mezzanine café above.",
       "The project is a study in thin-shell structures, aiming for a roof that is striking, efficient, and responsive to its site. It began as a field of modular cells shaped by the site. Layering sine waves across those cells produced a continuous shell, and varying the wave amplitudes from cell to cell let the roof meet the ground in a variety of ways. Stepping the heights of neighboring cells opens bands of clerestory light, and the troughs of the waves collect and store rainwater.",

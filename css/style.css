@@ -493,8 +493,8 @@ html.menu-entering .layout > :not(.menu) {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .img-label--center {
-    display: none;
+  .img-label {
+    display: none; /* listed under the group instead */
   }
 
   .label-list {

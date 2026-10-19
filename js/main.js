@@ -16,6 +16,9 @@
     });
   }
 
+  // Image URL with the current IMAGE_VERSION, so replaced images aren't served from cache
+  const asset = (src) => `${src}?v=${typeof IMAGE_VERSION === "undefined" ? 1 : IMAGE_VERSION}`;
+
   function escapeHTML(s) {
     return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   }
@@ -33,7 +36,7 @@
         <li>
           <a class="strip" href="project.html?p=${p.slug}" aria-label="${escapeHTML(p.title)}">
             <span class="strip-frame">
-              <img src="${p.strip}" alt="" loading="lazy" style="object-position:${p.stripFocus || "50% 50%"}">
+              <img src="${asset(p.strip)}" alt="" loading="lazy" style="object-position:${p.stripFocus || "50% 50%"}">
               <span class="strip-title" aria-hidden="true">${escapeHTML(p.title)}</span>
             </span>
             <span class="strip-caption" aria-hidden="true">${escapeHTML(p.title)}</span>
@@ -201,7 +204,7 @@
 
     // One image, with optional white labels on top and (inside a group) its own caption
     const image = (img, inGroup) => {
-      const tag = `<img src="${img.src}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">`;
+      const tag = `<img src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">`;
       const labels = (img.labels || [])
         .map(
           (l) =>
@@ -220,8 +223,8 @@
           block.layout === "bands"
             ? ` style="--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}"`
             : "";
-        // mobile: centred labels are too small on the image, so list them below instead
-        const listed = block.images.flatMap((img) => (img.labels || []).filter(centred));
+        // mobile: labels are listed below the group instead of sitting on the image
+        const listed = block.images.flatMap((img) => img.labels || []);
         const list = listed.length
           ? `<ul class="label-list">${listed.map((l) => `<li>${escapeHTML(l.text)}</li>`).join("")}</ul>`
           : "";
