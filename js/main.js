@@ -180,6 +180,13 @@
   document.fonts.ready.then(fitTagline);
   window.addEventListener("resize", fitTagline);
 
+  // Sticky header (desktop): expose its height so the menu and scroll targets sit below it
+  const header = document.querySelector(".site-header");
+  new ResizeObserver(() => {
+    const sticky = getComputedStyle(header).position === "sticky";
+    document.documentElement.style.setProperty("--header-h", sticky ? header.offsetHeight + "px" : "0px");
+  }).observe(header);
+
   if (page === "index") renderIndex();
   if (page === "project") renderProject();
   if (page === "resume") setActiveMenu("resume");

@@ -22,6 +22,7 @@
   --top: clamp(28px, 4vw, 56px);
   --strip-w: clamp(92px, 8.4vw, 132px);
   --strip-gap: clamp(10px, 1.2vw, 18px);
+  --header-h: 0px; /* set by main.js on desktop, where the header is sticky */
 }
 
 /* ---------- Base ---------- */
@@ -89,8 +90,18 @@ img {
 /* ---------- Header ---------- */
 
 .site-header {
-  padding-block: clamp(22px, 3vw, 38px) 16px;
+  padding-block: clamp(11px, 1.5vw, 19px) 16px;
   border-bottom: 1px solid var(--ink);
+}
+
+/* desktop: header stays pinned while scrolling */
+@media (min-width: 761px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--paper);
+  }
 }
 
 .name {
@@ -115,7 +126,6 @@ img {
 
 .tagline span {
   margin-inline: 0.5em;
-  color: var(--faint);
 }
 
 /* ---------- Two-column layout ---------- */
@@ -129,7 +139,7 @@ img {
 
 .menu {
   position: sticky;
-  top: var(--top);
+  top: calc(var(--header-h) + var(--top));
   align-self: start;
 }
 
@@ -141,7 +151,7 @@ img {
 
 .menu a {
   display: inline-block;
-  font-size: clamp(2.2rem, 5.2vw, 5.25rem);
+  font-size: clamp(1.6rem, 3vw, 2.6rem); /* same as the name */
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 0.92;
@@ -159,12 +169,12 @@ img {
 
 .category {
   min-height: 72vh;
-  scroll-margin-top: var(--top);
+  scroll-margin-top: calc(var(--header-h) + var(--top));
   transition: opacity 0.45s;
 }
 
 .category:last-child {
-  min-height: calc(100vh - 2 * var(--top));
+  min-height: calc(100vh - var(--header-h) - 2 * var(--top));
 }
 
 .category.is-dim {
@@ -442,6 +452,10 @@ img {
 /* ---------- Mobile ---------- */
 
 @media (max-width: 760px) {
+  .site-header {
+    padding-top: clamp(22px, 3vw, 38px);
+  }
+
   .layout {
     grid-template-columns: minmax(0, 1fr); /* keep the scrolling strip row from widening the page */
     padding-top: 0;
