@@ -91,8 +91,8 @@
     }
 
     // The header slides away over the same distance, starting HEADER_DELAY px later
-    // (about two mouse-wheel notches), so it lingers a little longer than the menu
-    const HEADER_DELAY = 200;
+    // (about one mouse-wheel notch), so it lingers a little longer than the menu
+    const HEADER_DELAY = 100;
 
     function setShrink(y) {
       const root = document.documentElement.style;
