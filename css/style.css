@@ -540,6 +540,10 @@ img {
   flex-basis: 100%;
 }
 
+.edu-class {
+  display: none; /* "Class of" shows on mobile only */
+}
+
 .entry + .entry {
   margin-top: 16px;
 }
@@ -719,6 +723,10 @@ img {
 
   .edu-school strong {
     font-weight: 400;
+  }
+
+  .edu-class {
+    display: inline;
   }
 
   .edu-year,
