@@ -456,9 +456,59 @@ html.menu-entering .layout > :not(.menu) {
   gap: clamp(8px, 1vw, 14px);
 }
 
+.gallery-item {
+  position: relative;
+}
+
+/* white labels set on a drawing's dark background */
+.img-label {
+  position: absolute;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: clamp(0.5rem, 0.72vw, 0.68rem);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.img-label--center {
+  transform: translate(-50%, -50%);
+}
+
+.item-caption {
+  margin: 8px 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+
+.label-list {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .gallery-grid .gallery-group {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .img-label--center {
+    display: none;
+  }
+
+  .label-list {
+    display: block;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+
+  .label-list li + li {
+    margin-top: 2px;
   }
 }
 

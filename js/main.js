@@ -196,8 +196,21 @@
 
     const summary = [].concat(p.summary).map((para) => `<p>${escapeHTML(para)}</p>`).join("");
 
-    const image = (img) => `<img src="${img.src}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">`;
     const caption = (text) => (text ? `<figcaption>${escapeHTML(text)}</figcaption>` : "");
+    const centred = (l) => l.align !== "left";
+
+    // One image, with optional white labels on top and (inside a group) its own caption
+    const image = (img, inGroup) => {
+      const tag = `<img src="${img.src}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">`;
+      const labels = (img.labels || [])
+        .map(
+          (l) =>
+            `<span class="img-label${centred(l) ? " img-label--center" : ""}" style="left:${l.x};top:${l.y}">${escapeHTML(l.text)}</span>`
+        )
+        .join("");
+      const ownCaption = inGroup && img.caption ? `<p class="item-caption">${escapeHTML(img.caption)}</p>` : "";
+      return labels || ownCaption ? `<div class="gallery-item">${tag}${labels}${ownCaption}</div>` : tag;
+    };
 
     // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid", images }
     const gallery = p.images
@@ -207,10 +220,15 @@
           block.layout === "bands"
             ? ` style="--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}"`
             : "";
+        // mobile: centred labels are too small on the image, so list them below instead
+        const listed = block.images.flatMap((img) => (img.labels || []).filter(centred));
+        const list = listed.length
+          ? `<ul class="label-list">${listed.map((l) => `<li>${escapeHTML(l.text)}</li>`).join("")}</ul>`
+          : "";
         return `
       <figure class="gallery-${block.layout}"${style}>
-        <div class="gallery-group">${block.images.map(image).join("")}</div>
-        ${caption(block.caption)}
+        <div class="gallery-group">${block.images.map((img) => image(img, true)).join("")}</div>
+        ${list}${caption(block.caption)}
       </figure>`;
       })
       .join("");
