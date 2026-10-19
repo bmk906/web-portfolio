@@ -16,3 +16,8 @@ Open `index.html` in a browser. Everything works from the file system.
 Edit the `PROJECTS` list in `js/projects.js`. The order there is the order on the site.
 To pick which detail a strip shows, set `stripFocus`
 (`"0% 50%"` left edge, `"50% 50%"` centre, `"100% 50%"` right edge).
+
+## Publishing changes
+When `css/style.css` or anything in `js/` changes, bump the `?v=` number on their
+links in `index.html` and `project.html` so browsers fetch the new files instead
+of a cached copy.

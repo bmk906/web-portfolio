@@ -472,6 +472,16 @@ img {
   border-top: 1px solid var(--ink);
 }
 
+/* desktop: Previous Experience continues Experience without a rule */
+@media (min-width: 761px) {
+  .resume-row--continued {
+    border-top: 0;
+  }
+  .resume-row--continued .resume-block {
+    padding-top: 0;
+  }
+}
+
 .resume-block {
   padding-block: 18px 26px;
 }
