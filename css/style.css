@@ -92,8 +92,10 @@ img {
    new position, and the rest of the page fades. Browsers without support
    simply navigate as normal. */
 
-@view-transition {
-  navigation: auto;
+@media (min-width: 761px) {
+  @view-transition {
+    navigation: auto;
+  }
 }
 
 .site-header {
@@ -188,10 +190,13 @@ img {
   padding-top: var(--top);
 }
 
+/* box hugs the words, so between pages the menu scales evenly instead of stretching */
 .menu {
   position: sticky;
   top: calc(var(--header-h) + var(--top));
   align-self: start;
+  justify-self: start;
+  width: max-content;
 }
 
 .menu ul {
@@ -201,7 +206,7 @@ img {
 }
 
 .menu a {
-  display: inline-block;
+  display: block; /* height comes from the word alone, so it scales with font-size */
   font-size: clamp(2.16rem, 4.05vw, 3.51rem); /* 1.35 × the name */
   font-weight: 700;
   letter-spacing: -0.025em;
@@ -530,6 +535,8 @@ img {
   .menu {
     top: 0;
     z-index: 10;
+    justify-self: stretch;
+    width: auto;
     margin-inline: calc(-1 * var(--gutter));
     padding: 12px var(--gutter) 10px;
     background: var(--paper);
