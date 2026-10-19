@@ -518,6 +518,21 @@ img {
   margin-top: 2px;
 }
 
+/* Education first line — desktop: school above "B.Arch 2023" */
+.edu-school {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.3em;
+}
+
+.edu-school strong {
+  flex-basis: 100%;
+}
+
+.edu-sep {
+  display: none;
+}
+
 .entry + .entry {
   margin-top: 16px;
 }
@@ -655,5 +670,30 @@ img {
   /* stacked: the side block gets its own rule */
   .resume-block + .resume-block {
     border-top: 1px solid var(--ink);
+  }
+
+  /* skills + software run on as one line, separated by dots, wrapping when full */
+  .flow-list li {
+    display: inline;
+    white-space: nowrap; /* never split a skill across lines */
+  }
+
+  .flow-list li:not(:last-child)::after {
+    content: "·";
+    margin-left: 0.3em; /* matches the word space after it, which comes from the HTML */
+  }
+
+  /* "University of Miami | B.Arch ........ 2023" */
+  .edu-school strong {
+    flex-basis: auto;
+  }
+
+  .edu-sep {
+    display: inline;
+    margin-inline: 0.15em;
+  }
+
+  .edu-year {
+    margin-left: auto;
   }
 }

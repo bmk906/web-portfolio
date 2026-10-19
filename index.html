@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Benjamin Klinger — Architecture</title>
   <meta name="description" content="Portfolio of Benjamin Klinger, architectural designer.">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body data-page="index">
 
@@ -49,8 +49,13 @@
             <section class="resume-block">
               <h3>Education</h3>
               <ul class="plain-list">
-                <li><strong>University of Miami</strong></li>
-                <li>B.Arch 2023</li>
+                <!-- desktop: school, then "B.Arch 2023" below; mobile: "University of Miami | B.Arch ... 2023" on one line -->
+                <li class="edu-school">
+                  <strong>University of Miami</strong>
+                  <span class="edu-sep">|</span>
+                  <span>B.Arch</span>
+                  <span class="edu-year">2023</span>
+                </li>
                 <li>Dean’s List</li>
                 <li>Rome Program, Fall 2022</li>
               </ul>
@@ -76,7 +81,7 @@
 
             <section class="resume-block">
               <h3>Core Skills</h3>
-              <ul class="plain-list">
+              <ul class="plain-list flow-list">
                 <li>Concept Development</li>
                 <li>Construction Detailing</li>
                 <li>3D Modeling</li>
@@ -88,10 +93,16 @@
               </ul>
 
               <h3 class="resume-subhead">Software</h3>
-              <ul class="plain-list">
-                <li>AutoCAD · Grasshopper · Revit</li>
-                <li>Rhino · Vectorworks · V-Ray</li>
-                <li>Illustrator · InDesign · Photoshop</li>
+              <ul class="plain-list flow-list">
+                <li>AutoCAD</li>
+                <li>Grasshopper</li>
+                <li>Revit</li>
+                <li>Rhino</li>
+                <li>Vectorworks</li>
+                <li>V-Ray</li>
+                <li>Illustrator</li>
+                <li>InDesign</li>
+                <li>Photoshop</li>
                 <li>ArcGIS</li>
               </ul>
             </section>
@@ -122,7 +133,7 @@
     </div>
   </main>
 
-  <script src="js/projects.js?v=2"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/projects.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>
