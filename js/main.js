@@ -97,8 +97,26 @@
       if (!menuLocked) setShrink(shrinkAt(scrollY));
     }
 
+    // Resume extends left to sit beside the small menu, the same distance a project
+    // sits from the menu on a project page
+    function setResumePull() {
+      if (!desktop.matches) return document.documentElement.style.setProperty("--resume-pull", "0px");
+      const menuBox = menu.getBoundingClientRect();
+      const fontNow = parseFloat(getComputedStyle(menu.querySelector("a")).fontSize);
+      const fontSmall = parseFloat(getComputedStyle(document.querySelector(".name")).fontSize);
+      const smallRight = menuBox.left + menuBox.width * (fontSmall / fontNow);
+      const gap = parseFloat(getComputedStyle(menu.parentElement).columnGap);
+      const pull = resume.parentElement.getBoundingClientRect().left - (smallRight + gap);
+      document.documentElement.style.setProperty("--resume-pull", Math.max(0, pull) + "px");
+    }
+    setResumePull();
+    document.fonts.ready.then(setResumePull);
+
     window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    window.addEventListener("resize", () => {
+      setResumePull();
+      update();
+    });
 
     // Menu click: animate straight to the destination's size (same timing as the
     // page transition) while the page scrolls, then hand control back to scrolling

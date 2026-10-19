@@ -446,6 +446,7 @@ img {
 
 /* extra space above keeps the resume mostly off screen while browsing projects */
 .resume {
+  margin-left: calc(-1 * var(--resume-pull, 0px)); /* widen leftward; set by main.js */
   margin-top: 22vh;
   padding-bottom: 64px;
   min-height: calc(100vh - var(--header-h) - 2 * var(--top));
