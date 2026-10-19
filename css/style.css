@@ -472,13 +472,24 @@ img {
   border-top: 1px solid var(--ink);
 }
 
-/* desktop: Previous Experience continues Experience without a rule */
+/* desktop: skills/software span both rows on the right, so Previous Experience
+   sits right under Experience (no rule) however long the side column is */
 @media (min-width: 761px) {
-  .resume-row--continued {
-    border-top: 0;
+  .resume-row--split {
+    grid-template-areas:
+      "exp  side"
+      "prev side";
+    grid-template-rows: auto 1fr;
   }
-  .resume-row--continued .resume-block {
-    padding-top: 0;
+  .resume-exp {
+    grid-area: exp;
+  }
+  .resume-side {
+    grid-area: side;
+  }
+  .resume-row--split .resume-prev {
+    grid-area: prev;
+    padding-top: 0; /* outranks .resume-block below */
   }
 }
 

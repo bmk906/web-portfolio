@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Benjamin Klinger — Architecture</title>
   <meta name="description" content="Portfolio of Benjamin Klinger, architectural designer.">
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body data-page="index">
 
@@ -62,8 +62,10 @@
             </section>
           </div>
 
-          <div class="resume-row">
-            <section class="resume-block">
+          <!-- desktop: skills/software span the full height on the right, so Previous
+               Experience follows Experience directly; mobile: stacks in this order -->
+          <div class="resume-row resume-row--split">
+            <section class="resume-block resume-exp">
               <h3>Experience</h3>
               <div class="entry">
                 <h4>Dreiling Terrones Architecture <span class="entry-title">— Project Manager</span></h4>
@@ -79,7 +81,7 @@
               </div>
             </section>
 
-            <section class="resume-block">
+            <section class="resume-block resume-side">
               <h3>Core Skills</h3>
               <ul class="plain-list flow-list">
                 <li>Concept Development</li>
@@ -106,10 +108,8 @@
                 <li>ArcGIS</li>
               </ul>
             </section>
-          </div>
 
-          <div class="resume-row resume-row--continued">
-            <section class="resume-block">
+            <section class="resume-block resume-prev">
               <h3>Previous Experience</h3>
               <div class="entry">
                 <h4>Ethos Architecture <span class="entry-title">— Intern</span></h4>
@@ -133,7 +133,7 @@
     </div>
   </main>
 
-  <script src="js/projects.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/projects.js?v=4"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
