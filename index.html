@@ -28,32 +28,41 @@
     <div>
       <div id="categories"></div>
 
-      <!-- Placeholder content: replace with the text of the PDF resume -->
       <section class="category resume" id="resume" aria-labelledby="resume-label">
         <div class="resume-top">
           <h2 class="category-head" id="resume-label">
             <span>03</span>
             <span>Resume</span>
           </h2>
-          <!-- <a class="eyebrow text-link" href="assets/resume.pdf">Download PDF</a> -->
+          <!-- add href="assets/resume.pdf" once the final PDF is in place -->
+          <a class="eyebrow text-link">Download PDF</a>
         </div>
 
+        <!-- Rows of [main column | side column]; each row's rule spans both columns -->
         <div class="resume-body">
-          <!-- Main column -->
-          <div class="resume-col">
+          <div class="resume-row">
             <section class="resume-block">
               <h3>Profile</h3>
               <p class="resume-profile">Architectural designer with 3+ years of experience at a small design practice, taking projects from sketch to construction. Focused on transforming designs from concept to built reality. Seeking a detail-driven practice that values the craft of Architecture.</p>
             </section>
 
             <section class="resume-block">
+              <h3>Education</h3>
+              <ul class="plain-list">
+                <li><strong>University of Miami</strong></li>
+                <li>B.Arch 2023</li>
+                <li>Dean’s List</li>
+                <li>Rome Program, Fall 2022</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="resume-row">
+            <section class="resume-block">
               <h3>Experience</h3>
               <div class="entry">
-                <div class="entry-head">
-                  <h4>Dreiling Terrones Architecture <span class="entry-title">— Project Manager</span></h4>
-                  <span class="entry-date">2023 — Present</span>
-                </div>
-                <p class="entry-role">Burlingame, CA</p>
+                <h4>Dreiling Terrones Architecture <span class="entry-title">— Project Manager</span></h4>
+                <p class="entry-role">Burlingame, CA <span class="sep">|</span> 2023 — Present</p>
                 <ul>
                   <li>Deliver residential and institutional projects ranging from ADUs and single-family homes to schools and a fire station.</li>
                   <li>Develop projects across all phases, including schematic design, design development, construction documents, bidding, and construction administration.</li>
@@ -63,44 +72,6 @@
                   <li>Produce design studies and custom construction details that translate design intent into buildable solutions.</li>
                 </ul>
               </div>
-            </section>
-
-            <section class="resume-block">
-              <h3>Previous Experience</h3>
-              <div class="entry">
-                <div class="entry-head">
-                  <h4>Ethos Architecture <span class="entry-title">— Intern</span></h4>
-                  <span class="entry-date">Summer 2023</span>
-                </div>
-                <p>Drafted working drawings for a new branch of restaurant chain, Modern Market.</p>
-              </div>
-              <div class="entry">
-                <div class="entry-head">
-                  <h4>Rad Lab, University of Miami <span class="entry-title">— Volunteer</span></h4>
-                  <span class="entry-date">2018 — 2020</span>
-                </div>
-                <p>Created and tested Arduino prototypes for smart-home applications.</p>
-              </div>
-              <div class="entry">
-                <div class="entry-head">
-                  <h4>George Mason University <span class="entry-title">— Intern</span></h4>
-                  <span class="entry-date">Summer 2018</span>
-                </div>
-                <p>Analyzed and plotted hurricane data in MATLAB to study how hurricanes affect total precipitation across the U.S.</p>
-              </div>
-            </section>
-          </div>
-
-          <!-- Side column -->
-          <div class="resume-col">
-            <section class="resume-block">
-              <h3>Education</h3>
-              <ul class="plain-list">
-                <li><strong>University of Miami</strong></li>
-                <li>B.Arch 2023</li>
-                <li>Dean’s List</li>
-                <li>Rome Program, Fall 2022</li>
-              </ul>
             </section>
 
             <section class="resume-block">
@@ -115,10 +86,8 @@
                 <li>Construction Administration</li>
                 <li>Hand Sketching</li>
               </ul>
-            </section>
 
-            <section class="resume-block">
-              <h3>Software</h3>
+              <h3 class="resume-subhead">Software</h3>
               <ul class="plain-list">
                 <li>AutoCAD · Grasshopper · Revit</li>
                 <li>Rhino · Vectorworks · V-Ray</li>
@@ -126,14 +95,26 @@
                 <li>ArcGIS</li>
               </ul>
             </section>
+          </div>
 
+          <div class="resume-row">
             <section class="resume-block">
-              <h3>Contact</h3>
-              <ul class="plain-list">
-                <li>San Francisco, CA</li>
-                <li>Open to relocation</li>
-                <li>bmk906@gmail.com</li>
-              </ul>
+              <h3>Previous Experience</h3>
+              <div class="entry">
+                <h4>Ethos Architecture <span class="entry-title">— Intern</span></h4>
+                <p class="entry-role">Summer 2023</p>
+                <p>Drafted working drawings for a new branch of restaurant chain, Modern Market.</p>
+              </div>
+              <div class="entry">
+                <h4>Rad Lab, University of Miami <span class="entry-title">— Volunteer</span></h4>
+                <p class="entry-role">2018 — 2020</p>
+                <p>Created and tested Arduino prototypes for smart-home applications.</p>
+              </div>
+              <div class="entry">
+                <h4>George Mason University <span class="entry-title">— Intern</span></h4>
+                <p class="entry-role">Summer 2018</p>
+                <p>Analyzed and plotted hurricane data in MATLAB to study how hurricanes affect total precipitation across the U.S.</p>
+              </div>
             </section>
           </div>
         </div>

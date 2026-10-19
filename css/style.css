@@ -463,8 +463,9 @@ img {
   margin: 0;
 }
 
-/* two columns, like the PDF: wide main column + narrow side column */
-.resume-body {
+/* two columns, like the PDF: wide main column + narrow side column,
+   in rows so each dividing rule runs under both */
+.resume-row {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   column-gap: clamp(32px, 4vw, 64px);
@@ -473,10 +474,6 @@ img {
 
 .resume-block {
   padding-block: 18px 26px;
-}
-
-.resume-block + .resume-block {
-  border-top: 1px solid var(--faint);
 }
 
 .resume-block h3 {
@@ -490,6 +487,10 @@ img {
 .resume-block p {
   margin: 0;
   max-width: 68ch;
+}
+
+.resume-block .resume-subhead {
+  margin-top: 28px;
 }
 
 .resume-profile {
@@ -511,12 +512,6 @@ img {
   margin-top: 16px;
 }
 
-.entry-head {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0 1rem;
-}
 
 .entry h4 {
   margin: 0;
@@ -528,15 +523,13 @@ img {
   font-weight: 400;
 }
 
-.entry-date {
-  font-size: 0.8rem;
-  color: var(--mute);
-  font-variant-numeric: tabular-nums;
-}
-
 .entry-role {
   margin: 0 0 6px;
   color: var(--mute);
+}
+
+.entry-role .sep {
+  margin-inline: 0.4em;
 }
 
 .entry ul {
@@ -645,12 +638,12 @@ img {
     padding-top: 28px;
   }
 
-  .resume-body {
+  .resume-row {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  /* stacked: rule between the main column's last block and the side column's first */
-  .resume-col + .resume-col {
-    border-top: 1px solid var(--faint);
+  /* stacked: the side block gets its own rule */
+  .resume-block + .resume-block {
+    border-top: 1px solid var(--ink);
   }
 }
