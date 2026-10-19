@@ -90,15 +90,21 @@
       return Math.min(1, Math.max(0, (y - start) / (end - start)));
     }
 
-    function setShrink(p) {
-      document.documentElement.style.setProperty("--menu-shrink", p.toFixed(4));
+    // The header slides away over the same distance, starting HEADER_DELAY px later
+    // (about two mouse-wheel notches), so it lingers a little longer than the menu
+    const HEADER_DELAY = 200;
+
+    function setShrink(y) {
+      const root = document.documentElement.style;
+      root.setProperty("--menu-shrink", shrinkAt(y).toFixed(4));
+      root.setProperty("--header-hide", shrinkAt(y - HEADER_DELAY).toFixed(4));
     }
 
     function update() {
       const line = innerHeight * ACTIVE_LINE;
       const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop() || sections[0];
       activate(current.id);
-      if (!menuLocked) setShrink(shrinkAt(scrollY));
+      if (!menuLocked) setShrink(scrollY);
     }
 
     // Resume extends left to sit beside the small menu, the same distance a project
@@ -138,7 +144,7 @@
         menuLocked = true;
         menu.classList.add("is-resizing");
         document.documentElement.classList.add("is-resizing"); // header slides in step
-        setShrink(shrinkAt(destY));
+        setShrink(destY);
 
         const scrolled = new Promise((done) => {
           addEventListener("scrollend", done, { once: true });

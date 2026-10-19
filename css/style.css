@@ -170,14 +170,15 @@ html.menu-entering .layout > :not(.menu) {
 
 /* desktop, home page: header stays pinned while browsing projects, then slides up
    out of view on the way to the resume, in step with the menu shrinking
-   (--menu-shrink, 0 → 1, set by main.js). Project pages: header scrolls away. */
+   (--header-hide, 0 → 1, set by main.js; trails the menu shrink slightly).
+   Project pages: header scrolls away. */
 @media (min-width: 761px) {
   body[data-page="index"] .site-header {
     position: sticky;
     top: 0;
     z-index: 20;
     background: var(--paper);
-    transform: translateY(calc(-100% * var(--menu-shrink, 0)));
+    transform: translateY(calc(-100% * var(--header-hide, 0)));
   }
 
   /* menu click: the header slides with the same timing as the menu resize */
@@ -223,7 +224,7 @@ html.menu-entering .layout > :not(.menu) {
 .menu {
   position: sticky;
   /* below the pinned header; moves up as the header slides away (home page) */
-  top: calc(var(--header-h) * (1 - var(--menu-shrink, 0)) + var(--top));
+  top: calc(var(--header-h) * (1 - var(--header-hide, 0)) + var(--top));
   align-self: start;
   justify-self: start;
   width: max-content;
