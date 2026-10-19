@@ -132,7 +132,23 @@ img {
   }
 }
 
-/* same fade for browsers without cross-page View Transitions (class set by main.js) */
+/* Same effect for browsers without cross-page View Transitions (e.g. Firefox).
+   menu-entering: set in <head> before first paint; draws the menu at the previous
+   page's size and holds the content back. main.js then swaps to a scale animation. */
+html.menu-entering .menu a {
+  font-size: var(--menu-enter-size) !important;
+}
+
+html.menu-entering .layout > :not(.menu) {
+  opacity: 0;
+}
+
+.menu.menu-scaling {
+  transform-origin: 0 0;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
 .page-enter .layout > :not(.menu) {
   animation: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0.1s both page-in;
 }
@@ -202,6 +218,7 @@ img {
   align-self: start;
   justify-self: start;
   width: max-content;
+  transform-origin: 0 0; /* the Firefox page-change animation scales from the top-left */
 }
 
 .menu ul {

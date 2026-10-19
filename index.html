@@ -3,6 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    // Browsers without cross-page View Transitions (e.g. Firefox): if we just came from
+    // another page, draw the menu at that page's size from the first frame (see main.js)
+    try {
+      var s = JSON.parse(sessionStorage.getItem("menuSizeOnLeave"));
+      if (s && Date.now() - s.at < 10000 && !("PageRevealEvent" in window) && matchMedia("(min-width: 761px)").matches) {
+        document.documentElement.classList.add("menu-entering");
+        document.documentElement.style.setProperty("--menu-enter-size", s.size + "px");
+      }
+    } catch (e) {}
+  </script>
   <!-- this title + the og: tags are what link previews show; main.js swaps the tab title after load -->
   <title>Benjamin Klinger - Design</title>
   <meta property="og:title" content="Benjamin Klinger - Design">
@@ -19,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=13">
+  <link rel="stylesheet" href="css/style.css?v=14">
 </head>
 <body data-page="index">
 
@@ -146,7 +157,7 @@
     </div>
   </main>
 
-  <script src="js/projects.js?v=13"></script>
-  <script src="js/main.js?v=13"></script>
+  <script src="js/projects.js?v=14"></script>
+  <script src="js/main.js?v=14"></script>
 </body>
 </html>

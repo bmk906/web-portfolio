@@ -270,12 +270,15 @@
 
   /* ---------- Page-change animation for browsers without cross-page View Transitions ----------
      Chrome/Edge/Safari animate the menu between pages natively (see style.css). Elsewhere
-     (e.g. Firefox), remember the menu's size when leaving a page, then on the next page
-     start the menu at that size and ease it to its own size, fading the content in. */
+     (e.g. Firefox): remember the menu's size when leaving a page. On arrival, the inline
+     script in <head> has already drawn the menu at that size (class "menu-entering"), so
+     here we switch to this page's size once, visually scale the menu back up to match,
+     and ease the scale to 1. Animating transform rather than font-size keeps the rest of
+     the page from re-laying out every frame. */
 
   const nativePageTransitions = "PageRevealEvent" in window;
   const isDesktop = () => matchMedia("(min-width: 761px)").matches;
-  const MENU_KEY = "menuSizeOnLeave";
+  const MENU_KEY = "menuSizeOnLeave"; // also read by the inline script in <head>
 
   if (!nativePageTransitions) {
     document.addEventListener("click", (e) => {
@@ -290,26 +293,30 @@
       } catch (err) {}
     });
 
-    let saved = null;
     try {
-      saved = JSON.parse(sessionStorage.getItem(MENU_KEY));
       sessionStorage.removeItem(MENU_KEY);
     } catch (err) {}
 
-    if (saved && Date.now() - saved.at < 3000 && isDesktop()) {
+    const root = document.documentElement;
+    if (root.classList.contains("menu-entering")) {
       const menu = document.querySelector(".menu");
-      const links = menu.querySelectorAll("a");
-
-      links.forEach((a) => (a.style.fontSize = saved.size + "px")); // start at the old page's size
-      void menu.offsetWidth; // commit it before turning the transition on
-      menu.classList.add("is-resizing");
-      links.forEach((a) => (a.style.fontSize = "")); // ease to this page's size
+      const word = menu.querySelector("a");
+      const from = parseFloat(getComputedStyle(word).fontSize);
+      root.classList.remove("menu-entering"); // menu and layout take this page's size, once
+      const to = parseFloat(getComputedStyle(word).fontSize);
       document.body.classList.add("page-enter");
 
+      if (Math.abs(from - to) > 0.5) {
+        menu.style.transform = `scale(${from / to})`; // looks the same as the previous page
+        void menu.offsetWidth; // commit before turning the transition on
+        menu.classList.add("menu-scaling");
+        menu.style.transform = ""; // ease to this page's size
+      }
+
       setTimeout(() => {
-        menu.classList.remove("is-resizing");
+        menu.classList.remove("menu-scaling");
         document.body.classList.remove("page-enter");
-      }, 600);
+      }, 700);
     }
   }
 })();
