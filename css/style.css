@@ -540,10 +540,6 @@ img {
   flex-basis: 100%;
 }
 
-.edu-sep {
-  display: none;
-}
-
 .entry + .entry {
   margin-top: 16px;
 }
@@ -694,17 +690,34 @@ img {
     margin-left: 0.3em; /* matches the word space after it, which comes from the HTML */
   }
 
-  /* "University of Miami | B.Arch ........ 2023" */
-  .edu-school strong {
-    flex-basis: auto;
+  /* Education: large year in the display face, a rule, then the details */
+  .edu-list {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 14px;
   }
 
-  .edu-sep {
-    display: inline;
-    margin-inline: 0.15em;
+  .edu-school {
+    display: contents; /* let its pieces sit directly in the grid */
   }
 
   .edu-year {
-    margin-left: auto;
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    padding-right: 14px;
+    border-right: 1px solid var(--ink);
+    font-family: var(--display);
+    font-size: 3.1rem;
+    line-height: 0.85;
+  }
+
+  .edu-list > :not(.edu-school),
+  .edu-school strong,
+  .edu-degree {
+    grid-column: 2;
+  }
+
+  .edu-list > li:not(.edu-school) {
+    color: var(--mute);
   }
 }
