@@ -102,10 +102,12 @@
     // sits from the menu on a project page
     function setResumePull() {
       if (!desktop.matches) return document.documentElement.style.setProperty("--resume-pull", "0px");
-      const menuBox = menu.getBoundingClientRect();
+      // offsetWidth is the layout width, unaffected by the page-change scale animation
+      // (getBoundingClientRect would measure the menu mid-scale in Firefox)
+      const menuLeft = menu.getBoundingClientRect().left; // scale origin is top-left, so left is stable
       const fontNow = parseFloat(getComputedStyle(menu.querySelector("a")).fontSize);
       const fontSmall = parseFloat(getComputedStyle(document.querySelector(".name")).fontSize);
-      const smallRight = menuBox.left + menuBox.width * (fontSmall / fontNow);
+      const smallRight = menuLeft + menu.offsetWidth * (fontSmall / fontNow);
       const gap = parseFloat(getComputedStyle(menu.parentElement).columnGap);
       const pull = resume.parentElement.getBoundingClientRect().left - (smallRight + gap);
       document.documentElement.style.setProperty("--resume-pull", Math.max(0, pull) + "px");
