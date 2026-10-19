@@ -48,13 +48,21 @@ html {
   }
 }
 
+/* desktop: text scales gently with screen width, so wide screens (e.g. MacBooks)
+   keep the same proportions as a laptop. 16px at 1280px wide, up to 20px. */
+@media (min-width: 761px) {
+  html {
+    font-size: clamp(16px, calc(10px + 0.47vw), 20px);
+  }
+}
+
 body {
   margin: 0;
   padding-inline: var(--gutter);
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font);
-  font-size: 15px;
+  font-size: 0.9375rem; /* 15px at the default size; grows with the desktop root size above */
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -421,7 +429,7 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .lede {
-  max-width: 62ch;
+  max-width: 75ch; /* readable line length */
   margin: 0 0 clamp(32px, 4vw, 56px);
   font-size: 1.05rem;
   line-height: 1.6;
