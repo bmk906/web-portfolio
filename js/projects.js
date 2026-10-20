@@ -43,7 +43,7 @@
               A group can have a caption, and its images can have their own captions.
               labels: white text placed on top of an image, at x/y percentages of the
               (cropped) image; centred on that point unless align: "left". On mobile
-              they're listed under the group instead.
+              they're listed under the group instead (keep: true leaves a short label on the image).
               mobileList: lines listed under an image or group on mobile only (for
               text that's part of the image and too small to read on a phone).
 */
@@ -258,7 +258,11 @@ const PROJECTS = [
       "Our second goal was to strengthen transit within the mountains, making it easier for residents to commute to Rome and travel between towns. We focused on the gateway to the range: Zagarolo, where trains from Rome arrive at an uninviting station. We redesigned the plaza outside it to mark the passage out of the city and into a new landscape, sinking the entire plaza into the ground. An oscillating staircase, part seating and part circulation, steps down into it. Built from locally sourced limestone, it echoes the ancient terraces found throughout the mountains.",
     ],
     images: [
-      { src: "assets/img/projects/monti-prenestini/site-plan.jpg", caption: "Site plan" },
+      {
+        src: "assets/img/projects/monti-prenestini/site-plan.jpg",
+        caption: "Site plan",
+        labels: [{ text: "Rome", x: "23%", y: "47%", dark: true, keep: true }],
+      },
 
       // ----- mobile: everything condensed into two swipe carousels
       {

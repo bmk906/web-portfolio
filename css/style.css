@@ -831,6 +831,11 @@ html.menu-entering .layout > :not(.menu) {
     display: none; /* listed under the group instead */
   }
 
+  .img-label.img-label--keep {
+    display: block; /* short map labels stay on the image */
+    font-size: 0.55rem;
+  }
+
   .label-list {
     display: block;
     margin: 4px 0 0;

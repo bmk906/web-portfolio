@@ -234,7 +234,7 @@
       const labels = (img.labels || [])
         .map(
           (l) =>
-            `<span class="img-label${centred(l) ? " img-label--center" : ""}${l.dark ? " img-label--dark" : ""}" style="left:${l.x};top:${l.y}">${escapeHTML(l.text)}</span>`
+            `<span class="img-label${centred(l) ? " img-label--center" : ""}${l.dark ? " img-label--dark" : ""}${l.keep ? " img-label--keep" : ""}" style="left:${l.x};top:${l.y}">${escapeHTML(l.text)}</span>`
         )
         .join("");
       const inset = img.captionInset ? ` style="padding-left:${img.captionInset}"` : "";
@@ -294,7 +294,7 @@
         // mobile: on-image labels (and any mobileList lines) are listed below instead;
         // aside images list their own labels under each image
         const listed = [
-          ...(block.layout === "aside" ? [] : block.layout ? block.images : [block]).flatMap((img) => img.labels || []),
+          ...(block.layout === "aside" ? [] : block.layout ? block.images : [block]).flatMap((img) => (img.labels || []).filter((l) => !l.keep)),
           ...(block.mobileList || []),
         ];
         const list = labelList(listed);
