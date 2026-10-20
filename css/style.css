@@ -588,6 +588,14 @@ html.menu-entering .layout > :not(.menu) {
   }
 }
 
+.carousel-note {
+  max-width: 60ch;
+  margin: 2px 0 0;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+
 .carousel-dots {
   display: none; /* mobile only */
 }

@@ -29,7 +29,8 @@
                                                      hideOnMobile: true makes it web-only,
                                                      list: true keeps the sidebar in list order
                                                      (default: reversed, top floor first),
-                                                     width: "100%" sets the image width
+                                                     width: "100%" sets the image width,
+                                                     note: "..." a description under every slide
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
               Carousels and single images can also be mobileOnly: true.
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
@@ -269,6 +270,7 @@ const PROJECTS = [
         layout: "carousel",
         mobileOnly: true,
         mobileSwipe: true,
+        note: "Trails and transit routes mapped for different ways of exploring the range, from horseback riding and hiking to road cycling and bus travel.",
         images: [
           { src: "assets/img/projects/monti-prenestini/01.jpg", ratio: 1.4413, caption: "Monti Prenestini Map", tab: "Map" },
           { src: "assets/img/projects/monti-prenestini/routes/01-horseback-riding.jpg", ratio: 1.4413, caption: "Horseback Trails", tab: "Horseback" },
@@ -283,6 +285,7 @@ const PROJECTS = [
         layout: "carousel",
         mobileOnly: true,
         mobileSwipe: true,
+        note: "User profiles tracing how different visitors move through and experience the mountain range.",
         images: [
           { src: "assets/img/projects/monti-prenestini/profiles/selection.jpg", ratio: 1.467, caption: "User Profiles", tab: "Overview", captionInset: "1.1%" },
           { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.467, caption: "Christiano, Horseback Rider", tab: "Christiano", captionInset: "1.1%" },
@@ -302,6 +305,7 @@ const PROJECTS = [
         width: "100%",
         revealEarly: true, // shows halfway down the map above
         hideOnMobile: true,
+        note: "Trails and transit routes mapped for different ways of exploring the range, from horseback riding and hiking to road cycling and bus travel.",
         images: [
           { src: "assets/img/projects/monti-prenestini/02.jpg", ratio: 1.4413, caption: "Transit and Bus Routes", tab: "Combined" },
           { src: "assets/img/projects/monti-prenestini/routes/01-horseback-riding.jpg", ratio: 1.4413, caption: "Horseback Trails", tab: "Horseback" },
@@ -316,6 +320,7 @@ const PROJECTS = [
         list: true,
         width: "100%",
         hideOnMobile: true,
+        note: "User profiles tracing how different visitors move through and experience the mountain range.",
         images: [
           { src: "assets/img/projects/monti-prenestini/profiles/selection.jpg", ratio: 1.467, caption: "Circulation Paths: User Profiles", tab: "Profiles", captionInset: "1.1%" },
           { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.467, caption: "Christiano, Horseback Rider", tab: "Christiano", captionInset: "1.1%" },
@@ -343,8 +348,8 @@ const PROJECTS = [
         images: [
           { src: "assets/img/projects/monti-prenestini/kit/axon.jpg", ratio: 2, caption: "Axonometric", tab: "Axon", captionInset: "1.9%" },
           { src: "assets/img/projects/monti-prenestini/kit/aerial.jpg", ratio: 2, caption: "Aerial View", tab: "Aerial", captionInset: "5.1%" },
-          { src: "assets/img/projects/monti-prenestini/kit/elevation.jpg", ratio: 2, caption: "Elevation", tab: "Elevation" },
-          { src: "assets/img/projects/monti-prenestini/kit/elevations.jpg", ratio: 2, caption: "Elevations", tab: "Elevations", captionInset: "0.8%" },
+          { src: "assets/img/projects/monti-prenestini/kit/elevation.jpg", ratio: 2, caption: "Elevation 1", tab: "Elevation 1" },
+          { src: "assets/img/projects/monti-prenestini/kit/elevations.jpg", ratio: 2, caption: "Elevation 2", tab: "Elevation 2", captionInset: "0.8%" },
         ],
       },
     ],

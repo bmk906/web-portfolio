@@ -270,7 +270,12 @@
       }"/></svg></button>`;
     const carouselHTML = (block) => {
       const slides = block.images
-        .map((img, i) => `<div class="carousel-slide${i ? "" : " is-active"}">${image(img, true)}</div>`)
+        .map((img, i) => {
+          // block.note: a short description under every slide's caption
+          const inset = img.captionInset ? ` style="padding-left:${img.captionInset}"` : "";
+          const note = block.note ? `<p class="carousel-note"${inset}>${escapeHTML(block.note)}</p>` : "";
+          return `<div class="carousel-slide${i ? "" : " is-active"}">${image(img, true)}${note}</div>`;
+        })
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
