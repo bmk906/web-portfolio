@@ -45,7 +45,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 9;
+const IMAGE_VERSION = 10;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -156,9 +156,9 @@ const PROJECTS = [
         id: "yc-plans",
         hideOnMobile: true,
         images: [
-          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1.061, caption: "Ground Floor Plan", tab: "Ground" },
-          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1.061, caption: "+5' Floor Plan", tab: "+5'" },
-          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1.061, caption: "Gym Floor Plan", tab: "Gym" },
+          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1.061, caption: "Ground Floor Plan", tab: "Ground", captionInset: "7.7%" },
+          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1.061, caption: "+5' Floor Plan", tab: "+5'", captionInset: "7.7%" },
+          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1.061, caption: "Gym Floor Plan", tab: "Gym", captionInset: "5.9%" },
         ],
       },
       {
@@ -172,8 +172,8 @@ const PROJECTS = [
       {
         layout: "row",
         images: [
-          { src: "assets/img/projects/youth-center/12.jpg", ratio: 1.104, caption: "Exploded Axonometric" },
-          { src: "assets/img/projects/youth-center/11.jpg", ratio: 0.402, caption: "Wall Section", hideOnMobile: true },
+          { src: "assets/img/projects/youth-center/12.jpg", ratio: 1.104, caption: "Exploded Axonometric", captionInset: "4%" },
+          { src: "assets/img/projects/youth-center/11.jpg", ratio: 0.3818, caption: "Wall Section", hideOnMobile: true },
         ],
       },
     ],
@@ -208,22 +208,23 @@ const PROJECTS = [
             src: "assets/img/projects/ziggurat-of-leaves/progression.jpg",
             ratio: 0.821,
             caption: "Progression Diagram",
+            captionInset: "2.8%",
             labels: [
               { text: "01 Ziggurat", x: "34%", y: "25.6%", dark: true },
               { text: "02 Tree", x: "82.7%", y: "51.4%", dark: true },
               { text: "03 Ziggurat of Leaves", x: "51.5%", y: "93.2%", dark: true },
             ],
           },
-          { src: "assets/img/projects/ziggurat-of-leaves/light.jpg", ratio: 1.816, caption: "Light Diagram" },
-          { src: "assets/img/projects/ziggurat-of-leaves/wind.jpg", ratio: 1.816, caption: "Wind Diagram" },
+          { src: "assets/img/projects/ziggurat-of-leaves/light.jpg", ratio: 1.816, caption: "Light Diagram", captionInset: "4.3%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/wind.jpg", ratio: 1.816, caption: "Wind Diagram", captionInset: "1.5%" },
         ],
       },
       {
         layout: "carousel", // web: one plan between arrows, levels in the sidebar; mobile: stacked
         images: [
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.2975, caption: "Ground Floor Plan", tab: "Ground" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", tab: "Level 1" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", tab: "Level 2" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.2975, caption: "Ground Floor Plan", tab: "Ground", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", tab: "Level 1", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", tab: "Level 2", captionInset: "2.2%" },
         ],
       },
       {
@@ -235,7 +236,7 @@ const PROJECTS = [
       },
       { src: "assets/img/projects/ziggurat-of-leaves/full-render-structure.jpg" },
       // source is low-res: shown at its native width on desktop so it stays crisp
-      { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", caption: "Exploded Axonometric", nativeWidth: 624 },
+      { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", caption: "Exploded Axonometric", nativeWidth: 611 },
     ],
   },
   {
@@ -254,46 +255,70 @@ const PROJECTS = [
     ],
     images: [
       { src: "assets/img/projects/monti-prenestini/site-plan.jpg", caption: "Site plan" },
-      { src: "assets/img/projects/monti-prenestini/01.jpg", caption: "Towns, Peaks and Points of Interest" },
-      { src: "assets/img/projects/monti-prenestini/02.jpg", caption: "Transit and Bus Routes" },
+      { src: "assets/img/projects/monti-prenestini/01.jpg", caption: "Monti Prenestini Map", note: "This map shows towns, mountains, and points of interest." },
+      { src: "assets/img/projects/monti-prenestini/02.jpg", caption: "Transit and Bus Routes", mobileOnly: true }, // mobile: right under the map
       { src: "assets/img/projects/monti-prenestini/profiles/selection.jpg", caption: "Circulation Paths: User Profiles" },
       {
-        layout: "carousel", // web: one profile at a time, names in the sidebar; mobile: stacked
+        layout: "carousel", // web: one profile at a time, names in the sidebar; mobile: swipe
         list: true,
         width: "100%",
+        revealEarly: true, // names show while the overview above is on screen
+        mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.414, caption: "Christiano, Horseback Rider", tab: "Christiano" },
-          { src: "assets/img/projects/monti-prenestini/profiles/02-giorgio.jpg", ratio: 1.414, caption: "Giorgio, Rock Climber", tab: "Giorgio" },
-          { src: "assets/img/projects/monti-prenestini/profiles/03-gianna.jpg", ratio: 1.414, caption: "Gianna, Biker", tab: "Gianna" },
-          { src: "assets/img/projects/monti-prenestini/profiles/04-fabrizio.jpg", ratio: 1.414, caption: "Fabrizio, National Hiker", tab: "Fabrizio" },
-          { src: "assets/img/projects/monti-prenestini/profiles/05-jan.jpg", ratio: 1.414, caption: "Jan, International Hiker", tab: "Jan" },
-          { src: "assets/img/projects/monti-prenestini/profiles/06-maria.jpg", ratio: 1.414, caption: "Maria, Person of Faith", tab: "Maria" },
+          { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.467, caption: "Christiano, Horseback Rider", tab: "Christiano", captionInset: "1.1%" },
+          { src: "assets/img/projects/monti-prenestini/profiles/02-giorgio.jpg", ratio: 1.467, caption: "Giorgio, Rock Climber", tab: "Giorgio", captionInset: "1.1%" },
+          { src: "assets/img/projects/monti-prenestini/profiles/03-gianna.jpg", ratio: 1.467, caption: "Gianna, Biker", tab: "Gianna", captionInset: "1.1%" },
+          { src: "assets/img/projects/monti-prenestini/profiles/04-fabrizio.jpg", ratio: 1.467, caption: "Fabrizio, National Hiker", tab: "Fabrizio", captionInset: "1.1%" },
+          { src: "assets/img/projects/monti-prenestini/profiles/05-jan.jpg", ratio: 1.467, caption: "Jan, International Hiker", tab: "Jan", captionInset: "1.1%" },
+          { src: "assets/img/projects/monti-prenestini/profiles/06-maria.jpg", ratio: 1.467, caption: "Maria, Person of Faith", tab: "Maria", captionInset: "1.1%" },
         ],
       },
+      { src: "assets/img/projects/monti-prenestini/02.jpg", caption: "Transit and Bus Routes", hideOnMobile: true }, // web: leads into the routes
       {
         layout: "carousel", // routes by mode of travel
         list: true,
         width: "100%",
+        revealEarly: true,
+        mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/monti-prenestini/routes/01-horseback-riding.jpg", ratio: 1.414, caption: "Horseback Trails", tab: "Horseback" },
-          { src: "assets/img/projects/monti-prenestini/routes/02-hiking-trails.jpg", ratio: 1.414, caption: "Hiking Trails", tab: "Hiking" },
-          { src: "assets/img/projects/monti-prenestini/routes/03-road-cycling.jpg", ratio: 1.414, caption: "Road Cycling Routes", tab: "Road Cycling" },
-          { src: "assets/img/projects/monti-prenestini/routes/04-existing-bus-route.jpg", ratio: 1.414, caption: "Existing Bus Route", tab: "Existing Bus" },
-          { src: "assets/img/projects/monti-prenestini/routes/05-proposed-bus-route.jpg", ratio: 1.414, caption: "Proposed Bus Route", tab: "Proposed Bus" },
+          { src: "assets/img/projects/monti-prenestini/routes/01-horseback-riding.jpg", ratio: 1.4413, caption: "Horseback Trails", tab: "Horseback" },
+          { src: "assets/img/projects/monti-prenestini/routes/02-hiking-trails.jpg", ratio: 1.4413, caption: "Hiking Trails", tab: "Hiking" },
+          { src: "assets/img/projects/monti-prenestini/routes/03-road-cycling.jpg", ratio: 1.4413, caption: "Road Cycling Routes", tab: "Road Cycling" },
+          { src: "assets/img/projects/monti-prenestini/routes/04-existing-bus-route.jpg", ratio: 1.4413, caption: "Existing Bus Route", tab: "Existing Bus" },
+          { src: "assets/img/projects/monti-prenestini/routes/05-proposed-bus-route.jpg", ratio: 1.4413, caption: "Proposed Bus Route", tab: "Proposed Bus" },
         ],
       },
       { src: "assets/img/projects/monti-prenestini/zag-site.jpg", caption: "Zagarolo Station: Site Plan" },
-      { src: "assets/img/projects/monti-prenestini/zag-site-section.jpg", caption: "Site Section" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-plan.jpg", caption: "Sunken Plaza Plan" },
+      { src: "assets/img/projects/monti-prenestini/zag-day.jpg", caption: "Plaza by Day" },
+      { src: "assets/img/projects/monti-prenestini/zag-night.jpg", caption: "Plaza by Night" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-section.jpg", caption: "Plaza Section" },
-      {
-        layout: "row",
-        images: [
-          { src: "assets/img/projects/monti-prenestini/zag-day.jpg", ratio: 1.414, caption: "Plaza by Day" },
-          { src: "assets/img/projects/monti-prenestini/zag-night.jpg", ratio: 1.414, caption: "Plaza by Night" },
-        ],
-      },
+      { src: "assets/img/projects/monti-prenestini/zag-site-section.jpg", caption: "Site Section" },
     ],
+  },
+  {
+    slug: "academic-05",
+    category: "academic",
+    title: "Academic Project 05",
+    year: "",
+    location: "",
+    type: "",
+    strip: "assets/img/placeholder-4.svg",
+    stripFocus: "50% 50%",
+    summary: "Placeholder: project coming soon.",
+    images: [{ src: "assets/img/placeholder-4.svg" }],
+  },
+  {
+    slug: "academic-06",
+    category: "academic",
+    title: "Academic Project 06",
+    year: "",
+    location: "",
+    type: "",
+    strip: "assets/img/placeholder-3.svg",
+    stripFocus: "50% 50%",
+    summary: "Placeholder: project coming soon.",
+    images: [{ src: "assets/img/placeholder-3.svg" }],
   },
   {
     slug: "practice-01",

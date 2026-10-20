@@ -316,16 +316,22 @@ html.menu-entering .layout > :not(.menu) {
 
 .strips {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--strip-gap);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* strips stay on one row, narrowing slightly if a category has many projects */
+.strips li {
+  flex: 0 1 var(--strip-w);
+  min-width: 0;
+}
+
 .strip {
   display: block;
-  width: var(--strip-w);
+  width: 100%;
 }
 
 .strip-frame {
@@ -567,6 +573,20 @@ html.menu-entering .layout > :not(.menu) {
   }
 }
 
+.carousel-dots {
+  display: none; /* mobile only */
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .mobile-only {
+    display: block;
+  }
+}
+
 .carousel-arrow {
   padding: 14px; /* generous click area */
   border: 0;
@@ -714,6 +734,46 @@ html.menu-entering .layout > :not(.menu) {
 
   .hide-mobile {
     display: none;
+  }
+
+  /* swipe carousels: slides side by side, the next one peeking in so it reads as
+     scrollable, with dots underneath */
+  .gallery-carousel.is-swipe .carousel-stage {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .gallery-carousel.is-swipe .carousel-stage::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-carousel.is-swipe .carousel-slide {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+  }
+
+  .carousel-dots {
+    display: flex;
+    gap: 7px;
+    margin-top: 10px;
+  }
+
+  .carousel-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--faint);
+    transition: background 0.2s;
+  }
+
+  .carousel-dots span.is-active {
+    background: var(--ink);
   }
 
   /* carousel: everything stacked with its caption; no tabs */

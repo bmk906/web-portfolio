@@ -274,10 +274,13 @@
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel${block.hideOnMobile ? " hide-mobile" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
+      <figure class="gallery-carousel${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileSwipe ? " is-swipe" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
         block.list ? ` data-list="1"` : ""
+      }${block.revealEarly ? ` data-early="1"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
       }${block.width ? ` style="--stage-w:${block.width}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
-        <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>
+        <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>${
+          block.mobileSwipe ? `<div class="carousel-dots" aria-hidden="true">${block.images.map(() => "<span></span>").join("")}</div>` : ""
+        }
       </figure>`;
     };
 
@@ -295,8 +298,9 @@
         const list = labelList(listed);
 
         if (!block.layout) {
-          const native = block.nativeWidth ? ` class="is-native" style="--native-w:${block.nativeWidth}px"` : "";
-          return `<figure${native}>${image(block)}${list}${caption(block.caption, block.note)}</figure>`;
+          const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", block.mobileOnly && "mobile-only"].filter(Boolean);
+          const attrs = (cls.length ? ` class="${cls.join(" ")}"` : "") + (block.nativeWidth ? ` style="--native-w:${block.nativeWidth}px"` : "");
+          return `<figure${attrs}>${image(block)}${list}${caption(block.caption, block.note)}</figure>`;
         }
         const vars = [
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
@@ -359,12 +363,23 @@
       };
       show(0);
       if (carousel.dataset.id) controls[carousel.dataset.id] = show;
-      buttons.forEach((b) => b.addEventListener("click", () => show(+b.dataset.i)));
+      // picking a name shows it and, if the carousel isn't centred yet, scrolls to it
+      buttons.forEach((b) =>
+        b.addEventListener("click", () => {
+          show(+b.dataset.i);
+          const s = stage.getBoundingClientRect();
+          if (Math.abs(s.top + s.height / 2 - innerHeight / 2) > innerHeight * 0.15)
+            stage.scrollIntoView({ behavior: "smooth", block: "center" });
+        })
+      );
       carousel.querySelectorAll(".carousel-arrow").forEach((a) => a.addEventListener("click", () => show(current + +a.dataset.step)));
       stage.addEventListener("click", () => show(current + 1));
 
       // Appears level with the top of the plan, slides to the plan's middle by the time the
       // plan is centred on screen, then holds there until the menu reaches it.
+      // revealEarly: shows once the image above is half scrolled past, waiting at the
+      // middle of the screen until the plan arrives.
+      const early = carousel.dataset.early && carousel.previousElementSibling;
       const place = () => {
         if (!matchMedia("(min-width: 761px)").matches) return selector.classList.remove("is-visible");
         const s = stage.getBoundingClientRect();
@@ -373,13 +388,31 @@
         const centred = innerHeight / 2 - s.height / 2; // plan top position when centred
         const t = Math.min(1, Math.max(0, (appear - s.top) / (appear - centred)));
         const floor = menu.getBoundingClientRect().bottom + 28; // just below the menu
-        const top = Math.max(s.top + t * (s.height / 2 - h / 2), floor);
+        let top = s.top + t * (s.height / 2 - h / 2);
+        if (early) top = Math.min(top, innerHeight / 2 - h / 2);
+        top = Math.max(top, floor);
         selector.style.top = `${top}px`;
-        selector.classList.toggle("is-visible", s.top < appear && s.bottom > top + h);
+        let start = s.top < appear;
+        if (early) {
+          const a = early.getBoundingClientRect();
+          start = start || a.top + a.height / 2 < innerHeight / 2;
+        }
+        selector.classList.toggle("is-visible", start && s.bottom > top + h);
       };
       place();
       window.addEventListener("scroll", place, { passive: true });
       window.addEventListener("resize", place);
+
+      // mobile swipe: dots follow the slide in view
+      const dots = [...carousel.querySelectorAll(".carousel-dots span")];
+      if (dots.length) {
+        const mark = () => {
+          const i = Math.round(stage.scrollLeft / (slides[1].offsetLeft - slides[0].offsetLeft || 1));
+          dots.forEach((d, j) => d.classList.toggle("is-active", j === Math.min(i, dots.length - 1)));
+        };
+        mark();
+        stage.addEventListener("scroll", mark, { passive: true });
+      }
     });
 
     // desktop: clicking a linked plan opens that level in its carousel and brings it into view
