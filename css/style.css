@@ -544,7 +544,7 @@ html.menu-entering .layout > :not(.menu) {
 
 .carousel-stage {
   display: grid;
-  flex: 0 1 68%;
+  flex: 0 1 var(--stage-w, 68%);
   cursor: pointer;
 }
 

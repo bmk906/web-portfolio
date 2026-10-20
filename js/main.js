@@ -274,7 +274,9 @@
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel${block.hideOnMobile ? " hide-mobile" : ""}"${block.id ? ` data-id="${block.id}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
+      <figure class="gallery-carousel${block.hideOnMobile ? " hide-mobile" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
+        block.list ? ` data-list="1"` : ""
+      }${block.width ? ` style="--stage-w:${block.width}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
         <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>
       </figure>`;
     };
@@ -340,13 +342,12 @@
       const stage = carousel.querySelector(".carousel-stage");
       const names = JSON.parse(carousel.dataset.tabs);
 
-      // selector lists the top level first, so it reads like the building
       const selector = document.createElement("div");
       selector.className = "level-select";
-      selector.innerHTML = names
-        .map((name, i) => `<button type="button" data-i="${i}">${escapeHTML(name)}</button>`)
-        .reverse()
-        .join("");
+      // floor plans list the top level first, so they read like the building;
+      // list carousels (people, routes) keep their own order
+      const items = names.map((name, i) => `<button type="button" data-i="${i}">${escapeHTML(name)}</button>`);
+      selector.innerHTML = (carousel.dataset.list ? items : items.reverse()).join("");
       document.body.appendChild(selector);
       const buttons = [...selector.querySelectorAll("button")];
 

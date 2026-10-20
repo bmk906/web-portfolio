@@ -26,7 +26,10 @@
                                                      web: one at a time between arrows, levels
                                                      (tab names) in the sidebar; mobile: stacked.
                                                      id: "x" lets other images link to it, and
-                                                     hideOnMobile: true makes it web-only
+                                                     hideOnMobile: true makes it web-only,
+                                                     list: true keeps the sidebar in list order
+                                                     (default: reversed, top floor first),
+                                                     width: "100%" sets the image width
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
               A single image can take note: "..." for a short description under its caption,
@@ -236,20 +239,60 @@ const PROJECTS = [
     ],
   },
   {
-    slug: "academic-04",
+    slug: "monti-prenestini",
     category: "academic",
-    title: "Academic Project 04",
-    year: "2019",
-    location: "City, State",
-    type: "Pavilion",
-    context: "Design-Build",
-    strip: "assets/img/placeholder-4.svg",
-    stripFocus: "45% 50%",
-    summary:
-      "Placeholder description. Two or three sentences on the site, the central idea, and what the building does with it.",
+    title: "Monti Prenestini",
+    year: "2022",
+    location: "Lazio, Italy",
+    type: "Urban Planning",
+    collaborators: "Isabella Andelsohn, Ethan Anderson, Lucas Rosen",
+    strip: "assets/img/projects/monti-prenestini/strip.jpg", // pre-cut slice on the right third line, through the ridge
+    stripFocus: "50% 50%",
+    summary: [
+      "Monti Prenestini is a mountain range about an hour east of Rome, home to sweeping views, abundant wildlife, and a handful of medieval hill towns now at risk of depopulation. Our goal was a campaign to market the range to Romans as a destination for day trips. Using GIS, we mapped its points of interest and traced routes tailored to different visitors, from cyclists and hikers to horseback riders and pilgrims.",
+      "Our second goal was to strengthen transit within the mountains, making it easier for residents to commute to Rome and travel between towns. We focused on the gateway to the range: Zagarolo, where trains from Rome arrive at an uninviting station. We redesigned the plaza outside it to mark the passage out of the city and into a new landscape, sinking the entire plaza into the ground. An oscillating staircase, part seating and part circulation, steps down into it. Built from locally sourced limestone, it echoes the ancient terraces found throughout the mountains.",
+    ],
     images: [
-      { src: "assets/img/placeholder-4.svg", caption: "Board-formed concrete" },
-      { src: "assets/img/placeholder-5.svg" },
+      { src: "assets/img/projects/monti-prenestini/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/monti-prenestini/01.jpg", caption: "Towns, Peaks and Points of Interest" },
+      { src: "assets/img/projects/monti-prenestini/02.jpg", caption: "Transit and Bus Routes" },
+      { src: "assets/img/projects/monti-prenestini/profiles/selection.jpg", caption: "Circulation Paths: User Profiles" },
+      {
+        layout: "carousel", // web: one profile at a time, names in the sidebar; mobile: stacked
+        list: true,
+        width: "100%",
+        images: [
+          { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.414, caption: "Christiano, Horseback Rider", tab: "Christiano" },
+          { src: "assets/img/projects/monti-prenestini/profiles/02-giorgio.jpg", ratio: 1.414, caption: "Giorgio, Rock Climber", tab: "Giorgio" },
+          { src: "assets/img/projects/monti-prenestini/profiles/03-gianna.jpg", ratio: 1.414, caption: "Gianna, Biker", tab: "Gianna" },
+          { src: "assets/img/projects/monti-prenestini/profiles/04-fabrizio.jpg", ratio: 1.414, caption: "Fabrizio, National Hiker", tab: "Fabrizio" },
+          { src: "assets/img/projects/monti-prenestini/profiles/05-jan.jpg", ratio: 1.414, caption: "Jan, International Hiker", tab: "Jan" },
+          { src: "assets/img/projects/monti-prenestini/profiles/06-maria.jpg", ratio: 1.414, caption: "Maria, Person of Faith", tab: "Maria" },
+        ],
+      },
+      {
+        layout: "carousel", // routes by mode of travel
+        list: true,
+        width: "100%",
+        images: [
+          { src: "assets/img/projects/monti-prenestini/routes/01-horseback-riding.jpg", ratio: 1.414, caption: "Horseback Trails", tab: "Horseback" },
+          { src: "assets/img/projects/monti-prenestini/routes/02-hiking-trails.jpg", ratio: 1.414, caption: "Hiking Trails", tab: "Hiking" },
+          { src: "assets/img/projects/monti-prenestini/routes/03-road-cycling.jpg", ratio: 1.414, caption: "Road Cycling Routes", tab: "Road Cycling" },
+          { src: "assets/img/projects/monti-prenestini/routes/04-existing-bus-route.jpg", ratio: 1.414, caption: "Existing Bus Route", tab: "Existing Bus" },
+          { src: "assets/img/projects/monti-prenestini/routes/05-proposed-bus-route.jpg", ratio: 1.414, caption: "Proposed Bus Route", tab: "Proposed Bus" },
+        ],
+      },
+      { src: "assets/img/projects/monti-prenestini/zag-site.jpg", caption: "Zagarolo Station: Site Plan" },
+      { src: "assets/img/projects/monti-prenestini/zag-site-section.jpg", caption: "Site Section" },
+      { src: "assets/img/projects/monti-prenestini/zag-plaza-plan.jpg", caption: "Sunken Plaza Plan" },
+      { src: "assets/img/projects/monti-prenestini/zag-plaza-section.jpg", caption: "Plaza Section" },
+      {
+        layout: "row",
+        images: [
+          { src: "assets/img/projects/monti-prenestini/zag-day.jpg", ratio: 1.414, caption: "Plaza by Day" },
+          { src: "assets/img/projects/monti-prenestini/zag-night.jpg", ratio: 1.414, caption: "Plaza by Night" },
+        ],
+      },
     ],
   },
   {
