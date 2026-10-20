@@ -18,7 +18,13 @@
                 { layout: "row", images: [{ src, ratio }, ...] }
                                                      side by side at equal heights (ratio =
                                                      width / height); stacked on mobile
-              stack and row can take gap: "10px" (stack: sit close instead of touching).
+                { layout: "aside", images: [single, ...stacked] }
+                                                     one image beside a stacked column, equal
+                                                     heights; reverse: true puts the column on
+                                                     the left; split: [0.45, 0.55] sets the widths
+                                                     instead; align: "center" centres vertically
+              stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
+              A single image can take note: "..." for a short description under its caption.
               Image options: captionInset: "7%" (indent the caption to where the drawing
               starts), hideOnMobile: true.
               A group can have a caption, and its images can have their own captions.
@@ -30,7 +36,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 7;
+const IMAGE_VERSION = 8;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -164,17 +170,17 @@ const PROJECTS = [
     stripFocus: "34% 0%", // the lit steel column and its branches
     stripZoom: 1.6,
     summary: [
-      "Ziggurat of Leaves is a proposal for the Miami Beach Architecture Center at the corner of Lincoln Road and Alton Road. The form began by deconstructing the stepped ziggurat so common in Miami Beach's Art Deco architecture, then flipping it upside down to shade a public plaza beneath.",
+      "Ziggurat of Leaves is a proposal for the Miami Beach Architecture Center at the corner of Lincoln Road and Alton Road. The form was conceived by studying the stepped ziggurat commonly used in South Beach's Art Deco architecture and inverting the structure to provide shade to the public plaza below.",
       "Midway through design, the pure ziggurat gave way to the idea of a tree carrying a canopy of exhibition spaces. The canopy breaks the building from a single mass into a web of smaller volumes whose plans echo the housing typologies of Miami Beach. The gaps between them draw daylight down to the fully open middle level and let hot air rise and escape, while openings in the sides cross-ventilate the building.",
     ],
     images: [
       { src: "assets/img/projects/ziggurat-of-leaves/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/ziggurat-of-leaves/concept-sketches.jpg", caption: "Initial Concept Sketches" },
       {
         src: "assets/img/projects/ziggurat-of-leaves/rendered-section.jpg",
         caption: "Rendered Section",
         note: "Axonometric section detailing the functions and circulation of the structure, from the lecture hall and outdoor classroom to the exhibitions and rooftop terrace.",
       },
-      { src: "assets/img/projects/ziggurat-of-leaves/concept-sketches.jpg", caption: "Initial Concept Sketches" },
       {
         layout: "aside", // progression on the left, light + wind stacked on the right
         images: [
@@ -183,9 +189,9 @@ const PROJECTS = [
             ratio: 0.821,
             caption: "Progression Diagram",
             labels: [
-              { text: "01 Ziggurat", x: "28.8%", y: "26.5%", dark: true },
-              { text: "02 Tree", x: "82.7%", y: "55%", dark: true },
-              { text: "03 Ziggurat of Leaves", x: "51.5%", y: "97.5%", dark: true },
+              { text: "01 Ziggurat", x: "28.8%", y: "25.6%", dark: true },
+              { text: "02 Tree", x: "82.7%", y: "51.4%", dark: true },
+              { text: "03 Ziggurat of Leaves", x: "51.5%", y: "93.2%", dark: true },
             ],
           },
           { src: "assets/img/projects/ziggurat-of-leaves/light.jpg", ratio: 1.816, caption: "Light Diagram" },
@@ -193,12 +199,16 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "row",
+        layout: "aside", // plans stacked top floor first on the left, exploded axon on the right
+        reverse: true,
+        split: [0.45, 0.55], // axon kept small (its source is low-res), plans get the room
+        align: "center",
         gap: "clamp(20px, 3vw, 48px)",
         images: [
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.171, caption: "Ground Floor Plan", captionInset: "2.2%" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.171, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", caption: "Exploded Axonometric" },
           { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.171, caption: "Level 2 Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.171, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.171, caption: "Ground Floor Plan", captionInset: "2.2%" },
         ],
       },
       {
@@ -209,7 +219,6 @@ const PROJECTS = [
         ],
       },
       { src: "assets/img/projects/ziggurat-of-leaves/full-render-structure.jpg" },
-      { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg" },
     ],
   },
   {

@@ -245,8 +245,10 @@
     const groupHTML = (block) => {
       if (block.layout !== "aside") return block.images.map((img) => image(img, true)).join("");
       const [first, ...rest] = block.images;
-      const colRatio = 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
-      return `${image(first, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
+      // split: [single, column] sets the two widths directly instead of matching heights
+      const single = block.split ? { ...first, ratio: block.split[0] } : first;
+      const colRatio = block.split ? block.split[1] : 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
+      return `${image(single, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
         .map((img) => image(img, true))
         .join("")}</div>`;
     };
@@ -267,12 +269,13 @@
         const vars = [
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
           block.gap ? `--group-gap:${block.gap}` : "",
+          block.align ? `--group-align:${block.align}` : "",
         ]
           .filter(Boolean)
           .join(";");
         const style = vars ? ` style="${vars}"` : "";
         return `
-      <figure class="gallery-${block.layout}"${style}>
+      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}"${style}>
         <div class="gallery-group">${groupHTML(block)}</div>
         ${list}${caption(block.caption)}
       </figure>`;
