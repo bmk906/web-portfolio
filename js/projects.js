@@ -49,7 +49,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 12;
+const IMAGE_VERSION = 13;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -251,7 +251,7 @@ const PROJECTS = [
     location: "Lazio, Italy",
     type: "Urban Planning",
     collaborators: "Isabella Andelsohn, Ethan Anderson, Lucas Rosen",
-    strip: "assets/img/projects/monti-prenestini/strip.jpg", // pre-cut slice of the regional site plan, the whole range highlighted
+    strip: "assets/img/projects/monti-prenestini/strip.jpg", // pre-cut close-up of contours on the ridge's east flank, green to beige
     stripFocus: "50% 50%",
     summary: [
       "Monti Prenestini is a mountain range about an hour east of Rome, home to sweeping views, abundant wildlife, and a handful of medieval hill towns now at risk of depopulation. Our goal was a campaign to market the range to Romans as a destination for day trips. Using GIS, we mapped its points of interest and traced routes tailored to different visitors, from cyclists and hikers to horseback riders and pilgrims.",
