@@ -544,7 +544,7 @@ html.menu-entering .layout > :not(.menu) {
 
 .carousel-stage {
   display: grid;
-  flex: 0 1 52%;
+  flex: 0 1 68%;
   cursor: pointer;
 }
 
@@ -565,7 +565,7 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .carousel-arrow {
-  padding: 8px;
+  padding: 14px; /* generous click area */
   border: 0;
   background: none;
   color: var(--faint);
@@ -580,8 +580,8 @@ html.menu-entering .layout > :not(.menu) {
 
 .carousel-arrow svg {
   display: block;
-  width: 10px;
-  height: 12px;
+  width: 25px;
+  height: 30px;
   fill: currentColor;
 }
 

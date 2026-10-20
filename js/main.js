@@ -359,14 +359,19 @@
       carousel.querySelectorAll(".carousel-arrow").forEach((a) => a.addEventListener("click", () => show(current + +a.dataset.step)));
       stage.addEventListener("click", () => show(current + 1));
 
+      // Appears level with the top of the plan, slides to the plan's middle by the time the
+      // plan is centred on screen, then holds there until the menu reaches it.
       const place = () => {
         if (!matchMedia("(min-width: 761px)").matches) return selector.classList.remove("is-visible");
         const s = stage.getBoundingClientRect();
         const h = selector.offsetHeight;
+        const appear = innerHeight * 0.75; // plan top position when the selector shows up
+        const centred = innerHeight / 2 - s.height / 2; // plan top position when centred
+        const t = Math.min(1, Math.max(0, (appear - s.top) / (appear - centred)));
         const floor = menu.getBoundingClientRect().bottom + 28; // just below the menu
-        const top = Math.max(s.top + s.height / 2 - h / 2, floor);
+        const top = Math.max(s.top + t * (s.height / 2 - h / 2), floor);
         selector.style.top = `${top}px`;
-        selector.classList.toggle("is-visible", s.top < innerHeight * 0.75 && s.bottom > top + h);
+        selector.classList.toggle("is-visible", s.top < appear && s.bottom > top + h);
       };
       place();
       window.addEventListener("scroll", place, { passive: true });
