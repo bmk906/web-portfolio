@@ -292,7 +292,6 @@ const PROJECTS = [
 
       // ----- web: maps, then routes, then profiles
       { src: "assets/img/projects/monti-prenestini/01.jpg", caption: "Monti Prenestini Map", note: "This map shows towns, mountains, and points of interest.", hideOnMobile: true },
-      { src: "assets/img/projects/monti-prenestini/02.jpg", caption: "Transit and Bus Routes", hideOnMobile: true },
       {
         layout: "carousel", // routes by mode of travel; names in the sidebar
         list: true,
@@ -300,6 +299,7 @@ const PROJECTS = [
         revealEarly: true, // shows halfway down the map above
         hideOnMobile: true,
         images: [
+          { src: "assets/img/projects/monti-prenestini/02.jpg", ratio: 1.4413, caption: "Transit and Bus Routes", tab: "Combined" },
           { src: "assets/img/projects/monti-prenestini/routes/01-horseback-riding.jpg", ratio: 1.4413, caption: "Horseback Trails", tab: "Horseback" },
           { src: "assets/img/projects/monti-prenestini/routes/02-hiking-trails.jpg", ratio: 1.4413, caption: "Hiking Trails", tab: "Hiking" },
           { src: "assets/img/projects/monti-prenestini/routes/03-road-cycling.jpg", ratio: 1.4413, caption: "Road Cycling Routes", tab: "Road Cycling" },
