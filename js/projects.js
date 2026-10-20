@@ -22,8 +22,12 @@
                                                      one image beside a stacked column, equal
                                                      heights; reverse: true puts the column on
                                                      the left
-                { layout: "carousel", images: [...] } web: one at a time, switched by tabs named
-                                                     after the captions; mobile: stacked
+                { layout: "carousel", images: [{ src, caption, tab }, ...] }
+                                                     web: one at a time between arrows, levels
+                                                     (tab names) in the sidebar; mobile: stacked.
+                                                     id: "x" lets other images link to it, and
+                                                     hideOnMobile: true makes it web-only
+              An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
               A single image can take note: "..." for a short description under its caption,
               and nativeWidth: 624 to never display wider than its source (desktop).
@@ -138,9 +142,20 @@ const PROJECTS = [
         layout: "row",
         gap: "clamp(20px, 3vw, 48px)", // a little more air between the plans
         images: [
-          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1.061, caption: "Ground Floor Plan", captionInset: "7.7%" },
-          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1.061, caption: "+5' Floor Plan", captionInset: "7.7%" },
-          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1.061, caption: "Gym Floor Plan", captionInset: "5.9%" },
+          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1.061, caption: "Ground Floor Plan", captionInset: "7.7%", opens: { carousel: "yc-plans", level: 0 } },
+          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1.061, caption: "+5' Floor Plan", captionInset: "7.7%", opens: { carousel: "yc-plans", level: 1 } },
+          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1.061, caption: "Gym Floor Plan", captionInset: "5.9%", opens: { carousel: "yc-plans", level: 2 } },
+        ],
+      },
+      {
+        // web only: a larger view of the plans above; clicking one opens it here
+        layout: "carousel",
+        id: "yc-plans",
+        hideOnMobile: true,
+        images: [
+          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1.061, caption: "Ground Floor Plan", tab: "Ground" },
+          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1.061, caption: "+5' Floor Plan", tab: "+5'" },
+          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1.061, caption: "Gym Floor Plan", tab: "Gym" },
         ],
       },
       {

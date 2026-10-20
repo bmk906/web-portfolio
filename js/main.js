@@ -241,9 +241,10 @@
       const ownCaption = inGroup && img.caption ? `<p class="item-caption"${inset}>${escapeHTML(img.caption)}</p>` : "";
       // in a row, each image's share of the width is its aspect ratio, so heights match
       const flex = img.ratio ? ` style="--r:${img.ratio}" data-ratio="${img.ratio}"` : "";
-      const cls = img.hideOnMobile ? "gallery-item hide-mobile" : "gallery-item";
-      return labels || ownCaption || flex || img.hideOnMobile
-        ? `<div class="${cls}"${flex}>${tag}${labels}${ownList ? labelList(img.labels) : ""}${ownCaption}</div>`
+      const cls = ["gallery-item", img.hideOnMobile && "hide-mobile", img.opens && "opens-level"].filter(Boolean).join(" ");
+      const link = img.opens ? ` data-carousel="${img.opens.carousel}" data-level="${img.opens.level}"` : "";
+      return labels || ownCaption || flex || img.hideOnMobile || link
+        ? `<div class="${cls}"${flex}${link}>${tag}${labels}${ownList ? labelList(img.labels) : ""}${ownCaption}</div>`
         : tag;
     };
 
@@ -273,7 +274,7 @@
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel" data-tabs="${escapeHTML(JSON.stringify(names))}">
+      <figure class="gallery-carousel${block.hideOnMobile ? " hide-mobile" : ""}"${block.id ? ` data-id="${block.id}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
         <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>
       </figure>`;
     };
@@ -333,6 +334,7 @@
      menu (it stops just below it), and gone once the carousel has scrolled past. */
   function wireCarousels(root) {
     const menu = document.querySelector(".menu");
+    const controls = {}; // carousel id -> show(level)
     root.querySelectorAll(".gallery-carousel").forEach((carousel) => {
       const slides = [...carousel.querySelectorAll(".carousel-slide")];
       const stage = carousel.querySelector(".carousel-stage");
@@ -355,6 +357,7 @@
         buttons.forEach((b) => b.classList.toggle("is-active", +b.dataset.i === current));
       };
       show(0);
+      if (carousel.dataset.id) controls[carousel.dataset.id] = show;
       buttons.forEach((b) => b.addEventListener("click", () => show(+b.dataset.i)));
       carousel.querySelectorAll(".carousel-arrow").forEach((a) => a.addEventListener("click", () => show(current + +a.dataset.step)));
       stage.addEventListener("click", () => show(current + 1));
@@ -377,6 +380,16 @@
       window.addEventListener("scroll", place, { passive: true });
       window.addEventListener("resize", place);
     });
+
+    // desktop: clicking a linked plan opens that level in its carousel and brings it into view
+    root.querySelectorAll("[data-carousel]").forEach((el) =>
+      el.addEventListener("click", () => {
+        const show = controls[el.dataset.carousel];
+        if (!show || !matchMedia("(min-width: 761px)").matches) return;
+        show(+el.dataset.level);
+        root.querySelector(`[data-id="${el.dataset.carousel}"]`).scrollIntoView({ behavior: "smooth", block: "center" });
+      })
+    );
   }
 
   /* ---------- Header: stretch tagline to the width of the name ---------- */

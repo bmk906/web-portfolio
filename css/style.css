@@ -560,8 +560,11 @@ html.menu-entering .layout > :not(.menu) {
   visibility: visible;
 }
 
-.carousel-slide .item-caption {
-  display: none; /* the sidebar selector names the slides */
+/* plans that open their level in a carousel (desktop) */
+@media (min-width: 761px) {
+  .opens-level img {
+    cursor: pointer;
+  }
 }
 
 .carousel-arrow {
