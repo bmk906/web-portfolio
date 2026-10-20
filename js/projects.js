@@ -333,6 +333,20 @@ const PROJECTS = [
       { src: "assets/img/projects/monti-prenestini/zag-night.jpg", caption: "Plaza by Night" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-section.jpg", caption: "Plaza Section" },
       { src: "assets/img/projects/monti-prenestini/zag-site-section.jpg", caption: "Site Section" },
+      { divider: "Kit of Parts" },
+      { src: "assets/img/projects/monti-prenestini/kit/sketch.jpg", caption: "Kit of Parts Sketch" },
+      {
+        layout: "carousel", // web and mobile: one drawing at a time
+        list: true,
+        width: "85%",
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/monti-prenestini/kit/axon.jpg", ratio: 2, caption: "Axonometric", tab: "Axon" },
+          { src: "assets/img/projects/monti-prenestini/kit/aerial.jpg", ratio: 2, caption: "Aerial View", tab: "Aerial" },
+          { src: "assets/img/projects/monti-prenestini/kit/elevation.jpg", ratio: 2, caption: "Elevation", tab: "Elevation" },
+          { src: "assets/img/projects/monti-prenestini/kit/elevations.jpg", ratio: 2, caption: "Elevations", tab: "Elevations" },
+        ],
+      },
     ],
   },
   {
