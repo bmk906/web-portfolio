@@ -18,7 +18,9 @@
                 { layout: "row", images: [{ src, ratio }, ...] }
                                                      side by side at equal heights (ratio =
                                                      width / height); stacked on mobile
-              stack can take gap: "10px" to sit close instead of touching.
+              stack and row can take gap: "10px" (stack: sit close instead of touching).
+              Image options: captionInset: "7%" (indent the caption to where the drawing
+              starts), hideOnMobile: true.
               A group can have a caption, and its images can have their own captions.
               labels: white text placed on top of an image, at x/y percentages of the
               (cropped) image; centred on that point unless align: "left". On mobile
@@ -28,7 +30,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 5;
+const IMAGE_VERSION = 6;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -98,8 +100,8 @@ const PROJECTS = [
     stripFocus: "100% 0%",
     stripZoom: 1.55, // zoomed toward the top right so only the rings show
     summary: [
-      "North Beach Youth Center sits across the street from North Beach Oceanside Park, right beside the Miami Beach skate park. The program brings together a skate shop, gym hall, juice bar, classrooms, and changing rooms, with parking below.",
-      "At its heart is an open-air gym hall beneath a figural canopy of layered rings that filters the sun into dappled, tree-like shade across the floor. Open on all four sides, the hall is cooled by cross-ventilation, and everything except the parking and skate shop is raised above grade in anticipation of rising sea levels.",
+      "North Beach Youth Center sits across the street from North Beach Oceanside Park, right beside the Miami Beach skate park. The program features a skate shop, gym hall, juice bar, classrooms, and changing rooms, with parking below.",
+      "At its heart is an open-air gym hall beneath a figural canopy of layered rings that diffuse sunlight into tree-like shadows and create a dappled lighting effect across the floor. Open on all four sides, the hall is cooled by cross-ventilation, and everything except the parking and skate shop is raised above grade in anticipation of rising sea levels.",
     ],
     images: [
       { src: "assets/img/projects/youth-center/site-plan.jpg", caption: "Site plan" },
@@ -125,10 +127,11 @@ const PROJECTS = [
       { src: "assets/img/projects/youth-center/05.jpg", caption: "Rendered Section Perspective" },
       {
         layout: "row",
+        gap: "clamp(20px, 3vw, 48px)", // a little more air between the plans
         images: [
-          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1, caption: "Ground Level" },
-          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1, caption: "5ft Level" },
-          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1, caption: "Gym Level" },
+          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1, caption: "Ground Level", captionInset: "7.5%" },
+          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1, caption: "5ft Level", captionInset: "4.9%" },
+          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1, caption: "Gym Level", captionInset: "5.9%" },
         ],
       },
       {
@@ -143,7 +146,7 @@ const PROJECTS = [
         layout: "row",
         images: [
           { src: "assets/img/projects/youth-center/12.jpg", ratio: 1.104, caption: "Exploded Axonometric" },
-          { src: "assets/img/projects/youth-center/11.jpg", ratio: 0.402, caption: "Wall Section" },
+          { src: "assets/img/projects/youth-center/11.jpg", ratio: 0.402, caption: "Wall Section", hideOnMobile: true },
         ],
       },
     ],

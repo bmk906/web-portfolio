@@ -496,7 +496,7 @@ html.menu-entering .layout > :not(.menu) {
 .gallery-row .gallery-group {
   display: flex;
   align-items: flex-start;
-  gap: clamp(8px, 1vw, 14px);
+  gap: var(--group-gap, clamp(8px, 1vw, 14px));
 }
 
 .gallery-row .gallery-item {
@@ -562,6 +562,10 @@ html.menu-entering .layout > :not(.menu) {
   .gallery-row .gallery-item {
     flex: none;
     width: 100%;
+  }
+
+  .hide-mobile {
+    display: none;
   }
 
   /* tall drawings (e.g. a wall section) shouldn't run several screens long */

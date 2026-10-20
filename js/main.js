@@ -226,10 +226,14 @@
             `<span class="img-label${centred(l) ? " img-label--center" : ""}" style="left:${l.x};top:${l.y}">${escapeHTML(l.text)}</span>`
         )
         .join("");
-      const ownCaption = inGroup && img.caption ? `<p class="item-caption">${escapeHTML(img.caption)}</p>` : "";
+      const inset = img.captionInset ? ` style="padding-left:${img.captionInset}"` : "";
+      const ownCaption = inGroup && img.caption ? `<p class="item-caption"${inset}>${escapeHTML(img.caption)}</p>` : "";
       // in a row, each image's share of the width is its aspect ratio, so heights match
       const flex = img.ratio ? ` style="--r:${img.ratio}"` : "";
-      return labels || ownCaption || flex ? `<div class="gallery-item"${flex}>${tag}${labels}${ownCaption}</div>` : tag;
+      const cls = img.hideOnMobile ? "gallery-item hide-mobile" : "gallery-item";
+      return labels || ownCaption || flex || img.hideOnMobile
+        ? `<div class="${cls}"${flex}>${tag}${labels}${ownCaption}</div>`
+        : tag;
     };
 
     // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row", images }
