@@ -49,7 +49,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 13;
+const IMAGE_VERSION = 14;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -341,10 +341,10 @@ const PROJECTS = [
         width: "85%",
         mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/monti-prenestini/kit/axon.jpg", ratio: 2, caption: "Axonometric", tab: "Axon" },
-          { src: "assets/img/projects/monti-prenestini/kit/aerial.jpg", ratio: 2, caption: "Aerial View", tab: "Aerial" },
+          { src: "assets/img/projects/monti-prenestini/kit/axon.jpg", ratio: 2, caption: "Axonometric", tab: "Axon", captionInset: "1.9%" },
+          { src: "assets/img/projects/monti-prenestini/kit/aerial.jpg", ratio: 2, caption: "Aerial View", tab: "Aerial", captionInset: "5.1%" },
           { src: "assets/img/projects/monti-prenestini/kit/elevation.jpg", ratio: 2, caption: "Elevation", tab: "Elevation" },
-          { src: "assets/img/projects/monti-prenestini/kit/elevations.jpg", ratio: 2, caption: "Elevations", tab: "Elevations" },
+          { src: "assets/img/projects/monti-prenestini/kit/elevations.jpg", ratio: 2, caption: "Elevations", tab: "Elevations", captionInset: "0.8%" },
         ],
       },
     ],
