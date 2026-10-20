@@ -98,7 +98,7 @@ const PROJECTS = [
     collaborators: "Anthony Venant",
     strip: "assets/img/projects/youth-center/strip.jpg",
     stripFocus: "100% 0%",
-    stripZoom: 1.55, // zoomed toward the top right so only the rings show
+    stripZoom: 1.5, // zoomed toward the top right so only the rings show
     summary: [
       "North Beach Youth Center sits across the street from North Beach Oceanside Park, right beside the Miami Beach skate park. The program features a skate shop, gym hall, juice bar, classrooms, and changing rooms, with parking below.",
       "At its heart is an open-air gym hall beneath a figural canopy of layered rings that diffuse sunlight into tree-like shadows and create a dappled lighting effect across the floor. Open on all four sides, the hall is cooled by cross-ventilation, and everything except the parking and skate shop is raised above grade in anticipation of rising sea levels.",
@@ -125,6 +125,7 @@ const PROJECTS = [
         ],
       },
       { src: "assets/img/projects/youth-center/05.jpg", caption: "Rendered Section Perspective" },
+      { src: "assets/img/projects/youth-center/section-axon.jpg", caption: "Section Axon" },
       {
         layout: "row",
         gap: "clamp(20px, 3vw, 48px)", // a little more air between the plans
