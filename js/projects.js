@@ -49,7 +49,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 11;
+const IMAGE_VERSION = 12;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -251,7 +251,7 @@ const PROJECTS = [
     location: "Lazio, Italy",
     type: "Urban Planning",
     collaborators: "Isabella Andelsohn, Ethan Anderson, Lucas Rosen",
-    strip: "assets/img/projects/monti-prenestini/strip.jpg", // pre-cut slice on the right third line, through the ridge
+    strip: "assets/img/projects/monti-prenestini/strip.jpg", // pre-cut slice of the regional site plan, the whole range highlighted
     stripFocus: "50% 50%",
     summary: [
       "Monti Prenestini is a mountain range about an hour east of Rome, home to sweeping views, abundant wildlife, and a handful of medieval hill towns now at risk of depopulation. Our goal was a campaign to market the range to Romans as a destination for day trips. Using GIS, we mapped its points of interest and traced routes tailored to different visitors, from cyclists and hikers to horseback riders and pilgrims.",
@@ -311,15 +311,13 @@ const PROJECTS = [
           { src: "assets/img/projects/monti-prenestini/routes/05-proposed-bus-route.jpg", ratio: 1.4413, caption: "Proposed Bus Route", tab: "Proposed Bus" },
         ],
       },
-      { src: "assets/img/projects/monti-prenestini/profiles/selection.jpg", caption: "Circulation Paths: User Profiles", hideOnMobile: true },
       {
-        layout: "carousel", // one profile at a time
+        layout: "carousel", // overview first, then one profile at a time
         list: true,
         width: "100%",
-        revealEarly: true, // names show beside the overview's own list of profiles
-        alignTo: 0.13, // (that list starts 13% down the overview map)
         hideOnMobile: true,
         images: [
+          { src: "assets/img/projects/monti-prenestini/profiles/selection.jpg", ratio: 1.467, caption: "Circulation Paths: User Profiles", tab: "Profiles", captionInset: "1.1%" },
           { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.467, caption: "Christiano, Horseback Rider", tab: "Christiano", captionInset: "1.1%" },
           { src: "assets/img/projects/monti-prenestini/profiles/02-giorgio.jpg", ratio: 1.467, caption: "Giorgio, Rock Climber", tab: "Giorgio", captionInset: "1.1%" },
           { src: "assets/img/projects/monti-prenestini/profiles/03-gianna.jpg", ratio: 1.467, caption: "Gianna, Biker", tab: "Gianna", captionInset: "1.1%" },
