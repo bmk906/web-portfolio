@@ -223,7 +223,9 @@
 
     // One image, with optional white labels on top and (inside a group) its own caption
     const image = (img, inGroup) => {
-      const tag = `<img src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy">`;
+      // known ratio: reserve the image's shape before it loads, so layouts can be measured early
+      const shape = img.ratio ? ` style="aspect-ratio:${img.ratio}"` : "";
+      const tag = `<img src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy"${shape}>`;
       const labels = (img.labels || [])
         .map(
           (l) =>
@@ -233,7 +235,7 @@
       const inset = img.captionInset ? ` style="padding-left:${img.captionInset}"` : "";
       const ownCaption = inGroup && img.caption ? `<p class="item-caption"${inset}>${escapeHTML(img.caption)}</p>` : "";
       // in a row, each image's share of the width is its aspect ratio, so heights match
-      const flex = img.ratio ? ` style="--r:${img.ratio}"` : "";
+      const flex = img.ratio ? ` style="--r:${img.ratio}" data-ratio="${img.ratio}"` : "";
       const cls = img.hideOnMobile ? "gallery-item hide-mobile" : "gallery-item";
       return labels || ownCaption || flex || img.hideOnMobile
         ? `<div class="${cls}"${flex}>${tag}${labels}${ownCaption}</div>`
@@ -245,10 +247,8 @@
     const groupHTML = (block) => {
       if (block.layout !== "aside") return block.images.map((img) => image(img, true)).join("");
       const [first, ...rest] = block.images;
-      // split: [single, column] sets the two widths directly instead of matching heights
-      const single = block.split ? { ...first, ratio: block.split[0] } : first;
-      const colRatio = block.split ? block.split[1] : 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
-      return `${image(single, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
+      const colRatio = 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
+      return `${image(first, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
         .map((img) => image(img, true))
         .join("")}</div>`;
     };
@@ -275,7 +275,7 @@
           .join(";");
         const style = vars ? ` style="${vars}"` : "";
         return `
-      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}"${style}>
+      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}${block.match ? " is-matched" : ""}"${style}>
         <div class="gallery-group">${groupHTML(block)}</div>
         ${list}${caption(block.caption)}
       </figure>`;
@@ -295,6 +295,40 @@
         <a href="index.html#${p.category}" class="pager-index">Index</a>
         <a href="project.html?p=${next.slug}"><span>Next</span>${escapeHTML(next.title)}</a>
       </nav>`;
+
+    fitMatchedAsides();
+    window.addEventListener("resize", fitMatchedAsides);
+    document.fonts.ready.then(fitMatchedAsides);
+  }
+
+  /* Matched aside (desktop): size the stacked column so the span from its first image's
+     top to its last image's bottom equals the single image's height, i.e. the drawings
+     line up top and bottom and the last captions share a line. The span is linear in the
+     column width (images scale, captions and gaps don't), so one trial measurement fixes it. */
+  function fitMatchedAsides() {
+    document.querySelectorAll(".gallery-aside.is-matched").forEach((fig) => {
+      const group = fig.querySelector(".gallery-group");
+      const single = group.querySelector(":scope > .gallery-item");
+      const col = group.querySelector(".gallery-col");
+      if (!matchMedia("(min-width: 761px)").matches) {
+        single.style.flex = col.style.flex = "";
+        return;
+      }
+      const imgs = [...col.querySelectorAll("img")];
+      const perWidth = [...col.querySelectorAll("[data-ratio]")].reduce((sum, el) => sum + 1 / +el.dataset.ratio, 0);
+      const singleRatio = +single.dataset.ratio;
+      const total = group.clientWidth - parseFloat(getComputedStyle(group).columnGap || 0);
+
+      const trial = total / 2;
+      col.style.flex = `0 0 ${trial}px`;
+      single.style.flex = `0 0 ${total - trial}px`;
+      const span = imgs[imgs.length - 1].getBoundingClientRect().bottom - imgs[0].getBoundingClientRect().top;
+      const fixed = span - perWidth * trial; // captions + gaps between the images
+
+      const colWidth = (total - singleRatio * fixed) / (1 + singleRatio * perWidth);
+      col.style.flex = `0 0 ${colWidth}px`;
+      single.style.flex = `0 0 ${total - colWidth}px`;
+    });
   }
 
   /* ---------- Header: stretch tagline to the width of the name ---------- */

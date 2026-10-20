@@ -21,8 +21,8 @@
                 { layout: "aside", images: [single, ...stacked] }
                                                      one image beside a stacked column, equal
                                                      heights; reverse: true puts the column on
-                                                     the left; split: [0.45, 0.55] sets the widths
-                                                     instead; align: "center" centres vertically
+                                                     the left; match: true sizes the column so its
+                                                     images span exactly the single image's height
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
               A single image can take note: "..." for a short description under its caption.
               Image options: captionInset: "7%" (indent the caption to where the drawing
@@ -36,7 +36,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 8;
+const IMAGE_VERSION = 9;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -189,7 +189,7 @@ const PROJECTS = [
             ratio: 0.821,
             caption: "Progression Diagram",
             labels: [
-              { text: "01 Ziggurat", x: "28.8%", y: "25.6%", dark: true },
+              { text: "01 Ziggurat", x: "34%", y: "25.6%", dark: true },
               { text: "02 Tree", x: "82.7%", y: "51.4%", dark: true },
               { text: "03 Ziggurat of Leaves", x: "51.5%", y: "93.2%", dark: true },
             ],
@@ -201,14 +201,13 @@ const PROJECTS = [
       {
         layout: "aside", // plans stacked top floor first on the left, exploded axon on the right
         reverse: true,
-        split: [0.45, 0.55], // axon kept small (its source is low-res), plans get the room
-        align: "center",
+        match: true, // plans sized so the stack spans exactly the axon's height (see main.js)
         gap: "clamp(20px, 3vw, 48px)",
         images: [
-          { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", caption: "Exploded Axonometric" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.171, caption: "Level 2 Floor Plan", captionInset: "2.2%" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.171, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.171, caption: "Ground Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", ratio: 0.6367, caption: "Exploded Axonometric" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", captionInset: "0.9%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.2975, caption: "Ground Floor Plan", captionInset: "2.2%" },
         ],
       },
       {

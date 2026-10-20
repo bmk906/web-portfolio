@@ -533,6 +533,11 @@ html.menu-entering .layout > :not(.menu) {
   flex-direction: row-reverse;
 }
 
+/* matched (widths set by main.js): both sides start at the top */
+.gallery-aside.is-matched .gallery-group {
+  align-items: flex-start;
+}
+
 /* a short description under a caption */
 .caption-note {
   display: block;
