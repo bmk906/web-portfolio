@@ -539,6 +539,31 @@ html.menu-entering .layout > :not(.menu) {
   flex-direction: row-reverse;
 }
 
+/* section break inside a project: a short rule, a subheading, a short rule */
+.gallery-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: clamp(40px, 6vw, 88px) 0 clamp(44px, 6.5vw, 96px);
+}
+
+.gallery-divider::before,
+.gallery-divider::after {
+  content: "";
+  width: 1px;
+  height: clamp(36px, 4.5vw, 64px);
+  background: var(--ink);
+}
+
+.gallery-divider span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 /* carousel: one plan at a time between two small arrows; slides share one spot and
    cross-fade. Its level selector (.level-select) sits in the left sidebar. */
 .carousel-body {

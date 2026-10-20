@@ -32,6 +32,9 @@
                                                      width: "100%" sets the image width
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
+              { divider: "Title" } adds a section break (rule, subheading, rule).
+              revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
+              image above.
               A single image can take note: "..." for a short description under its caption,
               and nativeWidth: 624 to never display wider than its source (desktop).
               Image options: captionInset: "7%" (indent the caption to where the drawing
@@ -45,7 +48,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 10;
+const IMAGE_VERSION = 11;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -262,7 +265,8 @@ const PROJECTS = [
         layout: "carousel", // web: one profile at a time, names in the sidebar; mobile: swipe
         list: true,
         width: "100%",
-        revealEarly: true, // names show while the overview above is on screen
+        revealEarly: true, // names show beside the overview's own list of profiles
+        alignTo: 0.13, // (that list starts 13% down the overview map)
         mobileSwipe: true,
         images: [
           { src: "assets/img/projects/monti-prenestini/profiles/01-christiano.jpg", ratio: 1.467, caption: "Christiano, Horseback Rider", tab: "Christiano", captionInset: "1.1%" },
@@ -288,6 +292,7 @@ const PROJECTS = [
           { src: "assets/img/projects/monti-prenestini/routes/05-proposed-bus-route.jpg", ratio: 1.4413, caption: "Proposed Bus Route", tab: "Proposed Bus" },
         ],
       },
+      { divider: "Zagarolo Plaza Renovation" },
       { src: "assets/img/projects/monti-prenestini/zag-site.jpg", caption: "Zagarolo Station: Site Plan" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-plan.jpg", caption: "Sunken Plaza Plan" },
       { src: "assets/img/projects/monti-prenestini/zag-day.jpg", caption: "Plaza by Day" },

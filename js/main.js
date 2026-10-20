@@ -276,7 +276,7 @@
       return `
       <figure class="gallery-carousel${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileSwipe ? " is-swipe" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
         block.list ? ` data-list="1"` : ""
-      }${block.revealEarly ? ` data-early="1"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
+      }${block.revealEarly ? ` data-early="${block.alignTo ?? 1}"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
       }${block.width ? ` style="--stage-w:${block.width}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
         <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>${
           block.mobileSwipe ? `<div class="carousel-dots" aria-hidden="true">${block.images.map(() => "<span></span>").join("")}</div>` : ""
@@ -288,6 +288,8 @@
     const gallery = p.images
       .map((block) => {
         if (block.layout === "carousel") return carouselHTML(block);
+        if (block.divider)
+          return `<div class="gallery-divider" role="separator"><span>${escapeHTML(block.divider)}</span></div>`;
 
         // mobile: on-image labels (and any mobileList lines) are listed below instead;
         // aside images list their own labels under each image
@@ -389,13 +391,20 @@
         const t = Math.min(1, Math.max(0, (appear - s.top) / (appear - centred)));
         const floor = menu.getBoundingClientRect().bottom + 28; // just below the menu
         let top = s.top + t * (s.height / 2 - h / 2);
-        if (early) top = Math.min(top, innerHeight / 2 - h / 2);
+        if (early) {
+          top = Math.min(top, innerHeight / 2 - h / 2);
+          // alignTo: sit beside that point of the image above (e.g. its legend) until it
+          // has risen to the middle of the screen
+          const a = early.getBoundingClientRect();
+          if (+carousel.dataset.early < 1) top = Math.max(top, a.top + +carousel.dataset.early * a.height);
+        }
         top = Math.max(top, floor);
         selector.style.top = `${top}px`;
         let start = s.top < appear;
         if (early) {
           const a = early.getBoundingClientRect();
-          start = start || a.top + a.height / 2 < innerHeight / 2;
+          const f = +carousel.dataset.early;
+          start = start || (f < 1 ? a.top + f * a.height < innerHeight * 0.8 : a.top + a.height / 2 < innerHeight / 2);
         }
         selector.classList.toggle("is-visible", start && s.bottom > top + h);
       };
