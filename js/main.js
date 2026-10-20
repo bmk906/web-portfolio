@@ -25,6 +25,13 @@
 
   /* ---------- Home ---------- */
 
+  // Crop of a strip image: which part shows (stripFocus), optionally zoomed in toward it
+  function stripStyle(p) {
+    const focus = p.stripFocus || "50% 50%";
+    const zoom = p.stripZoom ? `transform:scale(${p.stripZoom});transform-origin:${focus};` : "";
+    return `object-position:${focus};${zoom}`;
+  }
+
   function renderIndex() {
     const root = document.getElementById("categories");
 
@@ -36,10 +43,10 @@
         <li>
           <a class="strip" href="project.html?p=${p.slug}" aria-label="${escapeHTML(p.title)}">
             <span class="strip-frame">
-              <img src="${asset(p.strip)}" alt="" loading="lazy" style="object-position:${p.stripFocus || "50% 50%"}">
-              <span class="strip-title" aria-hidden="true">${escapeHTML(p.title)}</span>
+              <img src="${asset(p.strip)}" alt="" loading="lazy" style="${stripStyle(p)}">
+              <span class="strip-title" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             </span>
-            <span class="strip-caption" aria-hidden="true">${escapeHTML(p.title)}</span>
+            <span class="strip-caption" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             <span class="strip-code" aria-hidden="true">${code(p)}</span>
           </a>
         </li>`
@@ -220,10 +227,12 @@
         )
         .join("");
       const ownCaption = inGroup && img.caption ? `<p class="item-caption">${escapeHTML(img.caption)}</p>` : "";
-      return labels || ownCaption ? `<div class="gallery-item">${tag}${labels}${ownCaption}</div>` : tag;
+      // in a row, each image's share of the width is its aspect ratio, so heights match
+      const flex = img.ratio ? ` style="--r:${img.ratio}"` : "";
+      return labels || ownCaption || flex ? `<div class="gallery-item"${flex}>${tag}${labels}${ownCaption}</div>` : tag;
     };
 
-    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid", images }
+    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row", images }
     const gallery = p.images
       .map((block) => {
         // mobile: on-image labels (and any mobileList lines) are listed below instead
@@ -236,10 +245,13 @@
           : "";
 
         if (!block.layout) return `<figure>${image(block)}${list}${caption(block.caption)}</figure>`;
-        const style =
-          block.layout === "bands"
-            ? ` style="--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}"`
-            : "";
+        const vars = [
+          block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
+          block.gap ? `--group-gap:${block.gap}` : "",
+        ]
+          .filter(Boolean)
+          .join(";");
+        const style = vars ? ` style="${vars}"` : "";
         return `
       <figure class="gallery-${block.layout}"${style}>
         <div class="gallery-group">${block.images.map((img) => image(img, true)).join("")}</div>

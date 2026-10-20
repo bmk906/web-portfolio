@@ -481,7 +481,27 @@ html.menu-entering .layout > :not(.menu) {
 /* image groups (see projects.js) */
 .gallery-stack .gallery-group,
 .gallery-bands .gallery-group {
-  display: grid; /* no gap: related drawings read as one */
+  display: grid;
+  gap: var(--group-gap, 0); /* default no gap: related drawings read as one */
+}
+
+/* 3 × 3 study matrices, on mobile too */
+.gallery-matrix .gallery-group {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 0.5vw, 8px);
+}
+
+/* side by side at equal heights: each takes width in proportion to its ratio */
+.gallery-row .gallery-group {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(8px, 1vw, 14px);
+}
+
+.gallery-row .gallery-item {
+  flex: var(--r, 1) 1 0;
+  min-width: 0;
 }
 
 .gallery-bands img {
@@ -533,6 +553,22 @@ html.menu-entering .layout > :not(.menu) {
 @media (max-width: 760px) {
   .gallery-grid .gallery-group {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gallery-row .gallery-group {
+    flex-direction: column;
+  }
+
+  .gallery-row .gallery-item {
+    flex: none;
+    width: 100%;
+  }
+
+  /* tall drawings (e.g. a wall section) shouldn't run several screens long */
+  .gallery-row .gallery-item img {
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
   }
 
   .img-label {

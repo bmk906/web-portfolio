@@ -4,6 +4,8 @@
   strip       image used for the tall strip on the home page
   stripFocus  which part of that image the strip shows (CSS object-position):
               "0% 50%" = left edge, "50% 50%" = centre, "100% 50%" = right edge
+  stripZoom   optional; zooms the strip in toward stripFocus (e.g. 1.3)
+  shortTitle  optional; shorter name for the home page strip
   summary     one paragraph as a string, or several as a list of strings
   collaborators  optional; only shown when filled in
   images      shown in order on the project page; caption is optional. An entry can
@@ -12,6 +14,11 @@
                 { layout: "bands", ratio: "4 / 1", focus: "50% 87%", images: [...] }
                                                      each cropped to a thin band, stacked
                 { layout: "grid", images: [...] }    two columns (one on mobile)
+                { layout: "matrix", images: [...] }  three columns, on mobile too
+                { layout: "row", images: [{ src, ratio }, ...] }
+                                                     side by side at equal heights (ratio =
+                                                     width / height); stacked on mobile
+              stack can take gap: "10px" to sit close instead of touching.
               A group can have a caption, and its images can have their own captions.
               labels: white text placed on top of an image, at x/y percentages of the
               (cropped) image; centred on that point unless align: "left". On mobile
@@ -79,20 +86,66 @@ const PROJECTS = [
     ],
   },
   {
-    slug: "academic-02",
+    slug: "youth-center",
     category: "academic",
-    title: "Academic Project 02",
+    title: "North Beach Youth Center",
+    shortTitle: "Youth Center", // used on the home page strip
     year: "2021",
-    location: "City, State",
-    type: "Residential",
-    context: "Graduate Studio",
-    strip: "assets/img/placeholder-2.svg",
-    stripFocus: "65% 50%",
-    summary:
-      "Placeholder description. Two or three sentences on the site, the central idea, and what the building does with it.",
+    location: "Miami Beach, FL",
+    type: "Civic",
+    collaborators: "Anthony Venant",
+    strip: "assets/img/projects/youth-center/strip.jpg",
+    stripFocus: "100% 0%",
+    stripZoom: 1.55, // zoomed toward the top right so only the rings show
+    summary: [
+      "North Beach Youth Center sits across the street from North Beach Oceanside Park, right beside the Miami Beach skate park. The program brings together a skate shop, gym hall, juice bar, classrooms, and changing rooms, with parking below.",
+      "At its heart is an open-air gym hall beneath a figural canopy of layered rings that filters the sun into dappled, tree-like shade across the floor. Open on all four sides, the hall is cooled by cross-ventilation, and everything except the parking and skate shop is raised above grade in anticipation of rising sea levels.",
+    ],
     images: [
-      { src: "assets/img/placeholder-2.svg", caption: "Street elevation" },
-      { src: "assets/img/placeholder-6.svg" },
+      { src: "assets/img/projects/youth-center/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/youth-center/01.jpg", caption: "Site Axon" },
+      {
+        layout: "matrix",
+        caption: "Form Finding Studies",
+        images: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => ({ src: `assets/img/projects/youth-center/massing/m${n}.jpg` })),
+      },
+      {
+        layout: "matrix",
+        caption: "Roof Iterations",
+        images: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => ({ src: `assets/img/projects/youth-center/massing/h${n}.jpg` })),
+      },
+      { src: "assets/img/projects/youth-center/02.jpg", caption: "Gym Floor Render" },
+      {
+        layout: "row",
+        images: [
+          { src: "assets/img/projects/youth-center/03.jpg", ratio: 1.4, caption: "Close Up View of Rings" },
+          { src: "assets/img/projects/youth-center/04.jpg", ratio: 1.4, caption: "Classroom View" },
+        ],
+      },
+      { src: "assets/img/projects/youth-center/05.jpg", caption: "Rendered Section Perspective" },
+      {
+        layout: "row",
+        images: [
+          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1, caption: "Ground Level" },
+          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1, caption: "5ft Level" },
+          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1, caption: "Gym Level" },
+        ],
+      },
+      {
+        layout: "stack",
+        gap: "clamp(8px, 1vw, 14px)",
+        images: [
+          { src: "assets/img/projects/youth-center/09.jpg", caption: "Elevation" },
+          { src: "assets/img/projects/youth-center/10.jpg", caption: "Section" },
+        ],
+      },
+      {
+        layout: "row",
+        images: [
+          { src: "assets/img/projects/youth-center/12.jpg", ratio: 1.104, caption: "Exploded Axonometric" },
+          { src: "assets/img/projects/youth-center/11.jpg", ratio: 0.402, caption: "Wall Section" },
+        ],
+      },
     ],
   },
   {
