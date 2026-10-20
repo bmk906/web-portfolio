@@ -533,9 +533,56 @@ html.menu-entering .layout > :not(.menu) {
   flex-direction: row-reverse;
 }
 
-/* matched (widths set by main.js): both sides start at the top */
-.gallery-aside.is-matched .gallery-group {
-  align-items: flex-start;
+/* carousel: slides share one spot and cross-fade; tabs below, styled like captions */
+.carousel-stage {
+  display: grid;
+  cursor: pointer;
+}
+
+.carousel-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s, visibility 0.35s;
+}
+
+.carousel-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.carousel-slide .item-caption {
+  display: none; /* the tabs name the slides */
+}
+
+.carousel-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.6em;
+  margin-top: 3px;
+}
+
+.carousel-tab {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  line-height: 1.25;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.carousel-tab:hover,
+.carousel-tab.is-active {
+  color: var(--ink);
+}
+
+/* an image shown no larger than its source, so a low-res render stays crisp */
+.gallery figure.is-native img {
+  max-width: var(--native-w);
 }
 
 /* a short description under a caption */
@@ -622,6 +669,30 @@ html.menu-entering .layout > :not(.menu) {
 
   .hide-mobile {
     display: none;
+  }
+
+  /* carousel: everything stacked with its caption; no tabs */
+  .carousel-stage {
+    gap: clamp(20px, 5vw, 32px);
+    cursor: auto;
+  }
+
+  .carousel-slide {
+    grid-area: auto;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .carousel-slide .item-caption {
+    display: block;
+  }
+
+  .carousel-tabs {
+    display: none;
+  }
+
+  .gallery figure.is-native img {
+    max-width: 100%; /* full width on phones */
   }
 
   /* tall drawings (e.g. a wall section) shouldn't run several screens long */

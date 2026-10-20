@@ -220,9 +220,14 @@
         ? `<figcaption>${escapeHTML(text)}${note ? `<span class="caption-note">${escapeHTML(note)}</span>` : ""}</figcaption>`
         : "";
     const centred = (l) => l.align !== "left";
+    // mobile-only list of label text (on-image labels are too small to read on a phone)
+    const labelList = (labels) =>
+      labels && labels.length
+        ? `<ul class="label-list">${labels.map((l) => `<li>${escapeHTML(l.text || l)}</li>`).join("")}</ul>`
+        : "";
 
     // One image, with optional white labels on top and (inside a group) its own caption
-    const image = (img, inGroup) => {
+    const image = (img, inGroup, ownList) => {
       // known ratio: reserve the image's shape before it loads, so layouts can be measured early
       const shape = img.ratio ? ` style="aspect-ratio:${img.ratio}"` : "";
       const tag = `<img src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy"${shape}>`;
@@ -238,7 +243,7 @@
       const flex = img.ratio ? ` style="--r:${img.ratio}" data-ratio="${img.ratio}"` : "";
       const cls = img.hideOnMobile ? "gallery-item hide-mobile" : "gallery-item";
       return labels || ownCaption || flex || img.hideOnMobile
-        ? `<div class="${cls}"${flex}>${tag}${labels}${ownCaption}</div>`
+        ? `<div class="${cls}"${flex}>${tag}${labels}${ownList ? labelList(img.labels) : ""}${ownCaption}</div>`
         : tag;
     };
 
@@ -248,24 +253,48 @@
       if (block.layout !== "aside") return block.images.map((img) => image(img, true)).join("");
       const [first, ...rest] = block.images;
       const colRatio = 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
-      return `${image(first, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
-        .map((img) => image(img, true))
+      return `${image(first, true, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
+        .map((img) => image(img, true, true))
         .join("")}</div>`;
     };
 
-    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row" | "aside", images }
+    // Carousel (desktop): one large image at a time, switched with tabs named after the
+    // captions (or by clicking the image). Mobile: all images stacked with their captions.
+    const carouselHTML = (block) => {
+      const inset = block.images[0].captionInset ? ` style="padding-left:${block.images[0].captionInset}"` : "";
+      const slides = block.images
+        .map((img, i) => `<div class="carousel-slide${i ? "" : " is-active"}">${image(img, true)}</div>`)
+        .join("");
+      const tabs = block.images
+        .map(
+          (img, i) =>
+            `<button type="button" class="carousel-tab${i ? "" : " is-active"}" data-i="${i}">${escapeHTML(img.caption)}</button>`
+        )
+        .join("");
+      return `
+      <figure class="gallery-carousel">
+        <div class="carousel-stage">${slides}</div>
+        <div class="carousel-tabs"${inset}>${tabs}</div>
+      </figure>`;
+    };
+
+    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row" | "aside" | "carousel", images }
     const gallery = p.images
       .map((block) => {
-        // mobile: on-image labels (and any mobileList lines) are listed below instead
+        if (block.layout === "carousel") return carouselHTML(block);
+
+        // mobile: on-image labels (and any mobileList lines) are listed below instead;
+        // aside images list their own labels under each image
         const listed = [
-          ...(block.layout ? block.images : [block]).flatMap((img) => (img.labels || []).map((l) => l.text)),
+          ...(block.layout === "aside" ? [] : block.layout ? block.images : [block]).flatMap((img) => img.labels || []),
           ...(block.mobileList || []),
         ];
-        const list = listed.length
-          ? `<ul class="label-list">${listed.map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>`
-          : "";
+        const list = labelList(listed);
 
-        if (!block.layout) return `<figure>${image(block)}${list}${caption(block.caption, block.note)}</figure>`;
+        if (!block.layout) {
+          const native = block.nativeWidth ? ` class="is-native" style="--native-w:${block.nativeWidth}px"` : "";
+          return `<figure${native}>${image(block)}${list}${caption(block.caption, block.note)}</figure>`;
+        }
         const vars = [
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
           block.gap ? `--group-gap:${block.gap}` : "",
@@ -275,7 +304,7 @@
           .join(";");
         const style = vars ? ` style="${vars}"` : "";
         return `
-      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}${block.match ? " is-matched" : ""}"${style}>
+      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}"${style}>
         <div class="gallery-group">${groupHTML(block)}</div>
         ${list}${caption(block.caption)}
       </figure>`;
@@ -296,38 +325,19 @@
         <a href="project.html?p=${next.slug}"><span>Next</span>${escapeHTML(next.title)}</a>
       </nav>`;
 
-    fitMatchedAsides();
-    window.addEventListener("resize", fitMatchedAsides);
-    document.fonts.ready.then(fitMatchedAsides);
-  }
-
-  /* Matched aside (desktop): size the stacked column so the span from its first image's
-     top to its last image's bottom equals the single image's height, i.e. the drawings
-     line up top and bottom and the last captions share a line. The span is linear in the
-     column width (images scale, captions and gaps don't), so one trial measurement fixes it. */
-  function fitMatchedAsides() {
-    document.querySelectorAll(".gallery-aside.is-matched").forEach((fig) => {
-      const group = fig.querySelector(".gallery-group");
-      const single = group.querySelector(":scope > .gallery-item");
-      const col = group.querySelector(".gallery-col");
-      if (!matchMedia("(min-width: 761px)").matches) {
-        single.style.flex = col.style.flex = "";
-        return;
-      }
-      const imgs = [...col.querySelectorAll("img")];
-      const perWidth = [...col.querySelectorAll("[data-ratio]")].reduce((sum, el) => sum + 1 / +el.dataset.ratio, 0);
-      const singleRatio = +single.dataset.ratio;
-      const total = group.clientWidth - parseFloat(getComputedStyle(group).columnGap || 0);
-
-      const trial = total / 2;
-      col.style.flex = `0 0 ${trial}px`;
-      single.style.flex = `0 0 ${total - trial}px`;
-      const span = imgs[imgs.length - 1].getBoundingClientRect().bottom - imgs[0].getBoundingClientRect().top;
-      const fixed = span - perWidth * trial; // captions + gaps between the images
-
-      const colWidth = (total - singleRatio * fixed) / (1 + singleRatio * perWidth);
-      col.style.flex = `0 0 ${colWidth}px`;
-      single.style.flex = `0 0 ${total - colWidth}px`;
+    // carousels: tabs (or a click on the image) switch which slide is shown
+    root.querySelectorAll(".gallery-carousel").forEach((carousel) => {
+      const slides = [...carousel.querySelectorAll(".carousel-slide")];
+      const tabs = [...carousel.querySelectorAll(".carousel-tab")];
+      const show = (i) => {
+        slides.forEach((s, j) => s.classList.toggle("is-active", j === i));
+        tabs.forEach((t, j) => t.classList.toggle("is-active", j === i));
+      };
+      tabs.forEach((t, i) => t.addEventListener("click", () => show(i)));
+      carousel.querySelector(".carousel-stage").addEventListener("click", () => {
+        const current = slides.findIndex((s) => s.classList.contains("is-active"));
+        show((current + 1) % slides.length);
+      });
     });
   }
 

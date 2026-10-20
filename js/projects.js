@@ -21,10 +21,12 @@
                 { layout: "aside", images: [single, ...stacked] }
                                                      one image beside a stacked column, equal
                                                      heights; reverse: true puts the column on
-                                                     the left; match: true sizes the column so its
-                                                     images span exactly the single image's height
+                                                     the left
+                { layout: "carousel", images: [...] } web: one at a time, switched by tabs named
+                                                     after the captions; mobile: stacked
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
-              A single image can take note: "..." for a short description under its caption.
+              A single image can take note: "..." for a short description under its caption,
+              and nativeWidth: 624 to never display wider than its source (desktop).
               Image options: captionInset: "7%" (indent the caption to where the drawing
               starts), hideOnMobile: true.
               A group can have a caption, and its images can have their own captions.
@@ -199,15 +201,11 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "aside", // plans stacked top floor first on the left, exploded axon on the right
-        reverse: true,
-        match: true, // plans sized so the stack spans exactly the axon's height (see main.js)
-        gap: "clamp(20px, 3vw, 48px)",
+        layout: "carousel", // web: one large plan, tabs switch levels; mobile: stacked
         images: [
-          { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", ratio: 0.6367, caption: "Exploded Axonometric" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", captionInset: "0.9%" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
           { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.2975, caption: "Ground Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", captionInset: "0.9%" },
         ],
       },
       {
@@ -218,6 +216,8 @@ const PROJECTS = [
         ],
       },
       { src: "assets/img/projects/ziggurat-of-leaves/full-render-structure.jpg" },
+      // source is low-res: shown at its native width on desktop so it stays crisp
+      { src: "assets/img/projects/ziggurat-of-leaves/axon-nw.jpg", caption: "Exploded Axonometric", nativeWidth: 624 },
     ],
   },
   {
