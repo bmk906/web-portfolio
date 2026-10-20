@@ -30,7 +30,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 6;
+const IMAGE_VERSION = 7;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -129,9 +129,9 @@ const PROJECTS = [
         layout: "row",
         gap: "clamp(20px, 3vw, 48px)", // a little more air between the plans
         images: [
-          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1, caption: "Ground Level", captionInset: "7.5%" },
-          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1, caption: "5ft Level", captionInset: "4.9%" },
-          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1, caption: "Gym Level", captionInset: "5.9%" },
+          { src: "assets/img/projects/youth-center/06.jpg", ratio: 1.061, caption: "Ground Floor Plan", captionInset: "7.7%" },
+          { src: "assets/img/projects/youth-center/07.jpg", ratio: 1.061, caption: "+5' Floor Plan", captionInset: "7.7%" },
+          { src: "assets/img/projects/youth-center/08.jpg", ratio: 1.061, caption: "Gym Floor Plan", captionInset: "5.9%" },
         ],
       },
       {
