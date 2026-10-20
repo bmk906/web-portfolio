@@ -169,7 +169,7 @@ const PROJECTS = [
     type: "Civic",
     collaborators: "Anthony Venant",
     strip: "assets/img/projects/ziggurat-of-leaves/full-render-structure.jpg",
-    stripFocus: "34% 0%", // the lit steel column and its branches
+    stripFocus: "20% 0%", // from the top: branching canopy over the lit steel column
     stripZoom: 1.6,
     summary: [
       "Ziggurat of Leaves is a proposal for the Miami Beach Architecture Center at the corner of Lincoln Road and Alton Road. The form was conceived by studying the stepped ziggurat commonly used in South Beach's Art Deco architecture and inverting the structure to provide shade to the public plaza below.",
@@ -201,11 +201,11 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // web: one large plan, tabs switch levels; mobile: stacked
+        layout: "carousel", // web: one plan between arrows, levels in the sidebar; mobile: stacked
         images: [
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.2975, caption: "Ground Floor Plan", captionInset: "2.2%" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", captionInset: "2.2%" },
-          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", captionInset: "0.9%" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-ground.jpg", ratio: 1.2975, caption: "Ground Floor Plan", tab: "Ground" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-1.jpg", ratio: 1.2975, caption: "Level 1 Floor Plan", tab: "Level 1" },
+          { src: "assets/img/projects/ziggurat-of-leaves/plan-2.jpg", ratio: 1.2975, caption: "Level 2 Floor Plan", tab: "Level 2" },
         ],
       },
       {

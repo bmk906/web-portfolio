@@ -533,9 +533,18 @@ html.menu-entering .layout > :not(.menu) {
   flex-direction: row-reverse;
 }
 
-/* carousel: slides share one spot and cross-fade; tabs below, styled like captions */
+/* carousel: one plan at a time between two small arrows; slides share one spot and
+   cross-fade. Its level selector (.level-select) sits in the left sidebar. */
+.carousel-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 2.5vw, 40px);
+}
+
 .carousel-stage {
   display: grid;
+  flex: 0 1 52%;
   cursor: pointer;
 }
 
@@ -552,31 +561,64 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .carousel-slide .item-caption {
-  display: none; /* the tabs name the slides */
+  display: none; /* the sidebar selector names the slides */
 }
 
-.carousel-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 1.6em;
-  margin-top: 3px;
-}
-
-.carousel-tab {
-  padding: 0;
+.carousel-arrow {
+  padding: 8px;
   border: 0;
   background: none;
-  font: inherit;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  line-height: 1.25;
   color: var(--faint);
   cursor: pointer;
   transition: color 0.2s;
 }
 
-.carousel-tab:hover,
-.carousel-tab.is-active {
+.carousel-arrow:hover,
+.carousel-arrow:focus-visible {
+  color: var(--ink);
+}
+
+.carousel-arrow svg {
+  display: block;
+  width: 10px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.level-select {
+  position: fixed;
+  left: var(--gutter);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.level-select.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.level-select button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: clamp(0.8rem, 1.5vw, 1.3rem); /* half the project-page menu size */
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--faint);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.level-select button:hover,
+.level-select button.is-active {
   color: var(--ink);
 }
 
@@ -687,7 +729,12 @@ html.menu-entering .layout > :not(.menu) {
     display: block;
   }
 
-  .carousel-tabs {
+  .carousel-body {
+    display: block;
+  }
+
+  .carousel-arrow,
+  .level-select {
     display: none;
   }
 

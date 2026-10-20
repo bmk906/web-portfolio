@@ -258,23 +258,23 @@
         .join("")}</div>`;
     };
 
-    // Carousel (desktop): one large image at a time, switched with tabs named after the
-    // captions (or by clicking the image). Mobile: all images stacked with their captions.
+    // Carousel (desktop): one image at a time between two arrows; a level selector named
+    // with each image's `tab` appears in the left sidebar (see wireCarousels).
+    // Mobile: all images stacked with their captions, no arrows or selector.
+    const arrow = (dir) =>
+      `<button type="button" class="carousel-arrow" data-step="${dir === "prev" ? -1 : 1}" aria-label="${
+        dir === "prev" ? "Previous" : "Next"
+      }"><svg viewBox="0 0 10 12" aria-hidden="true"><polygon points="${
+        dir === "prev" ? "10,0 10,12 0,6" : "0,0 0,12 10,6"
+      }"/></svg></button>`;
     const carouselHTML = (block) => {
-      const inset = block.images[0].captionInset ? ` style="padding-left:${block.images[0].captionInset}"` : "";
       const slides = block.images
         .map((img, i) => `<div class="carousel-slide${i ? "" : " is-active"}">${image(img, true)}</div>`)
         .join("");
-      const tabs = block.images
-        .map(
-          (img, i) =>
-            `<button type="button" class="carousel-tab${i ? "" : " is-active"}" data-i="${i}">${escapeHTML(img.caption)}</button>`
-        )
-        .join("");
+      const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel">
-        <div class="carousel-stage">${slides}</div>
-        <div class="carousel-tabs"${inset}>${tabs}</div>
+      <figure class="gallery-carousel" data-tabs="${escapeHTML(JSON.stringify(names))}">
+        <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>
       </figure>`;
     };
 
@@ -325,19 +325,52 @@
         <a href="project.html?p=${next.slug}"><span>Next</span>${escapeHTML(next.title)}</a>
       </nav>`;
 
-    // carousels: tabs (or a click on the image) switch which slide is shown
+    wireCarousels(root);
+  }
+
+  /* Carousel controls (desktop). The level selector lives in the left sidebar: hidden
+     until the carousel is on screen, centred on it vertically, never riding up into the
+     menu (it stops just below it), and gone once the carousel has scrolled past. */
+  function wireCarousels(root) {
+    const menu = document.querySelector(".menu");
     root.querySelectorAll(".gallery-carousel").forEach((carousel) => {
       const slides = [...carousel.querySelectorAll(".carousel-slide")];
-      const tabs = [...carousel.querySelectorAll(".carousel-tab")];
+      const stage = carousel.querySelector(".carousel-stage");
+      const names = JSON.parse(carousel.dataset.tabs);
+
+      // selector lists the top level first, so it reads like the building
+      const selector = document.createElement("div");
+      selector.className = "level-select";
+      selector.innerHTML = names
+        .map((name, i) => `<button type="button" data-i="${i}">${escapeHTML(name)}</button>`)
+        .reverse()
+        .join("");
+      document.body.appendChild(selector);
+      const buttons = [...selector.querySelectorAll("button")];
+
+      let current = 0;
       const show = (i) => {
-        slides.forEach((s, j) => s.classList.toggle("is-active", j === i));
-        tabs.forEach((t, j) => t.classList.toggle("is-active", j === i));
+        current = (i + slides.length) % slides.length;
+        slides.forEach((s, j) => s.classList.toggle("is-active", j === current));
+        buttons.forEach((b) => b.classList.toggle("is-active", +b.dataset.i === current));
       };
-      tabs.forEach((t, i) => t.addEventListener("click", () => show(i)));
-      carousel.querySelector(".carousel-stage").addEventListener("click", () => {
-        const current = slides.findIndex((s) => s.classList.contains("is-active"));
-        show((current + 1) % slides.length);
-      });
+      show(0);
+      buttons.forEach((b) => b.addEventListener("click", () => show(+b.dataset.i)));
+      carousel.querySelectorAll(".carousel-arrow").forEach((a) => a.addEventListener("click", () => show(current + +a.dataset.step)));
+      stage.addEventListener("click", () => show(current + 1));
+
+      const place = () => {
+        if (!matchMedia("(min-width: 761px)").matches) return selector.classList.remove("is-visible");
+        const s = stage.getBoundingClientRect();
+        const h = selector.offsetHeight;
+        const floor = menu.getBoundingClientRect().bottom + 28; // just below the menu
+        const top = Math.max(s.top + s.height / 2 - h / 2, floor);
+        selector.style.top = `${top}px`;
+        selector.classList.toggle("is-visible", s.top < innerHeight * 0.75 && s.bottom > top + h);
+      };
+      place();
+      window.addEventListener("scroll", place, { passive: true });
+      window.addEventListener("resize", place);
     });
   }
 
