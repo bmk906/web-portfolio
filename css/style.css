@@ -492,16 +492,34 @@ html.menu-entering .layout > :not(.menu) {
   gap: clamp(4px, 0.5vw, 8px);
 }
 
-/* side by side at equal heights: each takes width in proportion to its ratio */
-.gallery-row .gallery-group {
+/* side by side at equal heights: each takes width in proportion to its ratio.
+   aside: one image on the left, a column of images on the right. */
+.gallery-row .gallery-group,
+.gallery-aside .gallery-group {
   display: flex;
   align-items: flex-start;
   gap: var(--group-gap, clamp(8px, 1vw, 14px));
 }
 
-.gallery-row .gallery-item {
+.gallery-row .gallery-item,
+.gallery-aside .gallery-group > .gallery-item,
+.gallery-col {
   flex: var(--r, 1) 1 0;
   min-width: 0;
+}
+
+.gallery-col {
+  display: grid;
+  gap: clamp(12px, 1.5vw, 24px);
+}
+
+/* a short description under a caption */
+.caption-note {
+  display: block;
+  max-width: 60ch;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
 }
 
 .gallery-bands img {
@@ -538,6 +556,10 @@ html.menu-entering .layout > :not(.menu) {
   transform: translate(-50%, -50%);
 }
 
+.img-label--dark {
+  color: var(--ink); /* for labels on white drawings */
+}
+
 .item-caption {
   margin: 3px 0 0;
   line-height: 1.25;
@@ -555,11 +577,14 @@ html.menu-entering .layout > :not(.menu) {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .gallery-row .gallery-group {
+  .gallery-row .gallery-group,
+  .gallery-aside .gallery-group {
     flex-direction: column;
   }
 
-  .gallery-row .gallery-item {
+  .gallery-row .gallery-item,
+  .gallery-aside .gallery-group > .gallery-item,
+  .gallery-col {
     flex: none;
     width: 100%;
   }

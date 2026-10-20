@@ -214,7 +214,11 @@
 
     const summary = [].concat(p.summary).map((para) => `<p>${escapeHTML(para)}</p>`).join("");
 
-    const caption = (text) => (text ? `<figcaption>${escapeHTML(text)}</figcaption>` : "");
+    // caption, optionally followed by a short descriptive note
+    const caption = (text, note) =>
+      text
+        ? `<figcaption>${escapeHTML(text)}${note ? `<span class="caption-note">${escapeHTML(note)}</span>` : ""}</figcaption>`
+        : "";
     const centred = (l) => l.align !== "left";
 
     // One image, with optional white labels on top and (inside a group) its own caption
@@ -223,7 +227,7 @@
       const labels = (img.labels || [])
         .map(
           (l) =>
-            `<span class="img-label${centred(l) ? " img-label--center" : ""}" style="left:${l.x};top:${l.y}">${escapeHTML(l.text)}</span>`
+            `<span class="img-label${centred(l) ? " img-label--center" : ""}${l.dark ? " img-label--dark" : ""}" style="left:${l.x};top:${l.y}">${escapeHTML(l.text)}</span>`
         )
         .join("");
       const inset = img.captionInset ? ` style="padding-left:${img.captionInset}"` : "";
@@ -236,7 +240,18 @@
         : tag;
     };
 
-    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row", images }
+    // Images inside a group. "aside": the first image on the left, the rest stacked in a
+    // column on the right; the column's ratio is set so both sides end up the same height.
+    const groupHTML = (block) => {
+      if (block.layout !== "aside") return block.images.map((img) => image(img, true)).join("");
+      const [first, ...rest] = block.images;
+      const colRatio = 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
+      return `${image(first, true)}<div class="gallery-col" style="--r:${colRatio.toFixed(3)}">${rest
+        .map((img) => image(img, true))
+        .join("")}</div>`;
+    };
+
+    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row" | "aside", images }
     const gallery = p.images
       .map((block) => {
         // mobile: on-image labels (and any mobileList lines) are listed below instead
@@ -248,7 +263,7 @@
           ? `<ul class="label-list">${listed.map((t) => `<li>${escapeHTML(t)}</li>`).join("")}</ul>`
           : "";
 
-        if (!block.layout) return `<figure>${image(block)}${list}${caption(block.caption)}</figure>`;
+        if (!block.layout) return `<figure>${image(block)}${list}${caption(block.caption, block.note)}</figure>`;
         const vars = [
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
           block.gap ? `--group-gap:${block.gap}` : "",
@@ -258,7 +273,7 @@
         const style = vars ? ` style="${vars}"` : "";
         return `
       <figure class="gallery-${block.layout}"${style}>
-        <div class="gallery-group">${block.images.map((img) => image(img, true)).join("")}</div>
+        <div class="gallery-group">${groupHTML(block)}</div>
         ${list}${caption(block.caption)}
       </figure>`;
       })
