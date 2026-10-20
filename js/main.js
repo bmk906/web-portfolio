@@ -32,6 +32,19 @@
     return `object-position:${focus};${zoom}`;
   }
 
+  /* Bauhaus tints for the black-and-white strips: a colour laid over each one in
+     "overlay" blend mode (see .strip-tint), dealt at random on every page load, never
+     the same on neighbouring strips. Colour strips (stripTint: false) and placeholders
+     are left alone. */
+  const TINTS = ["#D8342A", "#F0B323", "#1E4FA0", "#E8732E"]; // red, yellow, blue, poster orange
+  let lastTint = null;
+  function nextTint() {
+    const pool = TINTS.filter((t) => t !== lastTint);
+    lastTint = pool[Math.floor(Math.random() * pool.length)];
+    return lastTint;
+  }
+  const tinted = (p) => p.stripTint !== false && !/.svg$/.test(p.strip);
+
   function renderIndex() {
     const root = document.getElementById("categories");
 
@@ -44,6 +57,7 @@
           <a class="strip" href="project.html?p=${p.slug}" aria-label="${escapeHTML(p.title)}">
             <span class="strip-frame">
               <img src="${asset(p.strip)}" alt="" loading="lazy" style="${stripStyle(p)}">
+              ${tinted(p) ? `<span class="strip-tint" style="--tint:${nextTint()}"></span>` : ""}
               <span class="strip-title" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             </span>
             <span class="strip-caption" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>

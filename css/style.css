@@ -350,6 +350,31 @@ html.menu-entering .layout > :not(.menu) {
   transition: filter 0.35s;
 }
 
+/* colour laid over a black-and-white strip; fades out on hover so the grey
+   hover state and title read as before */
+.strip-frame {
+  isolation: isolate; /* blend only with the strip image */
+}
+
+.strip-tint {
+  position: absolute;
+  inset: 0;
+  background: var(--tint);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .strip:hover .strip-tint {
+    opacity: 0;
+  }
+}
+
+.strip:focus-visible .strip-tint {
+  opacity: 0;
+}
+
 .strip-title {
   position: absolute;
   inset: 0;
