@@ -62,8 +62,8 @@
     return `<span class="strip-tint strip-tint--mask" style="--tint:${tint};-webkit-mask-image:${mask};mask-image:${mask};-webkit-mask-position:${focus};mask-position:${focus}"></span>`;
   }
 
-  /* A project's colour carries from its home page strip into its page (the site plan
-     beside the description, the project code). The home page remembers the colours it
+  /* A project's colour carries from its home page strip into its page (the project
+     code above the title). The home page remembers the colours it
      dealt for this visit; a project opened directly gets a fixed colour of its own. */
   function rememberTints(tints) {
     try {
@@ -382,17 +382,9 @@
 
     // desktop: a site plan crop beside the details and description (besideText)
     const beside = p.images.find((block) => block.besideText);
-    // tinted in the project's colour like its strip; besideMarker keeps the red site
-    // marker crisp on top (black when the colour is red, so it still stands out)
     const tint = projectTint(p);
-    const markerMask = beside && beside.besideMarker ? `url('${asset(beside.besideMarker)}')` : "";
     const besideHTML = beside
-      ? `<figure class="head-beside" style="--tint:${tint}">
-          <img src="${asset(beside.besideText)}" alt="${escapeHTML(beside.caption || p.title)}">
-          <span class="beside-tint"></span>
-          ${markerMask ? `<span class="beside-marker${tint === TINTS[0] ? " is-dark" : ""}" style="-webkit-mask-image:${markerMask};mask-image:${markerMask}"></span>` : ""}
-          ${caption(beside.caption)}
-        </figure>`
+      ? `<figure class="head-beside"><img src="${asset(beside.besideText)}" alt="${escapeHTML(beside.caption || p.title)}">${caption(beside.caption)}</figure>`
       : "";
 
     root.innerHTML = `

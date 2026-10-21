@@ -46,9 +46,7 @@
               revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
               image above.
               A single image can take besideText: "crop.jpg" (web: that crop sits beside the
-              description instead, tinted in the project's colour; mobile: the image stays
-              in the gallery as it is). besideMarker: a PNG of the red site marker, kept
-              crisp on top of the tint.
+              description instead; mobile: the image stays in the gallery as it is).
               A single image can take note: "..." for a short description under its caption,
               and nativeWidth: 624 to never display wider than its source (desktop).
               Image options: captionInset: "7%" (indent the caption to where the drawing
@@ -62,7 +60,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 20;
+const IMAGE_VERSION = 21;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -84,7 +82,7 @@ const PROJECTS = [
       "The project is a study in thin-shell structures, aiming for a roof that is striking, efficient, and responsive to its site. It began as a field of modular cells shaped by the site. Layering sine waves across those cells produced a continuous shell, and varying the wave amplitudes from cell to cell let the roof meet the ground in a variety of ways. Stepping the heights of neighboring cells opens bands of clerestory light, and the troughs of the waves collect and store rainwater.",
     ],
     images: [
-      { src: "assets/img/projects/sinusoidal/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/sinusoidal/site-plan-crop.jpg", besideMarker: "assets/img/projects/sinusoidal/site-plan-marker.png" },
+      { src: "assets/img/projects/sinusoidal/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/sinusoidal/site-plan-crop.jpg" },
       {
         src: "assets/img/projects/sinusoidal/01.jpg", // labels are part of the image; saved at high quality (95) for crisp text
         caption: "Form Exploration",
@@ -136,7 +134,7 @@ const PROJECTS = [
       "At its heart is an open-air gym hall beneath a figural canopy of layered rings that diffuse sunlight into tree-like shadows and create a dappled lighting effect across the floor. Open on all four sides, the hall is cooled by cross-ventilation, and everything except the parking and skate shop is raised above grade in anticipation of rising sea levels.",
     ],
     images: [
-      { src: "assets/img/projects/youth-center/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/youth-center/site-plan-crop.jpg", besideMarker: "assets/img/projects/youth-center/site-plan-marker.png" },
+      { src: "assets/img/projects/youth-center/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/youth-center/site-plan-crop.jpg" },
       { src: "assets/img/projects/youth-center/01.jpg", caption: "Site Axon" },
       {
         layout: "matrix",
@@ -211,7 +209,7 @@ const PROJECTS = [
       "Midway through design, the pure ziggurat gave way to the idea of a tree carrying a canopy of exhibition spaces. The canopy breaks the building from a single mass into a web of smaller volumes whose plans echo the housing typologies of Miami Beach. The gaps between them draw daylight down to the fully open middle level and let hot air rise and escape, while openings in the sides cross-ventilate the building.",
     ],
     images: [
-      { src: "assets/img/projects/ziggurat-of-leaves/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/ziggurat-of-leaves/site-plan-crop.jpg", besideMarker: "assets/img/projects/ziggurat-of-leaves/site-plan-marker.png" },
+      { src: "assets/img/projects/ziggurat-of-leaves/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/ziggurat-of-leaves/site-plan-crop.jpg" },
       { src: "assets/img/projects/ziggurat-of-leaves/concept-sketches.jpg", caption: "Initial Concept Sketches" },
       {
         src: "assets/img/projects/ziggurat-of-leaves/rendered-section.jpg",
@@ -387,7 +385,7 @@ const PROJECTS = [
       "I then studied the proportions between tube lengths and musical notes to form a scale. From it I could compose chords, groups of three notes played together in harmony. A telescoping mechanism adjusts the length of each tube, so the wall can play different chords for different musical effects.",
     ],
     images: [
-      { src: "assets/img/projects/wall-of-flutes/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/wall-of-flutes/site-plan-crop.jpg", besideMarker: "assets/img/projects/wall-of-flutes/site-plan-marker.png" },
+      { src: "assets/img/projects/wall-of-flutes/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/wall-of-flutes/site-plan-crop.jpg" },
       { src: "assets/img/projects/wall-of-flutes/01.jpg", caption: "Wind to Sound" },
       { src: "assets/img/projects/wall-of-flutes/02.jpg", caption: "Wind Matrix" },
       { src: "assets/img/projects/wall-of-flutes/03.jpg", caption: "Musical Scales Exploration" },
