@@ -532,6 +532,11 @@ html.menu-entering .layout > :not(.menu) {
   gap: var(--group-gap, clamp(8px, 1vw, 14px));
 }
 
+/* a row can be capped (maxWidth) so a small source isn't blown up */
+.gallery-row .gallery-group {
+  max-width: var(--group-max, none);
+}
+
 .gallery-row .gallery-item,
 .gallery-aside .gallery-group > .gallery-item,
 .gallery-col {

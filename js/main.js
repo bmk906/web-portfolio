@@ -331,6 +331,7 @@
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
           block.gap ? `--group-gap:${block.gap}` : "",
           block.align ? `--group-align:${block.align}` : "",
+          block.maxWidth ? `--group-max:${block.maxWidth}` : "",
         ]
           .filter(Boolean)
           .join(";");
