@@ -425,8 +425,8 @@ const PROJECTS = [
         ],
       },
       { src: "assets/img/projects/compression/axon.jpg", caption: "Axonometric Render" },
-      { src: "assets/img/projects/compression/plan-1.jpg", caption: "Floor Plan 1" },
-      { src: "assets/img/projects/compression/plan-2.jpg", caption: "Floor Plan 2" },
+      { src: "assets/img/projects/compression/plan-1.jpg", caption: "Floor Plan: Symphony" },
+      { src: "assets/img/projects/compression/plan-2.jpg", caption: "Floor Plan: Residential" },
       {
         layout: "carousel", // web and mobile
         list: true,
