@@ -34,16 +34,23 @@
   }
 
   /* Bauhaus tints for the black-and-white strips: a colour laid over each one in
-     "overlay" blend mode (see .strip-tint), dealt at random on every page load, never
-     the same on neighbouring strips. Colour strips (stripTint: false) and placeholders
-     are left alone. */
-  // red, yellow, blue, poster orange, green, yellow-green
-  const TINTS = ["#D8342A", "#F0B323", "#1E4FA0", "#E8732E", "#2F7D52", "#9DB23A"];
-  let lastTint = null;
+     "overlay" blend mode (see .strip-tint), dealt like cards on every page load: each
+     category gets a freshly shuffled deck, so no colour repeats within it (until a
+     category has more strips than colours). Colour strips (stripTint: false) and
+     placeholders are left alone. */
+  // red, yellow, blue, poster orange, green, violet
+  const TINTS = ["#D8342A", "#F0B323", "#1E4FA0", "#E8732E", "#2F7D52", "#6A3D9A"];
+  let deck = [];
+  function shuffleTints() {
+    deck = [...TINTS];
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+  }
   function nextTint() {
-    const pool = TINTS.filter((t) => t !== lastTint);
-    lastTint = pool[Math.floor(Math.random() * pool.length)];
-    return lastTint;
+    if (!deck.length) shuffleTints();
+    return deck.pop();
   }
   const tinted = (p) => p.stripTint !== false && !/.svg$/.test(p.strip);
 
@@ -52,6 +59,7 @@
 
     root.innerHTML = CATEGORIES.map((cat, i) => {
       const items = inCategory(cat.id);
+      shuffleTints(); // a fresh deck per category
       const strips = items
         .map(
           (p) => `
