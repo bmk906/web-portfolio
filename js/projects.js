@@ -56,7 +56,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 16;
+const IMAGE_VERSION = 17;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -405,9 +405,8 @@ const PROJECTS = [
     year: "2023",
     location: "New York, NY",
     type: "Mixed Use",
-    strip: "assets/img/projects/compression/strip.jpg", // the site plan with buildings, from the middle
+    strip: "assets/img/projects/compression/strip.jpg", // middle of the site plan with buildings, pre-cut: greyscale, tones squeezed, grain (so the tint covers it)
     stripFocus: "50% 50%",
-    stripMono: true, // shown in black and white so it takes a tint like the others
     summary: [
       "In the year 2121, Lincoln Center's infrastructure has become obsolete and the complex is demolished. A plan is set forth to rebuild it, but New York City has passed legislation requiring new housing alongside it, as reparations for the destruction of the San Juan Hill neighborhood in the 1960s.",
       "The first goal was to integrate San Juan Hill with Lincoln Center rather than treat them as separate entities. I merged the two into one building, placing the new theater on the sixth floor of the housing complex, so that patrons of Lincoln Center leave alongside its residents. The design pushes both groups to encounter people outside the demographics they are used to, and this pressure is where the idea of compression comes from: the structure physically compresses the new theater while compressing two populations into one building. It also aims to bring the community of San Juan Hill and the facilities of Lincoln Center together, rejuvenating the neighborhood's identity in music and the arts.",
