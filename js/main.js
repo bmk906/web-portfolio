@@ -391,7 +391,7 @@
       <header class="project-head${beside ? " has-beside" : ""}" style="--tint:${tint}">
         <p class="eyebrow"><span class="project-code">${code(p)}</span> &nbsp;/&nbsp; ${cat.label}</p>
         <h1>${escapeHTML(p.title)}</h1>
-        <dl class="meta">${meta}</dl>
+        <dl class="meta${(meta.match(/<div>/g) || []).length > 3 ? " meta--long" : ""}">${meta}</dl>
         <div class="lede">${summary}</div>
         <button type="button" class="lede-more" hidden>Read more</button>
         ${besideHTML}

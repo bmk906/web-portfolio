@@ -527,8 +527,9 @@ html.menu-entering .layout > :not(.menu) {
     grid-column: 1 / -1;
   }
 
-  /* last detail ends on the site plan's right edge */
-  .project-head.has-beside > .meta {
+  /* four or more details (e.g. with collaborators): the last one ends on the site
+     plan's right edge; three stay at the description's width */
+  .project-head.has-beside > .meta--long {
     max-width: none;
   }
 
