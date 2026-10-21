@@ -40,6 +40,7 @@
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
               row can take maxWidth: "930px" (desktop) so a small source is never blown up.
               row can take mobileRow: true to stay side by side on phones.
+              A carousel can take arrowsOut: true (web) to fill the column, arrows in the margins.
               { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
               with an optional description under it.
               revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
@@ -430,7 +431,7 @@ const PROJECTS = [
       {
         layout: "carousel", // web and mobile
         list: true,
-        width: "95%", // larger than the default on web
+        arrowsOut: true, // web: full column width, arrows in the margins
         mobileSwipe: true,
         images: [
           { src: "assets/img/projects/compression/elevation.jpg", ratio: 3.019, caption: "Elevation", tab: "Elevation" },

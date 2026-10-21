@@ -624,6 +624,31 @@ html.menu-entering .layout > :not(.menu) {
   cursor: pointer;
 }
 
+/* arrowsOut: the image takes the full column and the arrows sit in the margins,
+   centred in the page gutter */
+.gallery-carousel.is-arrows-out .carousel-body {
+  position: relative;
+}
+
+.gallery-carousel.is-arrows-out .carousel-stage {
+  flex-basis: 100%;
+}
+
+.gallery-carousel.is-arrows-out .carousel-arrow {
+  position: absolute;
+  top: 50%;
+  padding: 8px;
+  transform: translateY(-50%);
+}
+
+.gallery-carousel.is-arrows-out .carousel-arrow[data-step="-1"] {
+  left: calc(-1 * (var(--gutter) / 2 + 20.5px));
+}
+
+.gallery-carousel.is-arrows-out .carousel-arrow[data-step="1"] {
+  right: calc(-1 * (var(--gutter) / 2 + 20.5px));
+}
+
 .carousel-slide {
   grid-area: 1 / 1;
   opacity: 0;
