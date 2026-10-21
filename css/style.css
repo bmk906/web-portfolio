@@ -506,9 +506,9 @@ html.menu-entering .layout > :not(.menu) {
   margin-top: 1em;
 }
 
-/* desktop: a site plan crop (3:4) beside the description (besideText), its right edge
+/* desktop: a square site plan crop beside the description (besideText), its right edge
    on the gallery's right edge and its top level with the description's first line;
-   the details row above stays as it is on every project page */
+   the details row above spreads to the same right edge */
 .head-beside {
   display: none;
 }
@@ -525,6 +525,11 @@ html.menu-entering .layout > :not(.menu) {
   .project-head.has-beside > h1,
   .project-head.has-beside > .meta {
     grid-column: 1 / -1;
+  }
+
+  /* last detail ends on the site plan's right edge */
+  .project-head.has-beside > .meta {
+    max-width: none;
   }
 
   .project-head.has-beside .lede {
