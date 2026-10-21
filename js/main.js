@@ -339,7 +339,8 @@
         const list = labelList(listed);
 
         if (!block.layout) {
-          const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", block.mobileOnly && "mobile-only"].filter(Boolean);
+          // besideText: on desktop a crop of this image sits beside the description instead
+          const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", (block.mobileOnly || block.besideText) && "mobile-only"].filter(Boolean);
           const attrs = (cls.length ? ` class="${cls.join(" ")}"` : "") + (block.nativeWidth ? ` style="--native-w:${block.nativeWidth}px"` : "");
           return `<figure${attrs}>${image(block)}${caption(block.caption, block.note)}${list}</figure>`;
         }
@@ -360,12 +361,20 @@
       })
       .join("");
 
+    // desktop: a site plan crop beside the details and description (besideText)
+    const beside = p.images.find((block) => block.besideText);
+    const besideHTML = beside
+      ? `<figure class="head-beside"><img src="${asset(beside.besideText)}" alt="${escapeHTML(beside.caption || p.title)}">${caption(beside.caption)}</figure>`
+      : "";
+
     root.innerHTML = `
-      <header class="project-head">
+      <header class="project-head${beside ? " has-beside" : ""}">
         <p class="eyebrow">${code(p)} &nbsp;/&nbsp; ${cat.label}</p>
         <h1>${escapeHTML(p.title)}</h1>
         <dl class="meta">${meta}</dl>
         <div class="lede">${summary}</div>
+        <button type="button" class="lede-more" hidden>Read more</button>
+        ${besideHTML}
       </header>
       <div class="gallery">${gallery}</div>
       <nav class="pager" aria-label="More projects">
@@ -375,6 +384,33 @@
       </nav>`;
 
     wireCarousels(root);
+    wireReadMore(root);
+  }
+
+  /* Mobile: the description starts collapsed (a few lines fading out) with a Read more
+     button, so the images come sooner. Only when it's actually longer than that. */
+  function wireReadMore(root) {
+    const lede = root.querySelector(".lede");
+    const button = root.querySelector(".lede-more");
+    const phone = matchMedia("(max-width: 760px)");
+    const setup = () => {
+      lede.classList.remove("is-collapsed", "is-open");
+      button.hidden = true;
+      if (!phone.matches) return;
+      lede.classList.add("is-collapsed");
+      if (lede.scrollHeight - lede.clientHeight > 24) button.hidden = false;
+      else lede.classList.remove("is-collapsed");
+      button.textContent = "Read more";
+    };
+    button.addEventListener("click", () => {
+      const open = lede.classList.toggle("is-open");
+      lede.classList.toggle("is-collapsed", !open);
+      button.textContent = open ? "Show less" : "Read more";
+      // collapsing from far down: bring the button back on screen
+      if (!open && button.getBoundingClientRect().top < 0) button.scrollIntoView({ block: "center" });
+    });
+    phone.addEventListener("change", setup);
+    setup();
   }
 
   /* Carousel controls (desktop). The level selector lives in the left sidebar: hidden

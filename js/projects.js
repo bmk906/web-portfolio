@@ -45,6 +45,8 @@
               with an optional description under it.
               revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
               image above.
+              A single image can take besideText: "crop.jpg" (web: that crop sits beside the
+              description instead; mobile: the image stays in the gallery as it is).
               A single image can take note: "..." for a short description under its caption,
               and nativeWidth: 624 to never display wider than its source (desktop).
               Image options: captionInset: "7%" (indent the caption to where the drawing
@@ -58,7 +60,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 18;
+const IMAGE_VERSION = 19;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -80,7 +82,7 @@ const PROJECTS = [
       "The project is a study in thin-shell structures, aiming for a roof that is striking, efficient, and responsive to its site. It began as a field of modular cells shaped by the site. Layering sine waves across those cells produced a continuous shell, and varying the wave amplitudes from cell to cell let the roof meet the ground in a variety of ways. Stepping the heights of neighboring cells opens bands of clerestory light, and the troughs of the waves collect and store rainwater.",
     ],
     images: [
-      { src: "assets/img/projects/sinusoidal/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/sinusoidal/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/sinusoidal/site-plan-crop.jpg" },
       {
         src: "assets/img/projects/sinusoidal/01.jpg", // labels are part of the image; saved at high quality (95) for crisp text
         caption: "Form Exploration",
@@ -132,7 +134,7 @@ const PROJECTS = [
       "At its heart is an open-air gym hall beneath a figural canopy of layered rings that diffuse sunlight into tree-like shadows and create a dappled lighting effect across the floor. Open on all four sides, the hall is cooled by cross-ventilation, and everything except the parking and skate shop is raised above grade in anticipation of rising sea levels.",
     ],
     images: [
-      { src: "assets/img/projects/youth-center/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/youth-center/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/youth-center/site-plan-crop.jpg" },
       { src: "assets/img/projects/youth-center/01.jpg", caption: "Site Axon" },
       {
         layout: "matrix",
@@ -207,7 +209,7 @@ const PROJECTS = [
       "Midway through design, the pure ziggurat gave way to the idea of a tree carrying a canopy of exhibition spaces. The canopy breaks the building from a single mass into a web of smaller volumes whose plans echo the housing typologies of Miami Beach. The gaps between them draw daylight down to the fully open middle level and let hot air rise and escape, while openings in the sides cross-ventilate the building.",
     ],
     images: [
-      { src: "assets/img/projects/ziggurat-of-leaves/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/ziggurat-of-leaves/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/ziggurat-of-leaves/site-plan-crop.jpg" },
       { src: "assets/img/projects/ziggurat-of-leaves/concept-sketches.jpg", caption: "Initial Concept Sketches" },
       {
         src: "assets/img/projects/ziggurat-of-leaves/rendered-section.jpg",
@@ -383,7 +385,7 @@ const PROJECTS = [
       "I then studied the proportions between tube lengths and musical notes to form a scale. From it I could compose chords, groups of three notes played together in harmony. A telescoping mechanism adjusts the length of each tube, so the wall can play different chords for different musical effects.",
     ],
     images: [
-      { src: "assets/img/projects/wall-of-flutes/site-plan.jpg", caption: "Site plan" },
+      { src: "assets/img/projects/wall-of-flutes/site-plan.jpg", caption: "Site plan", besideText: "assets/img/projects/wall-of-flutes/site-plan-crop.jpg" },
       { src: "assets/img/projects/wall-of-flutes/01.jpg", caption: "Wind to Sound" },
       { src: "assets/img/projects/wall-of-flutes/02.jpg", caption: "Wind Matrix" },
       { src: "assets/img/projects/wall-of-flutes/03.jpg", caption: "Musical Scales Exploration" },
@@ -411,9 +413,9 @@ const PROJECTS = [
     stripFocus: "50% 50%",
     stripMask: "assets/img/projects/compression/strip-roads.png", // the tint goes on the roads only
     summary: [
-      "In the year 2121, Lincoln Center's infrastructure has become obsolete and the complex is demolished. A plan is set forth to rebuild it, but New York City has passed legislation requiring new housing alongside it, as reparations for the destruction of the San Juan Hill neighborhood in the 1960s.",
-      "The first goal was to integrate San Juan Hill with Lincoln Center rather than treat them as separate entities. I merged the two into one building, placing the new theater on the sixth floor of the housing complex, so that patrons of Lincoln Center leave alongside its residents. The design pushes both groups to encounter people outside the demographics they are used to, and this pressure is where the idea of compression comes from: the structure physically compresses the new theater while compressing two populations into one building. It also aims to bring the community of San Juan Hill and the facilities of Lincoln Center together, rejuvenating the neighborhood's identity in music and the arts.",
-      "The second goal was not only to restore San Juan Hill but to improve it. Tenement housing has long been criticized for poor living conditions, from a lack of clean water and plumbing to missing basic amenities. I focused on social isolation: tenements have few public spaces, tight corridors, and narrow stairs. My solution was to overcorrect. Terraced lightwells serve as park space for residents, and from them spring wide corridors that carry residents from the interior of the building to the exterior, doubling as gathering spaces and secondary circulation. The building is mixed use, with amenities from restaurants to gyms to grocery stores spread across its floors to build a sense of community. Finally, the facade recaptures some of San Juan Hill's flair with a rhythmic pattern of windows, breaking up its monotony and harking back to the neighborhood's roots in jazz.",
+      "In 2121, Lincoln Center has become obsolete and is set to be rebuilt. New legislation requires housing alongside it, as reparations for San Juan Hill, the neighborhood demolished to make way for it in the 1960s.",
+      "Rather than place the two side by side, I merged them: the new theater sits on the sixth floor of the housing complex, and its patrons leave through the building alongside residents. The structure physically compresses the theater while compressing two populations into one building, with the aim of reviving the neighborhood's identity in music and the arts.",
+      "The project also improves on the tenements that once defined San Juan Hill, targeting their social isolation: few public spaces, tight corridors, and narrow stairs. The design overcorrects. Terraced lightwells become parks for residents, wide corridors spring from them to the facade as gathering spaces, and amenities from restaurants to gyms to a grocery store are spread across the floors. A rhythmic pattern of windows on the facade nods to the neighborhood's roots in jazz.",
     ],
     images: [
       {
