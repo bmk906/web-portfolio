@@ -801,6 +801,21 @@ html.menu-entering .layout > :not(.menu) {
     width: 100%;
   }
 
+  /* mobileRow: stays side by side on phones, small but together */
+  .gallery-row.is-mobile-row .gallery-group {
+    flex-direction: row;
+  }
+
+  .gallery-row.is-mobile-row .gallery-item {
+    flex: var(--r, 1) 1 0;
+    width: auto;
+  }
+
+  .gallery-row.is-mobile-row .gallery-item img {
+    width: 100%;
+    max-height: none;
+  }
+
   .hide-mobile {
     display: none;
   }

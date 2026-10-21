@@ -38,6 +38,7 @@
               Carousels and single images can also be mobileOnly: true.
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
               row can take maxWidth: "930px" (desktop) so a small source is never blown up.
+              row can take mobileRow: true to stay side by side on phones.
               { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
               with an optional description under it.
               revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
@@ -398,16 +399,60 @@ const PROJECTS = [
     ],
   },
   {
-    slug: "academic-06",
+    slug: "compression",
     category: "academic",
-    title: "Academic Project 06",
-    year: "",
-    location: "",
-    type: "",
-    strip: "assets/img/placeholder-3.svg",
+    title: "Compression",
+    year: "2023",
+    location: "New York, NY",
+    type: "Mixed Use",
+    strip: "assets/img/projects/compression/strip.jpg", // the site plan with buildings, from the middle
     stripFocus: "50% 50%",
-    summary: "Placeholder: project coming soon.",
-    images: [{ src: "assets/img/placeholder-3.svg" }],
+    stripMono: true, // shown in black and white so it takes a tint like the others
+    summary: [
+      "In the year 2121, Lincoln Center's infrastructure has become obsolete and the complex is demolished. A plan is set forth to rebuild it, but New York City has passed legislation requiring new housing alongside it, as reparations for the destruction of the San Juan Hill neighborhood in the 1960s.",
+      "The first goal was to integrate San Juan Hill with Lincoln Center rather than treat them as separate entities. I merged the two into one building, placing the new theater on the sixth floor of the housing complex, so that patrons of Lincoln Center leave alongside its residents. The design pushes both groups to encounter people outside the demographics they are used to, and this pressure is where the idea of compression comes from: the structure physically compresses the new theater while compressing two populations into one building. It also aims to bring the community of San Juan Hill and the facilities of Lincoln Center together, rejuvenating the neighborhood's identity in music and the arts.",
+      "The second goal was not only to restore San Juan Hill but to improve it. Tenement housing has long been criticized for poor living conditions, from a lack of clean water and plumbing to missing basic amenities. I focused on social isolation: tenements have few public spaces, tight corridors, and narrow stairs. My solution was to overcorrect. Terraced lightwells serve as park space for residents, and from them spring wide corridors that carry residents from the interior of the building to the exterior, doubling as gathering spaces and secondary circulation. The building is mixed use, with amenities from restaurants to gyms to grocery stores spread across its floors to build a sense of community. Finally, the facade recaptures some of San Juan Hill's flair with a rhythmic pattern of windows, breaking up its monotony and harking back to the neighborhood's roots in jazz.",
+    ],
+    images: [
+      {
+        layout: "carousel", // web and mobile: the city fabric first, then the building alone in the street grid
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/compression/site-fabric.jpg", ratio: 1.7778, caption: "Site Plan: Urban Fabric", tab: "Fabric" },
+          { src: "assets/img/projects/compression/site-figure.jpg", ratio: 1.7778, caption: "Site Plan: Figure", tab: "Figure" },
+        ],
+      },
+      { src: "assets/img/projects/compression/axon.jpg", caption: "Axonometric Render" },
+      {
+        layout: "carousel", // web: one plan at a time; mobile: stacked
+        list: true,
+        images: [
+          { src: "assets/img/projects/compression/plan-1.jpg", ratio: 2.397, caption: "Floor Plan 1", tab: "Plan 1" },
+          { src: "assets/img/projects/compression/plan-2.jpg", ratio: 2.397, caption: "Floor Plan 2", tab: "Plan 2" },
+        ],
+      },
+      {
+        layout: "carousel", // web and mobile
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/compression/elevation.jpg", ratio: 3.019, caption: "Elevation", tab: "Elevation" },
+          { src: "assets/img/projects/compression/elevation-diagram.jpg", ratio: 3.019, caption: "Elevation: Facade Rhythm", tab: "Rhythm" },
+        ],
+      },
+      { src: "assets/img/projects/compression/symphony-hall.jpg", caption: "Symphony Hall Render" },
+      { src: "assets/img/projects/compression/ground-plaza.jpg", caption: "Ground Plaza Perspective" },
+      { src: "assets/img/projects/compression/solid-void.jpg", caption: "Solid vs. Void" },
+      {
+        layout: "row", // side by side on phones too
+        mobileRow: true,
+        images: [
+          { src: "assets/img/projects/compression/compression-diagram.jpg", ratio: 1.5437, caption: "Compression Diagram" },
+          { src: "assets/img/projects/compression/tenement-typologies.jpg", ratio: 1.9644, caption: "Tenement Typologies" },
+        ],
+      },
+    ],
   },
   {
     slug: "practice-01",
