@@ -413,8 +413,8 @@ const PROJECTS = [
     stripFocus: "50% 50%",
     stripMask: "assets/img/projects/compression/strip-roads.png", // the tint goes on the roads only
     summary: [
-      "In 2121, Lincoln Center has become obsolete and is set to be rebuilt. New legislation requires housing alongside it, as reparations for San Juan Hill, the neighborhood demolished to make way for it in the 1960s.",
-      "Rather than place the two side by side, I merged them: the new theater sits on the sixth floor of the housing complex, and its patrons leave through the building alongside residents. The structure physically compresses the theater while compressing two populations into one building, with the aim of reviving the neighborhood's identity in music and the arts.",
+      "In 2121, Lincoln Center has fallen into decay and is set to be redeveloped. New legislation requires the site to include housing alongside its original role as a performing arts center, as reparations for San Juan Hill, the neighborhood demolished to build the original Lincoln Center in the 1960s.",
+      "This project proposes merging the two programs architecturally. The new theater sits on the sixth floor of the housing complex, and its patrons leave through the building alongside residents. The structure physically compresses the theater while compressing two populations into one building, with the aim of reviving the neighborhood's identity in music and the arts.",
       "The project also improves on the tenements that once defined San Juan Hill, targeting their social isolation: few public spaces, tight corridors, and narrow stairs. The design overcorrects. Terraced lightwells become parks for residents, wide corridors spring from them to the facade as gathering spaces, and amenities from restaurants to gyms to a grocery store are spread across the floors. A rhythmic pattern of windows on the facade nods to the neighborhood's roots in jazz.",
     ],
     images: [

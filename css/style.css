@@ -500,8 +500,10 @@ html.menu-entering .layout > :not(.menu) {
   margin-top: 1em;
 }
 
-/* desktop: a site plan crop beside the details and description (besideText),
-   its right edge on the gallery's right edge */
+/* desktop: a site plan crop beside the details and description (besideText), its
+   right edge on the gallery's right edge. It spans the text block exactly: top level
+   with the details' labels, bottom level with the description's last line, so its
+   height follows the text (cropped to fit); the caption hangs below in the margin. */
 .head-beside {
   display: none;
 }
@@ -526,21 +528,29 @@ html.menu-entering .layout > :not(.menu) {
 
   .head-beside {
     display: block;
+    position: relative;
     grid-column: 2;
     grid-row: 3 / span 2;
     justify-self: end;
     width: 100%;
-    max-width: 340px;
-    margin: 18px 0 0; /* top level with the details' labels */
+    max-width: 300px;
+    /* top level with the details' labels; bottom level with the last line of text
+       (the description's own bottom margin, minus its last line's leading) */
+    margin: 18px 0 calc(clamp(32px, 4vw, 56px) + 0.3em);
   }
 
   .head-beside img {
+    position: absolute; /* takes the text block's height instead of setting it */
+    inset: 0;
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
   }
 
   .head-beside figcaption {
+    position: absolute;
+    top: 100%;
     margin-top: 3px;
     line-height: 1.25;
     font-size: 0.72rem;
