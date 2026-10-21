@@ -55,34 +55,52 @@
   const tinted = (p) => p.stripTint !== false && !/.svg$/.test(p.strip);
   // stripMask: the colour goes only where the mask is opaque, as a flat colour, cropped
   // the same way as the strip image
-  function tintHTML(p) {
-    if (!p.stripMask) return `<span class="strip-tint" style="--tint:${nextTint()}"></span>`;
+  function tintHTML(p, tint) {
+    if (!p.stripMask) return `<span class="strip-tint" style="--tint:${tint}"></span>`;
     const mask = `url('${asset(p.stripMask)}')`;
     const focus = p.stripFocus || "50% 50%";
-    return `<span class="strip-tint strip-tint--mask" style="--tint:${nextTint()};-webkit-mask-image:${mask};mask-image:${mask};-webkit-mask-position:${focus};mask-position:${focus}"></span>`;
+    return `<span class="strip-tint strip-tint--mask" style="--tint:${tint};-webkit-mask-image:${mask};mask-image:${mask};-webkit-mask-position:${focus};mask-position:${focus}"></span>`;
+  }
+
+  /* A project's colour carries from its home page strip into its page (the site plan
+     beside the description, the project code). The home page remembers the colours it
+     dealt for this visit; a project opened directly gets a fixed colour of its own. */
+  function rememberTints(tints) {
+    try {
+      sessionStorage.setItem("stripTints", JSON.stringify(tints));
+    } catch (e) {}
+  }
+  function projectTint(p) {
+    try {
+      const tint = JSON.parse(sessionStorage.getItem("stripTints") || "{}")[p.slug];
+      if (tint) return tint;
+    } catch (e) {}
+    return TINTS[PROJECTS.indexOf(p) % TINTS.length];
   }
 
   function renderIndex() {
     const root = document.getElementById("categories");
 
+    const dealt = {}; // slug -> tint, remembered for the project pages
     root.innerHTML = CATEGORIES.map((cat, i) => {
       const items = inCategory(cat.id);
       shuffleTints(); // a fresh deck per category
       const strips = items
-        .map(
-          (p) => `
+        .map((p) => {
+          const tint = tinted(p) ? (dealt[p.slug] = nextTint()) : null;
+          return `
         <li>
           <a class="strip" href="project.html?p=${p.slug}" aria-label="${escapeHTML(p.title)}">
             <span class="strip-frame">
               <img src="${asset(p.strip)}" alt="" loading="lazy" style="${stripStyle(p)}">
-              ${tinted(p) ? tintHTML(p) : ""}
+              ${tint ? tintHTML(p, tint) : ""}
               <span class="strip-title" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             </span>
             <span class="strip-caption" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             <span class="strip-code" aria-hidden="true">${code(p)}</span>
           </a>
-        </li>`
-        )
+        </li>`;
+        })
         .join("");
 
       return `
@@ -95,6 +113,7 @@
         <ul class="strips">${strips}</ul>
       </section>`;
     }).join("");
+    rememberTints(dealt);
 
     const sections = [...document.querySelectorAll(".category")]; // project categories + resume
 
@@ -363,13 +382,22 @@
 
     // desktop: a site plan crop beside the details and description (besideText)
     const beside = p.images.find((block) => block.besideText);
+    // tinted in the project's colour like its strip; besideMarker keeps the red site
+    // marker crisp on top (black when the colour is red, so it still stands out)
+    const tint = projectTint(p);
+    const markerMask = beside && beside.besideMarker ? `url('${asset(beside.besideMarker)}')` : "";
     const besideHTML = beside
-      ? `<figure class="head-beside"><img src="${asset(beside.besideText)}" alt="${escapeHTML(beside.caption || p.title)}">${caption(beside.caption)}</figure>`
+      ? `<figure class="head-beside" style="--tint:${tint}">
+          <img src="${asset(beside.besideText)}" alt="${escapeHTML(beside.caption || p.title)}">
+          <span class="beside-tint"></span>
+          ${markerMask ? `<span class="beside-marker${tint === TINTS[0] ? " is-dark" : ""}" style="-webkit-mask-image:${markerMask};mask-image:${markerMask}"></span>` : ""}
+          ${caption(beside.caption)}
+        </figure>`
       : "";
 
     root.innerHTML = `
-      <header class="project-head${beside ? " has-beside" : ""}">
-        <p class="eyebrow">${code(p)} &nbsp;/&nbsp; ${cat.label}</p>
+      <header class="project-head${beside ? " has-beside" : ""}" style="--tint:${tint}">
+        <p class="eyebrow"><span class="project-code">${code(p)}</span> &nbsp;/&nbsp; ${cat.label}</p>
         <h1>${escapeHTML(p.title)}</h1>
         <dl class="meta">${meta}</dl>
         <div class="lede">${summary}</div>
