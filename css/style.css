@@ -506,8 +506,9 @@ html.menu-entering .layout > :not(.menu) {
   margin-top: 1em;
 }
 
-/* desktop: a site plan crop (3:2) beside the details and description (besideText),
-   filling the space to the gallery's right edge, its top level with the details' labels */
+/* desktop: a site plan crop (2:3) beside the description (besideText), its right edge
+   on the gallery's right edge and its top level with the description's first line;
+   the details row above stays as it is on every project page */
 .head-beside {
   display: none;
 }
@@ -521,11 +522,11 @@ html.menu-entering .layout > :not(.menu) {
   }
 
   .project-head.has-beside > .eyebrow,
-  .project-head.has-beside > h1 {
+  .project-head.has-beside > h1,
+  .project-head.has-beside > .meta {
     grid-column: 1 / -1;
   }
 
-  .project-head.has-beside .meta,
   .project-head.has-beside .lede {
     grid-column: 1;
   }
@@ -533,10 +534,14 @@ html.menu-entering .layout > :not(.menu) {
   .head-beside {
     display: block;
     grid-column: 2;
-    grid-row: 3 / span 2;
+    grid-row: 4;
     align-self: start;
+    justify-self: end;
     width: 100%;
-    margin: 18px 0 0; /* top level with the details' labels */
+    max-width: 260px;
+    /* top level with the first line's capitals (half its leading below the line box) */
+    margin: 0.42em 0 clamp(32px, 4vw, 56px);
+    font-size: 1.05rem; /* so the em above matches the description's */
   }
 
   .head-beside img {
