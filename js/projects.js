@@ -7,7 +7,8 @@
   stripZoom   optional; zooms the strip in toward stripFocus (e.g. 1.3)
   shortTitle  optional; shorter name for the home page strip
   stripTint   false keeps a colour strip as it is (black-and-white strips get a random
-              Bauhaus tint on the home page)
+              Bauhaus tint on the home page); stripMono: true shows a colour strip in
+              black and white so it gets tinted too
   summary     one paragraph as a string, or several as a list of strings
   collaborators  optional; only shown when filled in
   images      shown in order on the project page; caption is optional. An entry can
@@ -36,7 +37,8 @@
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
               Carousels and single images can also be mobileOnly: true.
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
-              { divider: "Title" } adds a section break (rule, subheading, rule).
+              { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
+              with an optional description under it.
               revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
               image above.
               A single image can take note: "..." for a short description under its caption,
@@ -256,7 +258,7 @@ const PROJECTS = [
     collaborators: "Isabella Andelsohn, Ethan Anderson, Lucas Rosen",
     strip: "assets/img/projects/monti-prenestini/strip.jpg", // pre-cut close-up of contours on the ridge's east flank, green to beige
     stripFocus: "50% 50%",
-    stripTint: false, // already in colour
+    stripMono: true, // shown in black and white so it takes a tint like the others
     summary: [
       "Monti Prenestini is a mountain range about an hour east of Rome, home to sweeping views, abundant wildlife, and a handful of medieval hill towns now at risk of depopulation. Our goal was a campaign to market the range to Romans as a destination for day trips. Using GIS, we mapped its points of interest and traced routes tailored to different visitors, from cyclists and hikers to horseback riders and pilgrims.",
       "Our second goal was to strengthen transit within the mountains, making it easier for residents to commute to Rome and travel between towns. We focused on the gateway to the range: Zagarolo, where trains from Rome arrive at an uninviting station. We redesigned the plaza outside it to mark the passage out of the city and into a new landscape, sinking the entire plaza into the ground. An oscillating staircase, part seating and part circulation, steps down into it. Built from locally sourced limestone, it echoes the ancient terraces found throughout the mountains.",
@@ -334,14 +336,20 @@ const PROJECTS = [
           { src: "assets/img/projects/monti-prenestini/profiles/06-maria.jpg", ratio: 1.467, caption: "Maria, Person of Faith", tab: "Maria", captionInset: "1.1%" },
         ],
       },
-      { divider: "Zagarolo Plaza Renovation" },
+      {
+        divider: "Zagarolo Plaza Renovation",
+        note: "Zagarolo's station is the gateway from Rome into the mountains, yet today it does little to mark the arrival. We set out to make it a true threshold between the city and the Italian countryside: a sunken plaza with symbolic weight, where travelers can wait for their train in the shade and linger among local shops and restaurants.",
+      },
       { src: "assets/img/projects/monti-prenestini/zag-site.jpg", caption: "Zagarolo Station: Site Plan" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-plan.jpg", caption: "Sunken Plaza Plan" },
       { src: "assets/img/projects/monti-prenestini/zag-day.jpg", caption: "Plaza by Day" },
       { src: "assets/img/projects/monti-prenestini/zag-night.jpg", caption: "Plaza by Night" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-section.jpg", caption: "Plaza Section" },
       { src: "assets/img/projects/monti-prenestini/zag-site-section.jpg", caption: "Site Section" },
-      { divider: "Kit of Parts" },
+      {
+        divider: "Kit of Parts",
+        note: "The Kit of Parts is a deployable booth designed to pop up in towns throughout Monti Prenestini. Its modular pieces combine to serve different needs, from bike rentals and tourist information to a snack bar, electric vehicle charging, and picnic areas.",
+      },
       { src: "assets/img/projects/monti-prenestini/kit/sketch.jpg", caption: "Kit of Parts Sketch" },
       {
         layout: "carousel", // web and mobile: one drawing at a time

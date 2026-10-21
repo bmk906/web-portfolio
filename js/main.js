@@ -29,14 +29,16 @@
   function stripStyle(p) {
     const focus = p.stripFocus || "50% 50%";
     const zoom = p.stripZoom ? `transform:scale(${p.stripZoom});transform-origin:${focus};` : "";
-    return `object-position:${focus};${zoom}`;
+    const mono = p.stripMono ? "filter:grayscale(1) contrast(1.1);" : ""; // colour image shown in black and white
+    return `object-position:${focus};${zoom}${mono}`;
   }
 
   /* Bauhaus tints for the black-and-white strips: a colour laid over each one in
      "overlay" blend mode (see .strip-tint), dealt at random on every page load, never
      the same on neighbouring strips. Colour strips (stripTint: false) and placeholders
      are left alone. */
-  const TINTS = ["#D8342A", "#F0B323", "#1E4FA0", "#E8732E"]; // red, yellow, blue, poster orange
+  // red, yellow, blue, poster orange, green, yellow-green
+  const TINTS = ["#D8342A", "#F0B323", "#1E4FA0", "#E8732E", "#2F7D52", "#9DB23A"];
   let lastTint = null;
   function nextTint() {
     const pool = TINTS.filter((t) => t !== lastTint);
@@ -258,7 +260,7 @@
       const cls = ["gallery-item", img.hideOnMobile && "hide-mobile", img.opens && "opens-level"].filter(Boolean).join(" ");
       const link = img.opens ? ` data-carousel="${img.opens.carousel}" data-level="${img.opens.level}"` : "";
       return labels || ownCaption || flex || img.hideOnMobile || link
-        ? `<div class="${cls}"${flex}${link}>${tag}${labels}${ownList ? labelList(img.labels) : ""}${ownCaption}</div>`
+        ? `<div class="${cls}"${flex}${link}>${tag}${labels}${ownCaption}${ownList ? labelList(img.labels) : ""}</div>`
         : tag;
     };
 
@@ -308,7 +310,9 @@
       .map((block) => {
         if (block.layout === "carousel") return carouselHTML(block);
         if (block.divider)
-          return `<div class="gallery-divider" role="separator"><span>${escapeHTML(block.divider)}</span></div>`;
+          return `<div class="gallery-section"><div class="gallery-divider" role="separator"><span>${escapeHTML(block.divider)}</span></div>${
+            block.note ? `<p class="divider-note">${escapeHTML(block.note)}</p>` : ""
+          }</div>`;
 
         // mobile: on-image labels (and any mobileList lines) are listed below instead;
         // aside images list their own labels under each image
@@ -321,7 +325,7 @@
         if (!block.layout) {
           const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", block.mobileOnly && "mobile-only"].filter(Boolean);
           const attrs = (cls.length ? ` class="${cls.join(" ")}"` : "") + (block.nativeWidth ? ` style="--native-w:${block.nativeWidth}px"` : "");
-          return `<figure${attrs}>${image(block)}${list}${caption(block.caption, block.note)}</figure>`;
+          return `<figure${attrs}>${image(block)}${caption(block.caption, block.note)}${list}</figure>`;
         }
         const vars = [
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
@@ -334,7 +338,7 @@
         return `
       <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}"${style}>
         <div class="gallery-group">${groupHTML(block)}</div>
-        ${list}${caption(block.caption)}
+        ${caption(block.caption)}${list}
       </figure>`;
       })
       .join("");

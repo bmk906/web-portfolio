@@ -564,6 +564,23 @@ html.menu-entering .layout > :not(.menu) {
   flex-direction: row-reverse;
 }
 
+/* section break with an optional short description under it */
+.gallery-section {
+  margin: clamp(40px, 6vw, 88px) 0 clamp(44px, 6.5vw, 96px);
+}
+
+.gallery-section .gallery-divider {
+  margin: 0;
+}
+
+.divider-note {
+  max-width: 62ch;
+  margin: clamp(18px, 2vw, 28px) auto 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
 /* section break inside a project: a subheading between two full-width rules */
 .gallery-divider {
   margin: clamp(40px, 6vw, 88px) 0 clamp(44px, 6.5vw, 96px);

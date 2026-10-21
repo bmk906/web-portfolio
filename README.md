@@ -10,7 +10,7 @@ Open `index.html` in a browser. Everything works from the file system.
 - `js/projects.js` — **all project content lives here**
 - `js/main.js` — renders the strips and project pages
 - `css/style.css` — all styling
-- `assets/img/` — images (currently placeholders)
+- `assets/img/` — images (`projects/<slug>/` per project)
 
 ## Adding or changing a project
 Edit the `PROJECTS` list in `js/projects.js`. The order there is the order on the site.
