@@ -365,6 +365,15 @@ html.menu-entering .layout > :not(.menu) {
   transition: opacity 0.35s;
 }
 
+/* stripMask: a flat colour on part of the image only (e.g. a site plan's roads) */
+.strip-tint--mask {
+  mix-blend-mode: multiply;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .strip:hover .strip-tint {
     opacity: 0;

@@ -8,7 +8,8 @@
   shortTitle  optional; shorter name for the home page strip
   stripTint   false keeps a colour strip as it is (black-and-white strips get a random
               Bauhaus tint on the home page); stripMono: true shows a colour strip in
-              black and white so it gets tinted too
+              black and white so it gets tinted too; stripMask: a PNG whose opaque parts
+              take the tint as a flat colour (e.g. only the roads of a site plan)
   summary     one paragraph as a string, or several as a list of strings
   collaborators  optional; only shown when filled in
   images      shown in order on the project page; caption is optional. An entry can
@@ -56,7 +57,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 17;
+const IMAGE_VERSION = 18;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -405,8 +406,9 @@ const PROJECTS = [
     year: "2023",
     location: "New York, NY",
     type: "Mixed Use",
-    strip: "assets/img/projects/compression/strip.jpg", // middle of the site plan with buildings, pre-cut: greyscale, tones squeezed, grain (so the tint covers it)
+    strip: "assets/img/projects/compression/strip.jpg", // middle of the site plan with buildings, black and white, roads light grey
     stripFocus: "50% 50%",
+    stripMask: "assets/img/projects/compression/strip-roads.png", // the tint goes on the roads only
     summary: [
       "In the year 2121, Lincoln Center's infrastructure has become obsolete and the complex is demolished. A plan is set forth to rebuild it, but New York City has passed legislation requiring new housing alongside it, as reparations for the destruction of the San Juan Hill neighborhood in the 1960s.",
       "The first goal was to integrate San Juan Hill with Lincoln Center rather than treat them as separate entities. I merged the two into one building, placing the new theater on the sixth floor of the housing complex, so that patrons of Lincoln Center leave alongside its residents. The design pushes both groups to encounter people outside the demographics they are used to, and this pressure is where the idea of compression comes from: the structure physically compresses the new theater while compressing two populations into one building. It also aims to bring the community of San Juan Hill and the facilities of Lincoln Center together, rejuvenating the neighborhood's identity in music and the arts.",
@@ -423,17 +425,12 @@ const PROJECTS = [
         ],
       },
       { src: "assets/img/projects/compression/axon.jpg", caption: "Axonometric Render" },
-      {
-        layout: "carousel", // web: one plan at a time; mobile: stacked
-        list: true,
-        images: [
-          { src: "assets/img/projects/compression/plan-1.jpg", ratio: 2.397, caption: "Floor Plan 1", tab: "Plan 1" },
-          { src: "assets/img/projects/compression/plan-2.jpg", ratio: 2.397, caption: "Floor Plan 2", tab: "Plan 2" },
-        ],
-      },
+      { src: "assets/img/projects/compression/plan-1.jpg", caption: "Floor Plan 1" },
+      { src: "assets/img/projects/compression/plan-2.jpg", caption: "Floor Plan 2" },
       {
         layout: "carousel", // web and mobile
         list: true,
+        width: "95%", // larger than the default on web
         mobileSwipe: true,
         images: [
           { src: "assets/img/projects/compression/elevation.jpg", ratio: 3.019, caption: "Elevation", tab: "Elevation" },
@@ -441,14 +438,14 @@ const PROJECTS = [
         ],
       },
       { src: "assets/img/projects/compression/symphony-hall.jpg", caption: "Symphony Hall Render" },
-      { src: "assets/img/projects/compression/ground-plaza.jpg", caption: "Ground Plaza Perspective" },
+      { src: "assets/img/projects/compression/ground-plaza.jpg", caption: "Ground Plaza Perspective" }, // white band under the render cropped off
       { src: "assets/img/projects/compression/solid-void.jpg", caption: "Solid vs. Void" },
       {
         layout: "row", // side by side on phones too
         mobileRow: true,
         images: [
           { src: "assets/img/projects/compression/compression-diagram.jpg", ratio: 1.5437, caption: "Compression Diagram" },
-          { src: "assets/img/projects/compression/tenement-typologies.jpg", ratio: 1.9644, caption: "Tenement Typologies" },
+          { src: "assets/img/projects/compression/tenement-typologies.jpg", ratio: 1.9644, caption: "Tenement Typologies", captionInset: "2.72%" },
         ],
       },
     ],

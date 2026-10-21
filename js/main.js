@@ -53,6 +53,14 @@
     return deck.pop();
   }
   const tinted = (p) => p.stripTint !== false && !/.svg$/.test(p.strip);
+  // stripMask: the colour goes only where the mask is opaque, as a flat colour, cropped
+  // the same way as the strip image
+  function tintHTML(p) {
+    if (!p.stripMask) return `<span class="strip-tint" style="--tint:${nextTint()}"></span>`;
+    const mask = `url('${asset(p.stripMask)}')`;
+    const focus = p.stripFocus || "50% 50%";
+    return `<span class="strip-tint strip-tint--mask" style="--tint:${nextTint()};-webkit-mask-image:${mask};mask-image:${mask};-webkit-mask-position:${focus};mask-position:${focus}"></span>`;
+  }
 
   function renderIndex() {
     const root = document.getElementById("categories");
@@ -67,7 +75,7 @@
           <a class="strip" href="project.html?p=${p.slug}" aria-label="${escapeHTML(p.title)}">
             <span class="strip-frame">
               <img src="${asset(p.strip)}" alt="" loading="lazy" style="${stripStyle(p)}">
-              ${tinted(p) ? `<span class="strip-tint" style="--tint:${nextTint()}"></span>` : ""}
+              ${tinted(p) ? tintHTML(p) : ""}
               <span class="strip-title" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             </span>
             <span class="strip-caption" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
