@@ -574,11 +574,10 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .divider-note {
-  max-width: 62ch;
-  margin: clamp(18px, 2vw, 28px) auto 0;
+  max-width: 75ch; /* same measure and alignment as the project description */
+  margin: clamp(18px, 2vw, 28px) 0 0;
   font-size: 1.05rem;
   line-height: 1.6;
-  text-align: center;
 }
 
 /* section break inside a project: a subheading between two full-width rules */

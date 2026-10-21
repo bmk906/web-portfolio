@@ -338,7 +338,7 @@ const PROJECTS = [
       },
       {
         divider: "Zagarolo Plaza Renovation",
-        note: "Zagarolo's station is the gateway from Rome into the mountains, yet today it does little to mark the arrival. We set out to make it a true threshold between the city and the Italian countryside: a sunken plaza with symbolic weight, where travelers can wait for their train in the shade and linger among local shops and restaurants.",
+        note: "Zagarolo's station is the gateway from Rome into the mountains, yet today it does little to mark the arrival. We set out to make it a true threshold between the city and the Italian countryside. The sunken plaza uncovers natural stone steps harvested from local quarries, evoking the sense of digging into the history and geology of the mountain range. It offers a shaded place to enjoy local shops and restaurants while waiting for the train.",
       },
       { src: "assets/img/projects/monti-prenestini/zag-site.jpg", caption: "Zagarolo Station: Site Plan" },
       { src: "assets/img/projects/monti-prenestini/zag-plaza-plan.jpg", caption: "Sunken Plaza Plan" },
