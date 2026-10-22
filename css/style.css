@@ -760,6 +760,17 @@ html.menu-entering .layout > :not(.menu) {
   transition: opacity 0.35s, visibility 0.35s;
 }
 
+/* mobileSrc: the picture wrapper adds no box of its own */
+picture {
+  display: contents;
+}
+
+@media (max-width: 760px) {
+  picture[style] img {
+    aspect-ratio: var(--m-ratio) !important; /* the mobile file's shape, not the desktop one */
+  }
+}
+
 .carousel-slide.is-active {
   opacity: 1;
   visibility: visible;

@@ -41,6 +41,7 @@
               row can take maxWidth: "930px" (desktop) so a small source is never blown up.
               row can take mobileRow: true to stay side by side on phones.
               A carousel can take arrowsOut: true (web) to fill the column, arrows in the margins.
+              Any image can take mobileSrc: "x.jpg" (+ mobileRatio) to use a different file on phones.
               { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
               with an optional description under it.
               revealEarly carousels can take alignTo: 0.13 to sit beside that point of the
@@ -436,8 +437,9 @@ const PROJECTS = [
         arrowsOut: true, // web: full column width, arrows in the margins
         mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/compression/elevation.jpg", ratio: 3.019, caption: "Elevation", tab: "Elevation" },
-          { src: "assets/img/projects/compression/elevation-diagram.jpg", ratio: 3.019, caption: "Elevation: Facade Rhythm", tab: "Rhythm" },
+          // mobile: cropped to the building with the scale bar lifted, so it reads larger
+          { src: "assets/img/projects/compression/elevation.jpg", mobileSrc: "assets/img/projects/compression/elevation-mobile.jpg", ratio: 3.019, mobileRatio: 2.4, caption: "Elevation", tab: "Elevation" },
+          { src: "assets/img/projects/compression/elevation-diagram.jpg", mobileSrc: "assets/img/projects/compression/elevation-diagram-mobile.jpg", ratio: 3.019, mobileRatio: 2.4, caption: "Elevation: Facade Rhythm", tab: "Rhythm" },
         ],
       },
       { src: "assets/img/projects/compression/symphony-hall.jpg", caption: "Symphony Hall Render" },

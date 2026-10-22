@@ -281,7 +281,11 @@
     const image = (img, inGroup, ownList) => {
       // known ratio: reserve the image's shape before it loads, so layouts can be measured early
       const shape = img.ratio ? ` style="aspect-ratio:${img.ratio}"` : "";
-      const tag = `<img src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy"${shape}>`;
+      const imgTag = `<img src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy"${shape}>`;
+      // mobileSrc: a different file on phones (e.g. a tighter crop), its own ratio in mobileRatio
+      const tag = img.mobileSrc
+        ? `<picture${img.mobileRatio ? ` style="--m-ratio:${img.mobileRatio}"` : ""}><source media="(max-width: 760px)" srcset="${asset(img.mobileSrc)}">${imgTag}</picture>`
+        : imgTag;
       const labels = (img.labels || [])
         .map(
           (l) =>
