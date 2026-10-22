@@ -256,6 +256,7 @@
       ["Year", p.year],
       ["Location", p.location],
       ["Type", p.type],
+      ["Status", p.status],
       [p.category === "academic" ? "Studio" : "Office / Role", p.context],
       ["Collaborators", p.collaborators],
     ]

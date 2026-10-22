@@ -12,6 +12,7 @@
               take the tint as a flat colour (e.g. only the roads of a site plan)
   summary     one paragraph as a string, or several as a list of strings
   collaborators  optional; only shown when filled in
+  status      optional (practice): Built, Under Construction, In Permitting, etc.
   images      shown in order on the project page; caption is optional. An entry can
               also be a group of images:
                 { layout: "stack", images: [...] }   stacked with no gap, reads as one image
@@ -471,6 +472,7 @@ const PROJECTS = [
     year: "2024",
     location: "Burlingame, CA",
     type: "Single-Family Renovation",
+    status: "Built",
     strip: "assets/img/projects/concord-way/strip.jpg", // pre-cropped close on one railing panel against the sky
     stripFocus: "50% 50%",
     stripMono: true, // shown in black and white so it takes a tint like the others
