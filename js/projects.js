@@ -61,7 +61,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 24;
+const IMAGE_VERSION = 25;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -471,20 +471,20 @@ const PROJECTS = [
     year: "2024",
     location: "Burlingame, CA",
     type: "Single-Family Renovation",
-    strip: "assets/img/projects/concord-way/strip.jpg", // a railing panel against the sky
-    stripFocus: "50% 60%",
+    strip: "assets/img/projects/concord-way/strip.jpg", // pre-cropped close on one railing panel against the sky
+    stripFocus: "50% 50%",
     stripMono: true, // shown in black and white so it takes a tint like the others
     summary: [
       "Concord Way is the renovation of a classic 1920s home in Burlingame that had fallen into disrepair and needed some love. The work was practical rather than transformative: remodeled bathrooms and a new toilet room, a refreshed kitchen, replacement windows, new paint inside and out, and a rebuilt deck off the back of the house.",
-      "The deck railing was my first real introduction to architectural detailing, and I carried it from idea to built. I designed the pattern, square panels of crossed diagonals set between trimmed posts, and then translated it into a set of instructions a contractor could build from: sections through the post and rail showing how each layer of trim goes together, an enlarged panel with every member dimensioned, and elevations of each run. The railing in the photos below was built from those drawings.",
+      "The deck railing served as a crash course in architectural detailing. I had to learn the process of taking an architectural idea and crafting it into a built reality. It began with a pattern, square panels of crossed diagonals set between trimmed posts, which I then translated into a set of instructions a contractor could build from: sections through the post and rail showing how each layer of trim goes together, an enlarged panel with every member dimensioned, and elevations of each run. The finished railing, shown below, was built from those drawings.",
     ],
     images: [
       {
-        layout: "carousel", // drawings: title block and notes cropped off
+        layout: "carousel", // drawings: title block and notes cropped off; the sheet's own drawing label stands in for a caption
         mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/concord-way/plan-1.jpg", ratio: 1.1495, caption: "First Floor Plan", tab: "First Floor" },
-          { src: "assets/img/projects/concord-way/plan-2.jpg", ratio: 1.1495, caption: "Second Floor Plan", tab: "Second Floor" },
+          { src: "assets/img/projects/concord-way/plan-1.jpg", ratio: 1.1495, tab: "First Floor" },
+          { src: "assets/img/projects/concord-way/plan-2.jpg", ratio: 1.1495, tab: "Second Floor" },
         ],
       },
       {
@@ -492,8 +492,8 @@ const PROJECTS = [
         list: true,
         mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/concord-way/elev-1.jpg", ratio: 1.2204, caption: "Front and Right Elevations", tab: "Front & Right" },
-          { src: "assets/img/projects/concord-way/elev-2.jpg", ratio: 1.2204, caption: "Rear and Left Elevations", tab: "Rear & Left" },
+          { src: "assets/img/projects/concord-way/elev-1.jpg", ratio: 1.2204, tab: "Front & Right" },
+          { src: "assets/img/projects/concord-way/elev-2.jpg", ratio: 1.2204, tab: "Rear & Left" },
         ],
       },
       {
@@ -506,10 +506,10 @@ const PROJECTS = [
         list: true,
         mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/concord-way/railing-3.jpg", ratio: 0.7531, caption: "Railing Panel", tab: "Panel" },
+          { src: "assets/img/projects/concord-way/railing-3.jpg", ratio: 1.3333, caption: "Railing Panel", tab: "Panel" },
           { src: "assets/img/projects/concord-way/railing-4.jpg", ratio: 1.3285, caption: "Deck", tab: "Deck" },
-          { src: "assets/img/projects/concord-way/railing-2.jpg", ratio: 0.7531, caption: "Deck from the Garden", tab: "Garden" },
-          { src: "assets/img/projects/concord-way/railing-1.jpg", ratio: 0.7531, caption: "Deck from the Side Yard", tab: "Side Yard" },
+          { src: "assets/img/projects/concord-way/railing-2.jpg", ratio: 1.3333, caption: "Deck from the Garden", tab: "Garden" },
+          { src: "assets/img/projects/concord-way/railing-1.jpg", ratio: 1.3333, caption: "Deck from the Side Yard", tab: "Side Yard" },
         ],
       },
       { divider: "Finished House" },
@@ -520,7 +520,7 @@ const PROJECTS = [
         images: [
           { src: "assets/img/projects/concord-way/exterior-2.jpg", ratio: 1.3285, caption: "Front", tab: "Front" },
           { src: "assets/img/projects/concord-way/exterior-1.jpg", ratio: 1.3285, caption: "Garage Approach", tab: "Garage" },
-          { src: "assets/img/projects/concord-way/interior-1.jpg", ratio: 0.7531, caption: "Living Room", tab: "Living Room" },
+          { src: "assets/img/projects/concord-way/interior-1.jpg", ratio: 1.3333, caption: "Living Room", tab: "Living Room" },
           { src: "assets/img/projects/concord-way/interior-2.jpg", ratio: 1.3285, caption: "Hall to Dining Room", tab: "Hall" },
           { src: "assets/img/projects/concord-way/interior-3.jpg", ratio: 1.3285, caption: "Dining Room", tab: "Dining Room" },
           { src: "assets/img/projects/concord-way/kitchen.jpg", ratio: 1.3285, caption: "Kitchen", tab: "Kitchen" },
