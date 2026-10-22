@@ -39,7 +39,7 @@
                                                      alignBottom: true sits shorter slides on the
                                                      bottom edge instead of the top
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
-              Carousels and single images can also be mobileOnly: true.
+              Carousels and single images can also be mobileOnly: true; groups can be hideOnMobile: true.
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
               row can take maxWidth: "930px" (desktop) so a small source is never blown up.
               row can take mobileRow: true to stay side by side on phones.
@@ -64,7 +64,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 27;
+const IMAGE_VERSION = 28;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -549,7 +549,7 @@ const PROJECTS = [
     location: "Burlingame, CA",
     type: "Accessory Dwelling Unit",
     status: "Under Construction",
-    strip: "assets/img/projects/burlingame-adu/strip.jpg", // pre-cropped from the chosen scheme's sketch (option 1), on the dormer
+    strip: "assets/img/projects/burlingame-adu/strip.jpg", // pre-cropped from the chosen scheme's sketch (option 1), on the front door
     stripFocus: "50% 50%",
     stripMono: true,
     summary: [
@@ -561,8 +561,7 @@ const PROJECTS = [
       // sketches: cropped to the drawing (the handwritten label carried the address)
       {
         layout: "carousel",
-        list: true,
-        mobileSwipe: true,
+        list: true, // mobile: stacked (no swipe) so each sketch shows at full width
         alignBottom: true,
         arrowsOut: true,
         images: [
@@ -572,13 +571,23 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "row", // the two floors from the sketch plan, side by side
-        mobileRow: true,
+        layout: "row", // the two floors from the sketch plan, same crop window so they line up
+        hideOnMobile: true,
         gap: "24px",
-        maxWidth: "760px",
+        maxWidth: "530px",
         images: [
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1 },
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0343 },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.4%" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.4%" },
+        ],
+      },
+      {
+        layout: "carousel", // mobile: the same two plans, one at a time and larger
+        mobileOnly: true,
+        mobileSwipe: true,
+        list: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.4%", tab: "Ground Floor" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.4%", tab: "Second Floor" },
         ],
       },
       // drawings: title block and notes cropped off; address painted out of the east elevation
@@ -598,10 +607,14 @@ const PROJECTS = [
         alignBottom: true,
         arrowsOut: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/interior-1.jpg", ratio: 1.2456, tab: "Main House Baths" },
-          { src: "assets/img/projects/burlingame-adu/interior-2.jpg", ratio: 1.1963, tab: "Kitchen / Living" },
-          { src: "assets/img/projects/burlingame-adu/interior-3.jpg", ratio: 1.4753, tab: "Bath / Bedroom" },
-          { src: "assets/img/projects/burlingame-adu/interior-4.jpg", ratio: 1.1679, tab: "Stair / Powder" },
+          // one drawing line per slide, all at the same scale (narrower lines padded to the widest)
+          { src: "assets/img/projects/burlingame-adu/int-kitchen.jpg", ratio: 1.7947, tab: "Kitchen / Living" },
+          { src: "assets/img/projects/burlingame-adu/int-ba.jpg", ratio: 3.2888, tab: "Bath" },
+          { src: "assets/img/projects/burlingame-adu/int-bedroom.jpg", ratio: 3.1904, tab: "Bedroom" },
+          { src: "assets/img/projects/burlingame-adu/int-stair.jpg", ratio: 2.502, tab: "Stair" },
+          { src: "assets/img/projects/burlingame-adu/int-powder.jpg", ratio: 3.5477, tab: "Powder Room" },
+          { src: "assets/img/projects/burlingame-adu/int-ba1.jpg", ratio: 3.3898, tab: "Main House BA#1" },
+          { src: "assets/img/projects/burlingame-adu/int-ba2.jpg", ratio: 3.467, tab: "Main House BA#2" },
         ],
       },
     ],

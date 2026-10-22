@@ -386,7 +386,7 @@
           .join(";");
         const style = vars ? ` style="${vars}"` : "";
         return `
-      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}${block.mobileRow ? " is-mobile-row" : ""}"${style}>
+      <figure class="gallery-${block.layout}${block.reverse ? " is-reverse" : ""}${block.mobileRow ? " is-mobile-row" : ""}${block.hideOnMobile ? " hide-mobile" : ""}"${style}>
         <div class="gallery-group">${groupHTML(block)}</div>
         ${caption(block.caption)}${list}
       </figure>`;
