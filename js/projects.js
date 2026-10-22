@@ -542,10 +542,54 @@ const PROJECTS = [
     slug: "hummingbird",
     category: "practice",
     title: "Hummingbird",
-    strip: "assets/img/placeholder-2.svg",
+    year: "2025",
+    location: "Woodside, CA",
+    type: "Single-Family Residence",
+    status: "On Hold",
+    strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall glass gable of the right elevation
     stripFocus: "50% 50%",
-    summary: "Placeholder description.",
-    images: [{ src: "assets/img/placeholder-2.svg" }],
+    summary: [
+      "Hummingbird is a small compound tucked deep in the Santa Cruz Mountains: a main residence, a barn for gathering and creative work like painting and crafts, and a cottage for guests. The owners named it Hummingbird because they wanted the property to feel like a place where hummingbirds gather.",
+      "The main house centers on a living room whose doors open out onto a terrace. Around it are the main bedroom and bathroom, a guest room, an office, and a library with a hidden bookshelf door.",
+      "The lot slopes steeply, so the topography is the big challenge. We plan to use retaining walls and grading to shape the land around the buildings, while still letting the house settle into the existing landscape.",
+    ],
+    images: [
+      // drawings: title block cropped off; road names and the draft stamp removed from the site plan
+      { src: "assets/img/projects/hummingbird/site-plan.jpg" },
+      {
+        layout: "carousel", // both floors cut with one window, so they line up
+        mobileSwipe: true,
+        alignBottom: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/plan-first.jpg", ratio: 1.1883, tab: "First Floor" },
+          { src: "assets/img/projects/hummingbird/plan-second.jpg", ratio: 1.1883, tab: "Second Floor" },
+        ],
+      },
+      {
+        layout: "carousel", // one elevation per slide, all at the same scale
+        list: true,
+        mobileSwipe: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/elev-front.jpg", ratio: 2.7875, tab: "Front" },
+          { src: "assets/img/projects/hummingbird/elev-right.jpg", ratio: 2.4261, tab: "Right" },
+          { src: "assets/img/projects/hummingbird/elev-rear.jpg", ratio: 2.7875, tab: "Rear" },
+          { src: "assets/img/projects/hummingbird/elev-left.jpg", ratio: 2.4279, tab: "Left" },
+        ],
+      },
+      { src: "assets/img/projects/hummingbird/barn-plan.jpg" },
+      {
+        layout: "carousel", // the two barn roof options, same window so only the roof changes
+        list: true,
+        mobileSwipe: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/barn-taller.jpg", ratio: 1.3687, tab: "Taller Pitch" },
+          { src: "assets/img/projects/hummingbird/barn-lower.jpg", ratio: 1.3687, tab: "Lower Pitch" },
+        ],
+      },
+    ],
   },
   {
     slug: "burlingame-adu",
@@ -573,7 +617,7 @@ const PROJECTS = [
         images: [
           { src: "assets/img/projects/burlingame-adu/option-2.jpg", ratio: 2.9144, caption: "Two Story ADU, Option 1", tab: "Two Story 1" },
           { src: "assets/img/projects/burlingame-adu/option-3.jpg", ratio: 3.7647, caption: "Two Story ADU, Option 2", tab: "Two Story 2" },
-          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Single Story ADU", tab: "Single Story" },
+          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Single Story ADU with Attached Garage", tab: "Single Story" },
         ],
       },
       {
