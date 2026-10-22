@@ -73,7 +73,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 31;
+const IMAGE_VERSION = 32;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -549,7 +549,7 @@ const PROJECTS = [
     location: "Woodside, CA",
     type: "Single-Family Residence",
     status: "Schematic Design",
-    strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall stair window of the front elevation (backup: strip-gable.jpg, the right elevation's glass gable)
+    strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall stair window of the front elevation, shifted left (backups: strip-stair-centred.jpg; strip-gable.jpg, the right elevation's glass gable)
     stripFocus: "50% 50%",
     summary: [
       "Hummingbird is a small compound tucked deep in the Santa Cruz Mountains: a main residence, a barn for gathering and creative work like painting and crafts, and a cottage for guests. The owners named it Hummingbird because they wanted the property to feel like a place where hummingbirds gather.",
