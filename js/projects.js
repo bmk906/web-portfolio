@@ -35,7 +35,9 @@
                                                      list: true keeps the sidebar in list order
                                                      (default: reversed, top floor first),
                                                      width: "100%" sets the image width,
-                                                     note: "..." a description under every slide
+                                                     note: "..." a description under every slide,
+                                                     alignBottom: true sits shorter slides on the
+                                                     bottom edge instead of the top
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
               Carousels and single images can also be mobileOnly: true.
               stack, row and aside can take gap: "10px" (stack: sit close instead of touching).
@@ -52,7 +54,7 @@
               A single image can take note: "..." for a short description under its caption,
               and nativeWidth: 624 to never display wider than its source (desktop).
               Image options: captionInset: "7%" (indent the caption to where the drawing
-              starts), hideOnMobile: true.
+              starts; single images too), hideOnMobile: true.
               A group can have a caption, and its images can have their own captions.
               labels: white text placed on top of an image, at x/y percentages of the
               (cropped) image; centred on that point unless align: "left". On mobile
@@ -62,7 +64,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 25;
+const IMAGE_VERSION = 26;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -560,17 +562,18 @@ const PROJECTS = [
     stripFocus: "50% 50%",
     stripMono: true,
     summary: [
-      "Hillsborough is the renovation of a traditional California ranch house, centered on a full kitchen remodel. Two new box bay windows were added, and the old coffered ceiling, trimmed out in crown moulding, gave way to a contemporary grid of stained faux wood beams on a cream ceiling.",
-      "The grid responds to the room around it. It centers on the kitchen island and frames the new range and hood, with a new skylight set in the grid directly above so the cook gets light from every side.",
-      "The project also shows creative ambition meeting a client's budget. A large part of the original scope was rebuilding the rear roof over the patio to better frame the view of San Francisco Bay. Weighing what that work would really cost against what it would give the client, we cut it from the final project.",
+      "Renovation of a traditional California ranch house. This project includes a full kitchen renovation, including the creation of two new box bay windows and a shift from a somewhat traditional style, with coffers accented by crown moulding, to a contemporary ceiling grid of stained faux wood beams on a cream colored ceiling.",
+      "The new ceiling grid responds to elements of the room, like the kitchen island in the middle. It also serves to frame the new range and hood, with a new skylight sitting above, centered in the grid, to provide light from all sides while cooking.",
+      "This project showcases the urge for creative pursuit contrasted against the reality of a client with budget concerns. A large part of the scope was initially dedicated to rebuilding the rear roof, which sat over the patio, to better frame the incredible view of San Francisco Bay. However, as architects we had to weigh the actual cost of such a renovation against the benefits gained for the client, and as such this scope was cut from the final project.",
     ],
     images: [
       // drawings: title block and notes cropped off (scheme sketch rotated to read landscape)
-      { src: "assets/img/projects/hillsborough/kitchen-scheme.jpg", caption: "Initial Kitchen Scheme" },
+      { src: "assets/img/projects/hillsborough/kitchen-scheme.jpg", caption: "Initial Kitchen Scheme", captionInset: "4.4%" },
       {
         layout: "carousel",
         list: true,
         mobileSwipe: true,
+        alignBottom: true, // the roof plan is shorter than the two floor plans
         images: [
           { src: "assets/img/projects/hillsborough/plan.jpg", ratio: 1.087, tab: "Floor Plan" },
           { src: "assets/img/projects/hillsborough/ceiling.jpg", ratio: 1.087, tab: "Ceiling Plan" },
@@ -604,6 +607,7 @@ const PROJECTS = [
         layout: "carousel",
         list: true,
         mobileSwipe: true,
+        arrowsOut: true, // full column width so the elevations read
         images: [
           { src: "assets/img/projects/hillsborough/elev-front.jpg", ratio: 2.0847, tab: "Front" },
           { src: "assets/img/projects/hillsborough/elev-rear.jpg", ratio: 2.0025, tab: "Rear" },

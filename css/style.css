@@ -776,6 +776,11 @@ picture {
   visibility: visible;
 }
 
+/* alignBottom: shorter slides sit on the bottom edge, so a drawing doesn't jump up */
+.gallery-carousel.is-bottom .carousel-slide {
+  align-self: end;
+}
+
 /* plans that open their level in a carousel (desktop) */
 @media (min-width: 761px) {
   .opens-level img {

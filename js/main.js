@@ -275,9 +275,9 @@
     const summary = [].concat(p.summary).map((para) => `<p>${escapeHTML(para)}</p>`).join("");
 
     // caption, optionally followed by a short descriptive note
-    const caption = (text, note) =>
+    const caption = (text, note, inset) =>
       text
-        ? `<figcaption>${escapeHTML(text)}${note ? `<span class="caption-note">${escapeHTML(note)}</span>` : ""}</figcaption>`
+        ? `<figcaption${inset ? ` style="padding-left:${inset}"` : ""}>${escapeHTML(text)}${note ? `<span class="caption-note">${escapeHTML(note)}</span>` : ""}</figcaption>`
         : "";
     const centred = (l) => l.align !== "left";
     // mobile-only list of label text (on-image labels are too small to read on a phone)
@@ -343,7 +343,7 @@
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
+      <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}${block.alignBottom ? " is-bottom" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
         block.list ? ` data-list="1"` : ""
       }${block.revealEarly ? ` data-early="${block.alignTo ?? 1}"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
       }${block.width ? ` style="--stage-w:${block.width}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
@@ -374,7 +374,7 @@
           // besideText: on desktop a crop of this image sits beside the description instead
           const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", (block.mobileOnly || block.besideText) && "mobile-only"].filter(Boolean);
           const attrs = (cls.length ? ` class="${cls.join(" ")}"` : "") + (block.nativeWidth ? ` style="--native-w:${block.nativeWidth}px"` : "");
-          return `<figure${attrs}>${image(block)}${caption(block.caption, block.note)}${list}</figure>`;
+          return `<figure${attrs}>${image(block)}${caption(block.caption, block.note, block.captionInset)}${list}</figure>`;
         }
         const vars = [
           block.layout === "bands" ? `--band-ratio:${block.ratio || "4 / 1"};--band-focus:${block.focus || "50% 50%"}` : "",
