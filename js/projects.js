@@ -651,7 +651,7 @@ const PROJECTS = [
     year: "2026",
     location: "Burlingame, CA",
     type: "Accessory Dwelling Unit",
-    status: "Under Construction",
+    status: "Ongoing",
     strip: "assets/img/projects/burlingame-adu/strip.jpg", // pre-cropped from the chosen scheme's sketch (option 1), on the front door
     stripFocus: "50% 50%",
     stripMono: true,
