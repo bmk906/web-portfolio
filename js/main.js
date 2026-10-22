@@ -158,9 +158,17 @@
       root.setProperty("--header-hide", shrinkAt(y - HEADER_DELAY).toFixed(4));
     }
 
+    const PASSED = 0.85; // a project category also becomes active once the one above it is this far off screen
+
     function update() {
       const line = innerHeight * ACTIVE_LINE;
-      const current = sections.filter((s) => s.getBoundingClientRect().top <= line).pop() || sections[0];
+      const current = sections.filter((s, i) => {
+        if (s.getBoundingClientRect().top <= line) return true;
+        // not the resume: its switch stays tied to the line, where the menu finishes shrinking
+        if (!i || s.id === "resume") return false;
+        const prev = sections[i - 1].getBoundingClientRect();
+        return prev.bottom <= prev.height * (1 - PASSED);
+      }).pop() || sections[0];
       activate(current.id);
       if (!menuLocked) setShrink(scrollY);
     }
