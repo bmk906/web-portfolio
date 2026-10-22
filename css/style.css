@@ -745,7 +745,7 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .gallery-carousel.is-arrows-out .carousel-stage {
-  flex-basis: 100%;
+  flex-basis: var(--stage-w, 100%); /* width: shrinks it, centred */
 }
 
 .gallery-carousel.is-arrows-out .carousel-arrow {

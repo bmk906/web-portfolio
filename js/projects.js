@@ -550,7 +550,7 @@ const PROJECTS = [
     stripFocus: "50% 50%",
     summary: [
       "Hummingbird is a small compound tucked deep in the Santa Cruz Mountains: a main residence, a barn for gathering and creative work like painting and crafts, and a cottage for guests. The owners named it Hummingbird because they wanted the property to feel like a place where hummingbirds gather.",
-      "The main house centers on a living room whose doors open out onto a terrace. Around it are the main bedroom and bathroom, a guest room, an office, and a library with a hidden bookshelf door.",
+      "The main house centers on a living room whose doors open out onto a terrace. Around it are the main bedroom and bathroom, a guest room, and a library with a hidden bookshelf door.",
       "The lot slopes steeply, so the topography is the big challenge. We plan to use retaining walls and grading to shape the land around the buildings, while still letting the house settle into the existing landscape.",
     ],
     images: [
@@ -567,8 +567,8 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // one elevation per slide, all at the same scale
+        hideOnMobile: true,
         list: true,
-        mobileSwipe: true,
         alignBottom: true,
         arrowsOut: true,
         images: [
@@ -578,15 +578,53 @@ const PROJECTS = [
           { src: "assets/img/projects/hummingbird/elev-left.jpg", ratio: 2.4279, tab: "Left" },
         ],
       },
+      {
+        layout: "carousel", // mobile: cropped to the building (no level marks), wider slides
+        mobileOnly: true,
+        mobileSwipe: true,
+        mobileSlide: "94%",
+        list: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/m-elev-front.jpg", ratio: 2.9963, caption: "Front", tab: "Front" },
+          { src: "assets/img/projects/hummingbird/m-elev-right.jpg", ratio: 2.8951, caption: "Right", tab: "Right" },
+          { src: "assets/img/projects/hummingbird/m-elev-rear.jpg", ratio: 2.9963, caption: "Rear", tab: "Rear" },
+          { src: "assets/img/projects/hummingbird/m-elev-left.jpg", ratio: 2.864, caption: "Left", tab: "Left" },
+        ],
+      },
       { src: "assets/img/projects/hummingbird/barn-plan.jpg" },
       {
         layout: "carousel", // the two barn roof options, same window so only the roof changes
+        hideOnMobile: true,
         list: true,
-        mobileSwipe: true,
         arrowsOut: true,
+        width: "95%", // a little smaller so it fits a 14" laptop screen
         images: [
           { src: "assets/img/projects/hummingbird/barn-taller.jpg", ratio: 1.3687, tab: "Taller Pitch" },
           { src: "assets/img/projects/hummingbird/barn-lower.jpg", ratio: 1.3687, tab: "Lower Pitch" },
+        ],
+      },
+      {
+        layout: "carousel", // mobile: taller pitch barn, one elevation per frame (all eight at one scale)
+        mobileOnly: true,
+        mobileSwipe: true,
+        list: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/m-barn-taller-front.jpg", ratio: 1.4215, caption: "Taller Pitch: Front", tab: "Front" },
+          { src: "assets/img/projects/hummingbird/m-barn-taller-right.jpg", ratio: 1.3063, caption: "Taller Pitch: Right", tab: "Right" },
+          { src: "assets/img/projects/hummingbird/m-barn-taller-rear.jpg", ratio: 1.5004, caption: "Taller Pitch: Rear", tab: "Rear" },
+          { src: "assets/img/projects/hummingbird/m-barn-taller-left.jpg", ratio: 1.5094, caption: "Taller Pitch: Left", tab: "Left" },
+        ],
+      },
+      {
+        layout: "carousel", // mobile: lower pitch barn, one elevation per frame (all eight at one scale)
+        mobileOnly: true,
+        mobileSwipe: true,
+        list: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/m-barn-lower-front.jpg", ratio: 1.4215, caption: "Lower Pitch: Front", tab: "Front" },
+          { src: "assets/img/projects/hummingbird/m-barn-lower-right.jpg", ratio: 1.3063, caption: "Lower Pitch: Right", tab: "Right" },
+          { src: "assets/img/projects/hummingbird/m-barn-lower-rear.jpg", ratio: 1.5004, caption: "Lower Pitch: Rear", tab: "Rear" },
+          { src: "assets/img/projects/hummingbird/m-barn-lower-left.jpg", ratio: 1.5094, caption: "Lower Pitch: Left", tab: "Left" },
         ],
       },
     ],
