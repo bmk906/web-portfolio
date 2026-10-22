@@ -364,7 +364,7 @@
         if (block.layout === "pan")
           return `<figure class="gallery-pan mobile-only" data-follows="${block.follows}" style="--zoom:${block.zoom || 2.5}"><div class="pan-view">${block.images
             .map((img, i) => `<img class="pan-img${i ? "" : " is-active"}" src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy" data-caption="${escapeHTML(img.caption || "")}" style="aspect-ratio:${img.ratio}">`)
-            .join("")}</div><figcaption>${escapeHTML(block.label || "Enlarged")}: <span class="pan-name">${escapeHTML(block.images[0].caption || "")}</span>, swipe to see the rest</figcaption></figure>`;
+            .join("")}</div><figcaption>${escapeHTML(block.label || "Enlarged")}: <span class="pan-name">${escapeHTML(block.images[0].caption || "")}</span>. Swipe to see the rest; keep swiping at the end for the next view</figcaption></figure>`;
         if (block.divider)
           return `<div class="gallery-section"><div class="gallery-divider" role="separator"><span>${escapeHTML(block.divider)}</span></div>${
             block.note ? `<p class="divider-note">${escapeHTML(block.note)}</p>` : ""
@@ -544,18 +544,49 @@
       }
     });
 
-    // mobile pan views show the image for the slide in view in the carousel they follow
+    // mobile pan views show the image for the slide in view in the carousel they follow.
+    // Swiping on past the right end goes to the next image (the carousel follows), and
+    // past the left end back to the previous one, arriving at its right end.
     root.querySelectorAll(".gallery-pan").forEach((pan) => {
       const view = pan.querySelector(".pan-view");
       const imgs = [...pan.querySelectorAll(".pan-img")];
       const name = pan.querySelector(".pan-name");
-      const show = (i) => {
-        imgs.forEach((im, j) => im.classList.toggle("is-active", j === i));
-        if (imgs[i]) name.textContent = imgs[i].dataset.caption;
-        view.scrollLeft = 0;
-      };
       const source = root.querySelector(`[data-id="${pan.dataset.follows}"]`);
-      if (source) source.addEventListener("slide", (e) => show(e.detail));
+      const stage = source && source.querySelector(".carousel-stage");
+      const slides = source ? [...source.querySelectorAll(".carousel-slide")] : [];
+      let current = 0;
+      const show = (i, atEnd) => {
+        current = i;
+        imgs.forEach((im, j) => im.classList.toggle("is-active", j === i));
+        name.textContent = imgs[i].dataset.caption;
+        view.scrollLeft = atEnd ? view.scrollWidth : 0;
+      };
+      const go = (i, atEnd) => {
+        if (i < 0 || i >= imgs.length) return;
+        show(i, atEnd);
+        if (stage && slides[i]) stage.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: "instant" }); // usually off screen above
+      };
+      if (source) source.addEventListener("slide", (e) => e.detail !== current && show(e.detail));
+
+      let start = null;
+      view.addEventListener(
+        "touchstart",
+        (e) => {
+          const max = view.scrollWidth - view.clientWidth;
+          start = { x: e.touches[0].clientX, y: e.touches[0].clientY, atStart: view.scrollLeft <= 2, atEnd: view.scrollLeft >= max - 2 };
+        },
+        { passive: true }
+      );
+      view.addEventListener("touchend", (e) => {
+        if (!start) return;
+        const dx = e.changedTouches[0].clientX - start.x;
+        const dy = e.changedTouches[0].clientY - start.y;
+        const { atStart, atEnd } = start;
+        start = null;
+        if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return; // a tap or a vertical scroll
+        if (dx < 0 && atEnd) go(current + 1);
+        else if (dx > 0 && atStart) go(current - 1, true);
+      });
     });
 
     // desktop: clicking a linked plan opens that level in its carousel and brings it into view
