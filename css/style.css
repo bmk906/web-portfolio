@@ -652,12 +652,16 @@ html.menu-entering .layout > :not(.menu) {
 
 /* pan (mobile): an enlarged image to swipe across, matching the slide in view above */
 .pan-view {
+  display: flex;
+  align-items: flex-end; /* drawings sit on the bottom, so the ground line holds still */
+  aspect-ratio: calc(var(--pan-ratio, 3) / var(--zoom, 2.5)); /* the tallest image: no height jump between views */
   overflow-x: auto;
   overscroll-behavior-x: contain;
 }
 
 .gallery .pan-img {
   display: none;
+  flex: none;
   width: calc(var(--zoom, 2.5) * 100%);
   max-width: none;
 }

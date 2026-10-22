@@ -362,7 +362,7 @@
         if (block.layout === "carousel") return carouselHTML(block);
         // pan (mobile): one image at a time, enlarged, swiped sideways; follows the carousel named in follows
         if (block.layout === "pan")
-          return `<figure class="gallery-pan mobile-only" data-follows="${block.follows}" style="--zoom:${block.zoom || 2.5}"><div class="pan-view">${block.images
+          return `<figure class="gallery-pan mobile-only" data-follows="${block.follows}" style="--zoom:${block.zoom || 2.5};--pan-ratio:${Math.min(...block.images.map((img) => img.ratio))}"><div class="pan-view">${block.images
             .map((img, i) => `<img class="pan-img${i ? "" : " is-active"}" src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy" data-caption="${escapeHTML(img.caption || "")}" style="aspect-ratio:${img.ratio}">`)
             .join("")}</div><figcaption>${escapeHTML(block.label || "Enlarged")}: <span class="pan-name">${escapeHTML(block.images[0].caption || "")}</span>. Swipe to see the rest; keep swiping at the end for the next view</figcaption></figure>`;
         if (block.divider)
@@ -561,31 +561,68 @@
         name.textContent = imgs[i].dataset.caption;
         view.scrollLeft = atEnd ? view.scrollWidth : 0;
       };
-      const go = (i, atEnd) => {
-        if (i < 0 || i >= imgs.length) return;
-        show(i, atEnd);
-        if (stage && slides[i]) stage.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: "instant" }); // usually off screen above
+      // changing view: the drawing slides out the way the finger went and the next one
+      // slides in from the other side
+      const SHIFT = 60;
+      const slideTo = (i, dir) => {
+        view.style.transition = "transform 0.2s ease-in, opacity 0.2s ease-in";
+        view.style.transform = `translateX(${-dir * SHIFT}px)`;
+        view.style.opacity = "0";
+        setTimeout(() => {
+          show(i, dir < 0);
+          if (stage && slides[i]) stage.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: "instant" }); // usually off screen above
+          view.style.transition = "none";
+          view.style.transform = `translateX(${dir * SHIFT}px)`;
+          void view.offsetWidth; // start the slide-in from there
+          view.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
+          view.style.transform = "";
+          view.style.opacity = "";
+        }, 200);
+      };
+      const settle = () => {
+        view.style.transition = "transform 0.25s ease-out, opacity 0.25s ease-out";
+        view.style.transform = "";
+        view.style.opacity = "";
       };
       if (source) source.addEventListener("slide", (e) => e.detail !== current && show(e.detail));
 
+      // at an end, the drawing gives a little under the finger before it changes
       let start = null;
+      const pull = (e) => {
+        const dx = e.clientX - start.x;
+        const toNext = dx < 0 && start.atEnd && current < imgs.length - 1;
+        const toPrev = dx > 0 && start.atStart && current > 0;
+        return { dx, dy: e.clientY - start.y, toNext, toPrev };
+      };
       view.addEventListener(
         "touchstart",
         (e) => {
           const max = view.scrollWidth - view.clientWidth;
           start = { x: e.touches[0].clientX, y: e.touches[0].clientY, atStart: view.scrollLeft <= 2, atEnd: view.scrollLeft >= max - 2 };
+          view.style.transition = "none";
+        },
+        { passive: true }
+      );
+      view.addEventListener(
+        "touchmove",
+        (e) => {
+          if (!start) return;
+          const { dx, dy, toNext, toPrev } = pull(e.touches[0]);
+          if ((!toNext && !toPrev) || Math.abs(dy) > Math.abs(dx)) return;
+          const give = dx * 0.35;
+          view.style.transform = `translateX(${give}px)`;
+          view.style.opacity = String(Math.max(0.4, 1 - Math.abs(give) / 150));
         },
         { passive: true }
       );
       view.addEventListener("touchend", (e) => {
         if (!start) return;
-        const dx = e.changedTouches[0].clientX - start.x;
-        const dy = e.changedTouches[0].clientY - start.y;
-        const { atStart, atEnd } = start;
+        const { dx, dy, toNext, toPrev } = pull(e.changedTouches[0]);
         start = null;
-        if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return; // a tap or a vertical scroll
-        if (dx < 0 && atEnd) go(current + 1);
-        else if (dx > 0 && atStart) go(current - 1, true);
+        const sideways = Math.abs(dx) >= 40 && Math.abs(dx) > Math.abs(dy); // not a tap or a vertical scroll
+        if (sideways && toNext) slideTo(current + 1, 1);
+        else if (sideways && toPrev) slideTo(current - 1, -1);
+        else settle();
       });
     });
 
