@@ -349,7 +349,7 @@
       <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}${block.alignBottom ? " is-bottom" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
         block.list ? ` data-list="1"` : ""
       }${block.revealEarly ? ` data-early="${block.alignTo ?? 1}"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
-      }${block.width ? ` style="--stage-w:${block.width}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
+      }${block.width || block.mobileSlide ? ` style="${block.width ? `--stage-w:${block.width};` : ""}${block.mobileSlide ? `--slide-w:${block.mobileSlide}` : ""}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
         <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>${
           block.mobileSwipe ? `<div class="carousel-dots" aria-hidden="true">${block.images.map(() => "<span></span>").join("")}</div>` : ""
         }

@@ -40,6 +40,8 @@
                                                      (default: reversed, top floor first),
                                                      width: "100%" sets the image width,
                                                      note: "..." a description under every slide,
+                                                     mobileSlide: "70%" each swipe slide's share of
+                                                     the phone width (default 86%),
                                                      alignBottom: true sits shorter slides on the
                                                      bottom edge instead of the top
               An image can open a carousel level on click (web): opens: { carousel: "x", level: 0 }
@@ -68,7 +70,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 29;
+const IMAGE_VERSION = 30;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -569,9 +571,9 @@ const PROJECTS = [
         alignBottom: true,
         arrowsOut: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Single Story ADU", tab: "Single Story" },
           { src: "assets/img/projects/burlingame-adu/option-2.jpg", ratio: 2.9144, caption: "Two Story ADU, Option 1", tab: "Two Story 1" },
           { src: "assets/img/projects/burlingame-adu/option-3.jpg", ratio: 3.7647, caption: "Two Story ADU, Option 2", tab: "Two Story 2" },
+          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Single Story ADU", tab: "Single Story" },
         ],
       },
       {
@@ -583,9 +585,10 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // mobile: the same two plans, one at a time and larger
+        layout: "carousel", // mobile: the same two plans, one at a time
         mobileOnly: true,
         mobileSwipe: true,
+        mobileSlide: "69%", // about 0.8x the usual size; the sketches show their flaws when large
         list: true,
         images: [
           { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.9%", tab: "Ground Floor" },
@@ -599,9 +602,10 @@ const PROJECTS = [
         mobileSwipe: true,
         alignBottom: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/plan-ground.jpg", ratio: 1.0892, tab: "Ground Floor" },
-          { src: "assets/img/projects/burlingame-adu/plan-second.jpg", ratio: 1.0833, tab: "Second Floor" },
-          { src: "assets/img/projects/burlingame-adu/plan-ceiling.jpg", ratio: 1.1494, tab: "Ceiling" },
+          // all four cropped with one window placed from the A1 / AA grid lines, so walls stack slide to slide
+          { src: "assets/img/projects/burlingame-adu/plan-ground.jpg", ratio: 1.1307, tab: "Ground Floor" },
+          { src: "assets/img/projects/burlingame-adu/plan-second.jpg", ratio: 1.1307, tab: "Second Floor" },
+          { src: "assets/img/projects/burlingame-adu/plan-ceiling.jpg", ratio: 1.1307, tab: "Ceiling" },
           { src: "assets/img/projects/burlingame-adu/plan-roof.jpg", ratio: 1.1307, tab: "Roof" },
         ],
       },

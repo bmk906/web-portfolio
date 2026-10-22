@@ -1002,7 +1002,7 @@ picture {
   }
 
   .gallery-carousel.is-swipe .carousel-slide {
-    flex: 0 0 86%;
+    flex: 0 0 var(--slide-w, 86%); /* mobileSlide sets a smaller share */
     scroll-snap-align: start;
   }
 
