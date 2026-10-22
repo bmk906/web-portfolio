@@ -650,6 +650,16 @@ html.menu-entering .layout > :not(.menu) {
   max-width: var(--group-max, none);
 }
 
+/* place: images at set offsets and widths, tops aligned */
+.gallery-place .gallery-group {
+  display: flex;
+  align-items: flex-start;
+}
+
+.place-item {
+  flex: none;
+}
+
 .gallery-row .gallery-item,
 .gallery-aside .gallery-group > .gallery-item,
 .gallery-col {

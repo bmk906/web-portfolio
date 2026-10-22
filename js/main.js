@@ -315,6 +315,9 @@
     // Images inside a group. "aside": the first image on the left, the rest stacked in a
     // column on the right; the column's ratio is set so both sides end up the same height.
     const groupHTML = (block) => {
+      // "place": each image at its own offset and width (percent of the column)
+      if (block.layout === "place")
+        return block.images.map((img) => `<div class="place-item" style="margin-left:${img.left || 0};width:${img.width}">${image(img, true)}</div>`).join("");
       if (block.layout !== "aside") return block.images.map((img) => image(img, true)).join("");
       const [first, ...rest] = block.images;
       const colRatio = 1 / rest.reduce((sum, img) => sum + 1 / img.ratio, 0);
@@ -353,7 +356,7 @@
       </figure>`;
     };
 
-    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row" | "aside" | "carousel", images }
+    // An entry is a single image, or a group: { layout: "stack" | "bands" | "grid" | "matrix" | "row" | "aside" | "place" | "carousel", images }
     const gallery = p.images
       .map((block) => {
         if (block.layout === "carousel") return carouselHTML(block);

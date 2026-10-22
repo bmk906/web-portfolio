@@ -20,6 +20,10 @@
                                                      each cropped to a thin band, stacked
                 { layout: "grid", images: [...] }    two columns (one on mobile)
                 { layout: "matrix", images: [...] }  three columns, on mobile too
+                { layout: "place", images: [{ src, left: "7%", width: "26%" }, ...] }
+                                                     side by side, each at its own offset and width
+                                                     (percent of the column), e.g. to sit under a
+                                                     drawing above
                 { layout: "row", images: [{ src, ratio }, ...] }
                                                      side by side at equal heights (ratio =
                                                      width / height); stacked on mobile
@@ -64,7 +68,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 28;
+const IMAGE_VERSION = 29;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -571,13 +575,11 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "row", // the two floors from the sketch plan, same crop window so they line up
+        layout: "place", // web: each floor sits under its elevation in Two Story Option 1 above, at that sketch's scale
         hideOnMobile: true,
-        gap: "24px",
-        maxWidth: "530px",
         images: [
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.4%" },
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.4%" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.9%", left: "7.06%", width: "25.9%" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.9%", left: "27.75%", width: "25.9%" },
         ],
       },
       {
@@ -586,18 +588,21 @@ const PROJECTS = [
         mobileSwipe: true,
         list: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.4%", tab: "Ground Floor" },
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.4%", tab: "Second Floor" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.9%", tab: "Ground Floor" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.9%", tab: "Second Floor" },
         ],
       },
-      // drawings: title block and notes cropped off; address painted out of the east elevation
-      { src: "assets/img/projects/burlingame-adu/plans.jpg" },
-      { src: "assets/img/projects/burlingame-adu/elevations.jpg" },
+      // drawings: title block and notes cropped off, each drawing on its own at one scale per sheet;
+      // address painted out of the east elevation
       {
-        layout: "row", // the sheet's two sections, side by side at the same scale
+        layout: "carousel",
+        mobileSwipe: true,
+        alignBottom: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/section-1.jpg", ratio: 1.2516 },
-          { src: "assets/img/projects/burlingame-adu/section-2.jpg", ratio: 1.2516 },
+          { src: "assets/img/projects/burlingame-adu/plan-ground.jpg", ratio: 1.0892, tab: "Ground Floor" },
+          { src: "assets/img/projects/burlingame-adu/plan-second.jpg", ratio: 1.0833, tab: "Second Floor" },
+          { src: "assets/img/projects/burlingame-adu/plan-ceiling.jpg", ratio: 1.1494, tab: "Ceiling" },
+          { src: "assets/img/projects/burlingame-adu/plan-roof.jpg", ratio: 1.1307, tab: "Roof" },
         ],
       },
       {
@@ -605,16 +610,65 @@ const PROJECTS = [
         list: true,
         mobileSwipe: true,
         alignBottom: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/elev-south.jpg", ratio: 1.3992, tab: "South" },
+          { src: "assets/img/projects/burlingame-adu/elev-east.jpg", ratio: 1.3974, tab: "East" },
+          { src: "assets/img/projects/burlingame-adu/elev-north.jpg", ratio: 1.3974, tab: "North" },
+          { src: "assets/img/projects/burlingame-adu/elev-west.jpg", ratio: 1.3974, tab: "West" },
+        ],
+      },
+      {
+        layout: "row", // the sheet's two sections, side by side at the same scale
+        hideOnMobile: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/section-1.jpg", ratio: 1.2516 },
+          { src: "assets/img/projects/burlingame-adu/section-2.jpg", ratio: 1.2516 },
+        ],
+      },
+      {
+        layout: "carousel",
+        mobileOnly: true,
+        mobileSwipe: true,
+        list: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/section-1.jpg", ratio: 1.2516, tab: "Section 1" },
+          { src: "assets/img/projects/burlingame-adu/section-2.jpg", ratio: 1.2516, tab: "Section 2" },
+        ],
+      },
+      {
+        layout: "carousel", // web: a room's drawing lines stacked, all slides at the same scale
+        hideOnMobile: true,
+        list: true,
+        alignBottom: true,
         arrowsOut: true,
         images: [
-          // one drawing line per slide, all at the same scale (narrower lines padded to the widest)
-          { src: "assets/img/projects/burlingame-adu/int-kitchen.jpg", ratio: 1.7947, tab: "Kitchen / Living" },
-          { src: "assets/img/projects/burlingame-adu/int-ba.jpg", ratio: 3.2888, tab: "Bath" },
-          { src: "assets/img/projects/burlingame-adu/int-bedroom.jpg", ratio: 3.1904, tab: "Bedroom" },
+          { src: "assets/img/projects/burlingame-adu/int-kitchen.jpg", ratio: 1.8401, tab: "Kitchen / Living" },
+          { src: "assets/img/projects/burlingame-adu/int-bath-bedroom.jpg", ratio: 1.6352, tab: "Bath / Bedroom" },
           { src: "assets/img/projects/burlingame-adu/int-stair.jpg", ratio: 2.502, tab: "Stair" },
-          { src: "assets/img/projects/burlingame-adu/int-powder.jpg", ratio: 3.5477, tab: "Powder Room" },
-          { src: "assets/img/projects/burlingame-adu/int-ba1.jpg", ratio: 3.3898, tab: "Main House BA#1" },
-          { src: "assets/img/projects/burlingame-adu/int-ba2.jpg", ratio: 3.467, tab: "Main House BA#2" },
+          { src: "assets/img/projects/burlingame-adu/int-main-house.jpg", ratio: 1.7307, tab: "Main House Baths" },
+        ],
+      },
+      {
+        layout: "carousel", // mobile: one or two walls per slide so they read larger, all at the same scale
+        mobileOnly: true,
+        mobileSwipe: true,
+        list: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/m-kitchen-n.jpg", ratio: 2.0921, caption: "Kitchen / Living: North", tab: "Kitchen / Living: North" },
+          { src: "assets/img/projects/burlingame-adu/m-kitchen-w.jpg", ratio: 2.0921, caption: "Kitchen / Living: West", tab: "Kitchen / Living: West" },
+          { src: "assets/img/projects/burlingame-adu/m-kitchen-e.jpg", ratio: 2.2857, caption: "Kitchen / Living: East", tab: "Kitchen / Living: East" },
+          { src: "assets/img/projects/burlingame-adu/m-kitchen-s.jpg", ratio: 2.2857, caption: "Kitchen / Living: South", tab: "Kitchen / Living: South" },
+          { src: "assets/img/projects/burlingame-adu/m-bath-1.jpg", ratio: 2.0986, caption: "Bath: North and East", tab: "Bath: North and East" },
+          { src: "assets/img/projects/burlingame-adu/m-bath-2.jpg", ratio: 2.0964, caption: "Bath: South and West", tab: "Bath: South and West" },
+          { src: "assets/img/projects/burlingame-adu/m-bed-s.jpg", ratio: 2.0243, caption: "Bedroom: South", tab: "Bedroom: South" },
+          { src: "assets/img/projects/burlingame-adu/m-bed-e.jpg", ratio: 2.0243, caption: "Bedroom: East", tab: "Bedroom: East" },
+          { src: "assets/img/projects/burlingame-adu/m-bed-w.jpg", ratio: 2.0243, caption: "Bedroom: West", tab: "Bedroom: West" },
+          { src: "assets/img/projects/burlingame-adu/m-stair-n.jpg", ratio: 1.5349, caption: "Stair: North", tab: "Stair: North" },
+          { src: "assets/img/projects/burlingame-adu/m-stair-e.jpg", ratio: 1.5349, caption: "Stair: East", tab: "Stair: East" },
+          { src: "assets/img/projects/burlingame-adu/m-ba1-1.jpg", ratio: 2.1692, caption: "Main House BA#1: North and East", tab: "Main House BA#1: North and East" },
+          { src: "assets/img/projects/burlingame-adu/m-ba1-2.jpg", ratio: 2.2497, caption: "Main House BA#1: South and West", tab: "Main House BA#1: South and West" },
+          { src: "assets/img/projects/burlingame-adu/m-ba2-1.jpg", ratio: 2.2247, caption: "Main House BA#2: North and East", tab: "Main House BA#2: North and East" },
+          { src: "assets/img/projects/burlingame-adu/m-ba2-2.jpg", ratio: 2.2247, caption: "Main House BA#2: South and West", tab: "Main House BA#2: South and West" },
         ],
       },
     ],
