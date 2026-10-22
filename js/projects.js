@@ -475,8 +475,8 @@ const PROJECTS = [
     stripFocus: "50% 60%",
     stripMono: true, // shown in black and white so it takes a tint like the others
     summary: [
-      "A renovation of a classic 1920s Burlingame home that had fallen into disrepair and needed some love. The scope was practical: remodeled bathrooms and kitchen, new windows, interior and exterior repainting, and a rebuilt deck at the back of the house.",
-      "The deck railing was my first introduction to architectural detailing. I designed it, then drew it as a set of instructions for the contractor: sections through the post and rail, an enlarged panel, and dimensioned elevations of each run. The photos below show it built.",
+      "Concord Way is the renovation of a classic 1920s home in Burlingame that had fallen into disrepair and needed some love. The work was practical rather than transformative: remodeled bathrooms and a new toilet room, a refreshed kitchen, replacement windows, new paint inside and out, and a rebuilt deck off the back of the house.",
+      "The deck railing was my first real introduction to architectural detailing, and I carried it from idea to built. I designed the pattern, square panels of crossed diagonals set between trimmed posts, and then translated it into a set of instructions a contractor could build from: sections through the post and rail showing how each layer of trim goes together, an enlarged panel with every member dimensioned, and elevations of each run. The railing in the photos below was built from those drawings.",
     ],
     images: [
       {
