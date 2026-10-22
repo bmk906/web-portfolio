@@ -360,6 +360,11 @@
     const gallery = p.images
       .map((block) => {
         if (block.layout === "carousel") return carouselHTML(block);
+        // pan (mobile): one image at a time, enlarged, swiped sideways; follows the carousel named in follows
+        if (block.layout === "pan")
+          return `<figure class="gallery-pan mobile-only" data-follows="${block.follows}" style="--zoom:${block.zoom || 2.5}"><div class="pan-view">${block.images
+            .map((img, i) => `<img class="pan-img${i ? "" : " is-active"}" src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy" data-caption="${escapeHTML(img.caption || "")}" style="aspect-ratio:${img.ratio}">`)
+            .join("")}</div><figcaption>${escapeHTML(block.label || "Enlarged")}: <span class="pan-name">${escapeHTML(block.images[0].caption || "")}</span>, swipe to see the rest</figcaption></figure>`;
         if (block.divider)
           return `<div class="gallery-section"><div class="gallery-divider" role="separator"><span>${escapeHTML(block.divider)}</span></div>${
             block.note ? `<p class="divider-note">${escapeHTML(block.note)}</p>` : ""
@@ -530,11 +535,27 @@
       if (dots.length) {
         const mark = () => {
           const i = Math.round(stage.scrollLeft / (slides[1].offsetLeft - slides[0].offsetLeft || 1));
-          dots.forEach((d, j) => d.classList.toggle("is-active", j === Math.min(i, dots.length - 1)));
+          const at = Math.min(i, dots.length - 1);
+          dots.forEach((d, j) => d.classList.toggle("is-active", j === at));
+          if (at !== carousel._at) carousel.dispatchEvent(new CustomEvent("slide", { detail: (carousel._at = at) }));
         };
         mark();
         stage.addEventListener("scroll", mark, { passive: true });
       }
+    });
+
+    // mobile pan views show the image for the slide in view in the carousel they follow
+    root.querySelectorAll(".gallery-pan").forEach((pan) => {
+      const view = pan.querySelector(".pan-view");
+      const imgs = [...pan.querySelectorAll(".pan-img")];
+      const name = pan.querySelector(".pan-name");
+      const show = (i) => {
+        imgs.forEach((im, j) => im.classList.toggle("is-active", j === i));
+        if (imgs[i]) name.textContent = imgs[i].dataset.caption;
+        view.scrollLeft = 0;
+      };
+      const source = root.querySelector(`[data-id="${pan.dataset.follows}"]`);
+      if (source) source.addEventListener("slide", (e) => show(e.detail));
     });
 
     // desktop: clicking a linked plan opens that level in its carousel and brings it into view

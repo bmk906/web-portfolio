@@ -650,6 +650,22 @@ html.menu-entering .layout > :not(.menu) {
   max-width: var(--group-max, none);
 }
 
+/* pan (mobile): an enlarged image to swipe across, matching the slide in view above */
+.pan-view {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.gallery .pan-img {
+  display: none;
+  width: calc(var(--zoom, 2.5) * 100%);
+  max-width: none;
+}
+
+.gallery .pan-img.is-active {
+  display: block;
+}
+
 /* place: images at set offsets and widths, tops aligned */
 .gallery-place .gallery-group {
   display: flex;

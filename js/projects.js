@@ -20,6 +20,9 @@
                                                      each cropped to a thin band, stacked
                 { layout: "grid", images: [...] }    two columns (one on mobile)
                 { layout: "matrix", images: [...] }  three columns, on mobile too
+                { layout: "pan", follows: "x", zoom: 2.5, images: [...] }
+                                                     mobile only: the image for the slide in view in
+                                                     carousel "x", enlarged, swiped sideways
                 { layout: "place", images: [{ src, left: "7%", width: "26%" }, ...] }
                                                      side by side, each at its own offset and width
                                                      (percent of the column), e.g. to sit under a
@@ -70,7 +73,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 30;
+const IMAGE_VERSION = 31;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -546,7 +549,7 @@ const PROJECTS = [
     location: "Woodside, CA",
     type: "Single-Family Residence",
     status: "On Hold",
-    strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall glass gable of the right elevation
+    strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall stair window of the front elevation (backup: strip-gable.jpg, the right elevation's glass gable)
     stripFocus: "50% 50%",
     summary: [
       "Hummingbird is a small compound tucked deep in the Santa Cruz Mountains: a main residence, a barn for gathering and creative work like painting and crafts, and a cottage for guests. The owners named it Hummingbird because they wanted the property to feel like a place where hummingbirds gather.",
@@ -580,6 +583,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // mobile: cropped to the building (no level marks), wider slides
+        id: "hb-elev",
         mobileOnly: true,
         mobileSwipe: true,
         mobileSlide: "94%",
@@ -589,6 +593,17 @@ const PROJECTS = [
           { src: "assets/img/projects/hummingbird/m-elev-right.jpg", ratio: 2.8951, caption: "Right", tab: "Right" },
           { src: "assets/img/projects/hummingbird/m-elev-rear.jpg", ratio: 2.9963, caption: "Rear", tab: "Rear" },
           { src: "assets/img/projects/hummingbird/m-elev-left.jpg", ratio: 2.864, caption: "Left", tab: "Left" },
+        ],
+      },
+      {
+        layout: "pan", // mobile: a close-up of the elevation in view above, swipe across it
+        follows: "hb-elev",
+        zoom: 2.5,
+        images: [
+          { src: "assets/img/projects/hummingbird/m-elev-front.jpg", ratio: 2.9963, caption: "Front" },
+          { src: "assets/img/projects/hummingbird/m-elev-right.jpg", ratio: 2.8951, caption: "Right" },
+          { src: "assets/img/projects/hummingbird/m-elev-rear.jpg", ratio: 2.9963, caption: "Rear" },
+          { src: "assets/img/projects/hummingbird/m-elev-left.jpg", ratio: 2.864, caption: "Left" },
         ],
       },
       { src: "assets/img/projects/hummingbird/barn-plan.jpg" },
