@@ -548,7 +548,7 @@ const PROJECTS = [
     year: "2025",
     location: "Woodside, CA",
     type: "Single-Family Residence",
-    status: "On Hold",
+    status: "Schematic Design",
     strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall stair window of the front elevation (backup: strip-gable.jpg, the right elevation's glass gable)
     stripFocus: "50% 50%",
     summary: [
