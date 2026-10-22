@@ -545,10 +545,66 @@ const PROJECTS = [
     slug: "burlingame-adu",
     category: "practice",
     title: "Burlingame ADU",
-    strip: "assets/img/placeholder-3.svg",
+    year: "2026",
+    location: "Burlingame, CA",
+    type: "Accessory Dwelling Unit",
+    status: "Under Construction",
+    strip: "assets/img/projects/burlingame-adu/strip.jpg", // pre-cropped from the chosen scheme's sketch (option 1), on the dormer
     stripFocus: "50% 50%",
-    summary: "Placeholder description.",
-    images: [{ src: "assets/img/placeholder-3.svg" }],
+    stripMono: true,
+    summary: [
+      "Part of a larger project to create a new dwelling unit in the backyard, a new garage, and a renovation of the existing bathrooms. We explored a multitude of options, including a one story scheme and two different two story schemes, and settled on a two story ADU to preserve as much yard space as possible.",
+      "The new structure consists of living and dining on the first floor, along with a powder room. Upstairs sports a generous main bedroom with a large bathroom and walk-in closet. The design respects the existing house style and features a stucco facade with Spanish style accents and details. Large glass doors connect the living room to the yard and allow for a seamless blending of indoor and outdoor space. Upstairs, we use a dormer to create a large window in the main bedroom.",
+      "The clients were excited about us picking fixtures and finishes in the bathrooms and have been extremely involved throughout the process. This project is currently under construction.",
+    ],
+    images: [
+      // sketches: cropped to the drawing (the handwritten label carried the address)
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Single Story ADU", tab: "Single Story" },
+          { src: "assets/img/projects/burlingame-adu/option-2.jpg", ratio: 2.9144, caption: "Two Story ADU, Option 1", tab: "Two Story 1" },
+          { src: "assets/img/projects/burlingame-adu/option-3.jpg", ratio: 3.7647, caption: "Two Story ADU, Option 2", tab: "Two Story 2" },
+        ],
+      },
+      {
+        layout: "row", // the two floors from the sketch plan, side by side
+        mobileRow: true,
+        gap: "24px",
+        maxWidth: "760px",
+        images: [
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1 },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0343 },
+        ],
+      },
+      // drawings: title block and notes cropped off; address painted out of the east elevation
+      { src: "assets/img/projects/burlingame-adu/plans.jpg" },
+      { src: "assets/img/projects/burlingame-adu/elevations.jpg" },
+      {
+        layout: "row", // the sheet's two sections, side by side at the same scale
+        images: [
+          { src: "assets/img/projects/burlingame-adu/section-1.jpg", ratio: 1.2516 },
+          { src: "assets/img/projects/burlingame-adu/section-2.jpg", ratio: 1.2516 },
+        ],
+      },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/burlingame-adu/interior-1.jpg", ratio: 1.2456, tab: "Main House Baths" },
+          { src: "assets/img/projects/burlingame-adu/interior-2.jpg", ratio: 1.1963, tab: "Kitchen / Living" },
+          { src: "assets/img/projects/burlingame-adu/interior-3.jpg", ratio: 1.4753, tab: "Bath / Bedroom" },
+          { src: "assets/img/projects/burlingame-adu/interior-4.jpg", ratio: 1.1679, tab: "Stair / Powder" },
+        ],
+      },
+    ],
   },
   {
     slug: "hillsborough",
