@@ -64,7 +64,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 26;
+const IMAGE_VERSION = 27;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -558,7 +558,7 @@ const PROJECTS = [
     location: "Hillsborough, CA",
     type: "Single-Family Residence",
     status: "Built",
-    strip: "assets/img/projects/hillsborough/strip.jpg", // pre-cropped on the skylight in the beam grid, above the range hood
+    strip: "assets/img/projects/hillsborough/strip.jpg", // pre-cropped from the island photo, centred between the range hood and the skylight
     stripFocus: "50% 50%",
     stripMono: true,
     summary: [
