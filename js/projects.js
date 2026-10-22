@@ -552,9 +552,64 @@ const PROJECTS = [
     slug: "hillsborough",
     category: "practice",
     title: "Hillsborough",
-    strip: "assets/img/placeholder-4.svg",
+    year: "2024",
+    location: "Hillsborough, CA",
+    type: "Single-Family Residence",
+    status: "Built",
+    strip: "assets/img/projects/hillsborough/strip.jpg", // pre-cropped on the skylight in the beam grid, above the range hood
     stripFocus: "50% 50%",
-    summary: "Placeholder description.",
-    images: [{ src: "assets/img/placeholder-4.svg" }],
+    stripMono: true,
+    summary: [
+      "Hillsborough is the renovation of a traditional California ranch house, centered on a full kitchen remodel. Two new box bay windows were added, and the old coffered ceiling, trimmed out in crown moulding, gave way to a contemporary grid of stained faux wood beams on a cream ceiling.",
+      "The grid responds to the room around it. It centers on the kitchen island and frames the new range and hood, with a new skylight set in the grid directly above so the cook gets light from every side.",
+      "The project also shows creative ambition meeting a client's budget. A large part of the original scope was rebuilding the rear roof over the patio to better frame the view of San Francisco Bay. Weighing what that work would really cost against what it would give the client, we cut it from the final project.",
+    ],
+    images: [
+      // drawings: title block and notes cropped off (scheme sketch rotated to read landscape)
+      { src: "assets/img/projects/hillsborough/kitchen-scheme.jpg", caption: "Initial Kitchen Scheme" },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/hillsborough/plan.jpg", ratio: 1.087, tab: "Floor Plan" },
+          { src: "assets/img/projects/hillsborough/ceiling.jpg", ratio: 1.087, tab: "Ceiling Plan" },
+          { src: "assets/img/projects/hillsborough/roof.jpg", ratio: 1.3652, tab: "Roof Plan" },
+        ],
+      },
+      { divider: "Finished Kitchen" },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/hillsborough/kitchen-1.jpg", ratio: 1.3333, caption: "Kitchen", tab: "Kitchen" },
+          { src: "assets/img/projects/hillsborough/kitchen-2.jpg", ratio: 1.3333, caption: "Island and Range Wall", tab: "Island" },
+          { src: "assets/img/projects/hillsborough/skylight.jpg", ratio: 1.3333, caption: "Skylight in the Beam Grid", tab: "Skylight" },
+          { src: "assets/img/projects/hillsborough/range.jpg", ratio: 1.3333, caption: "Range", tab: "Range" },
+          { src: "assets/img/projects/hillsborough/box-bay.jpg", ratio: 1.3333, caption: "Box Bay Window", tab: "Box Bay" },
+          { src: "assets/img/projects/hillsborough/kitchen-3.jpg", ratio: 1.3333, caption: "Sink in the Box Bay", tab: "Sink" },
+          { src: "assets/img/projects/hillsborough/kitchen-4.jpg", ratio: 1.3333, caption: "Sink Wall", tab: "Sink Wall" },
+        ],
+      },
+      {
+        layout: "row",
+        caption: "Built-in Cabinets",
+        images: [
+          { src: "assets/img/projects/hillsborough/built-in-1.jpg", ratio: 0.75 },
+          { src: "assets/img/projects/hillsborough/built-in-2.jpg", ratio: 1.3333 },
+        ],
+      },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/hillsborough/elev-front.jpg", ratio: 2.0847, tab: "Front" },
+          { src: "assets/img/projects/hillsborough/elev-rear.jpg", ratio: 2.0025, tab: "Rear" },
+        ],
+      },
+      { src: "assets/img/projects/hillsborough/details.jpg" },
+    ],
   },
 ];
