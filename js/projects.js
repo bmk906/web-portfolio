@@ -78,7 +78,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 40;
+const IMAGE_VERSION = 41;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -479,7 +479,7 @@ const PROJECTS = [
     year: "2026",
     location: "Sonoma County, CA",
     type: "Civic",
-    status: "Ongoing",
+    status: "Construction Documents",
     strip: "assets/img/projects/station-1/strip.jpg", // pre-cropped on the hose tower in the early east sketch
     stripFocus: "50% 50%",
     stripMono: true,
@@ -517,20 +517,7 @@ const PROJECTS = [
       { src: "assets/img/projects/station-1/landscape.jpg" },
       { divider: "Building M" },
       {
-        layout: "carousel", // early elevation sketches (not his own drawing): kept small
-        mobileSwipe: true,
-        list: true,
-        alignBottom: true,
-        arrowsOut: true,
-        width: "60%",
-        images: [
-          { src: "assets/img/projects/station-1/sketch-m-east.jpg", ratio: 2.608, caption: "Early Sketch: East", tab: "East" },
-          { src: "assets/img/projects/station-1/sketch-m-north.jpg", ratio: 3.3058, caption: "Early Sketch: North", tab: "North" },
-        ],
-      },
-      {
         layout: "carousel", // all six sheets cut with one window on the grid lines, so walls stay put between slides
-        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -547,7 +534,6 @@ const PROJECTS = [
       {
         layout: "carousel", // one elevation per slide at one scale, the F.F. 0 level line at the same height on every slide
         spaceBefore: "large", // set apart a little more
-        spaceAfter: "medium",
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -558,6 +544,19 @@ const PROJECTS = [
           { src: "assets/img/projects/station-1/m-elev-west.jpg", ratio: 3.3403, tab: "West" },
           { src: "assets/img/projects/station-1/m-elev-west-shop.jpg", ratio: 3.3403, tab: "West, Shop Wing" },
           { src: "assets/img/projects/station-1/m-elev-south.jpg", ratio: 3.3403, tab: "South" }, // from A4.2
+        ],
+      },
+      {
+        layout: "carousel", // early elevation sketches by the project lead, after the drawn ones; kept small, at one scale
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        width: "60%",
+        spaceAfter: "medium", // the room that was under the elevations
+        images: [
+          { src: "assets/img/projects/station-1/sketch-m-east.jpg", ratio: 3.4218, caption: "Early Sketch by Project Lead: East", captionInset: "11.9%", tab: "East" },
+          { src: "assets/img/projects/station-1/sketch-m-north.jpg", ratio: 3.3044, caption: "Early Sketch by Project Lead: North", tab: "North" },
         ],
       },
       {
@@ -637,21 +636,7 @@ const PROJECTS = [
       { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
       { divider: "Building B" },
       {
-        layout: "carousel", // early elevation sketches (not his own drawing): kept small
-        mobileSwipe: true,
-        list: true,
-        alignBottom: true,
-        arrowsOut: true,
-        width: "60%",
-        images: [
-          { src: "assets/img/projects/station-1/sketch-b-east.jpg", ratio: 3.4302, caption: "Early Sketch: East", tab: "East" },
-          { src: "assets/img/projects/station-1/sketch-b-south.jpg", ratio: 4.4813, caption: "Early Sketch: South", captionInset: "19.3%", tab: "South" },
-          { src: "assets/img/projects/station-1/sketch-b-north.jpg", ratio: 3.9499, caption: "Early Sketch: North", captionInset: "19.4%", tab: "North" },
-        ],
-      },
-      {
         layout: "carousel", // one window on the grid lines (the porch part plan under it on A2.3 left out)
-        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -675,6 +660,19 @@ const PROJECTS = [
           { src: "assets/img/projects/station-1/b-elev-west.jpg", ratio: 3.6171, tab: "West" },
           { src: "assets/img/projects/station-1/b-elev-south.jpg", ratio: 3.6171, tab: "South" },
           { src: "assets/img/projects/station-1/b-elev-south-part.jpg", ratio: 3.6171, tab: "South, Part" },
+        ],
+      },
+      {
+        layout: "carousel", // early elevation sketches by the project lead, after the drawn ones; kept small, at one scale (East as reference)
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        width: "60%",
+        images: [
+          { src: "assets/img/projects/station-1/sketch-b-east.jpg", ratio: 3.4302, caption: "Early Sketch by Project Lead: East", tab: "East" },
+          { src: "assets/img/projects/station-1/sketch-b-south.jpg", ratio: 4.4813, caption: "Early Sketch by Project Lead: South", captionInset: "19.3%", tab: "South" },
+          { src: "assets/img/projects/station-1/sketch-b-north.jpg", ratio: 3.9499, caption: "Early Sketch by Project Lead: North", captionInset: "19.4%", tab: "North" },
         ],
       },
       {
@@ -838,7 +836,7 @@ const PROJECTS = [
     year: "2026",
     location: "Burlingame, CA",
     type: "Accessory Dwelling Unit",
-    status: "Ongoing",
+    status: "Under Construction",
     strip: "assets/img/projects/burlingame-adu/strip.jpg", // pre-cropped from the chosen scheme's sketch (option 1), on the front door
     stripFocus: "50% 50%",
     stripMono: true,
