@@ -78,7 +78,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 37;
+const IMAGE_VERSION = 38;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -483,6 +483,8 @@ const PROJECTS = [
     strip: "assets/img/projects/station-1/strip.jpg", // pre-cropped on the hose tower in the early east sketch
     stripFocus: "50% 50%",
     stripMono: true,
+    sideIndex: true, // desktop: the page's parts listed under the menu
+    roomy: true, // desktop: more space between drawings
     summary: [
       "Station 1 is a multi-phase renovation of a working firehouse in Sonoma County. The fire district covers a rural area that is critically at risk of wildfire, which demands a well equipped fire department with updated facilities. The existing station suffers from limited sleeping quarters, no proper lobby or entrance, and a neglected, unpleasant day room for the firefighters.",
       "We are adding a new wing with a day room and an upstairs theater room, and building a new lobby onto the front with glass storefront windows. The existing fire pole moves into the lobby to form a sort of museum area. We believe a firehouse is essentially the public face of government in a small town, and the entry should reflect that. Upstairs is completely rearranged to go from three dorm rooms to six, meeting the district's increased demand for staffing, and the admin area is reorganized into a usable chief's office, conference room, and dedicated admin offices. The kitchen is being renovated as well, and at the apparatus bay we are building an entire new level on top of the existing workshop and storage wing.",
@@ -492,6 +494,7 @@ const PROJECTS = [
       // drawings: title blocks and notes cropped off; street names, permit numbers and the district's name on the sign painted out
       {
         layout: "carousel", // construction management plans, which double as the site plans: one window, so the site stays put
+        index: "Site",
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -515,6 +518,7 @@ const PROJECTS = [
       { divider: "Building M" },
       {
         layout: "carousel", // early elevation sketches
+        index: "Early Sketches",
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -526,6 +530,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // all six sheets cut with one window on the grid lines, so walls stay put between slides
+        index: "Plans",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -542,6 +547,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // one elevation per slide at one scale, the F.F. 0 level line at the same height on every slide
+        index: "Elevations",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -557,6 +563,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // interior elevations, two rows of a sheet per slide, all at one scale
+        index: "Interiors",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -575,6 +582,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // the kitchen's interior elevations (drawn at a larger scale), one row per slide
+        spaceBefore: "half",
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -586,21 +594,17 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // A7.1 and A7.2 cut into columns of details that stack on one another, rows kept level
+        layout: "carousel", // A7.1 and A7.2, each whole sheet on one slide; hover to read
+        index: "Details",
         spaceBefore: true,
         hideOnMobile: true,
-        loupe: true,
+        loupe: 6, // the files are 4800 wide, so 6x is still sharp
         list: true,
         arrowsOut: true,
-        width: "45%", // a whole column fits a 14" laptop screen; the loupe makes it readable
+        width: "90%",
         images: [
-          { src: "assets/img/projects/station-1/m-det-1.jpg", ratio: 0.6047, tab: "Details 1, 5, 9" },
-          { src: "assets/img/projects/station-1/m-det-2.jpg", ratio: 0.6047, tab: "Details 2, 6" },
-          { src: "assets/img/projects/station-1/m-det-3.jpg", ratio: 0.6047, tab: "Details 3, 7, 11" },
-          { src: "assets/img/projects/station-1/m-det-4.jpg", ratio: 0.6047, tab: "Details 4, 8, 12" },
-          { src: "assets/img/projects/station-1/m-det-5.jpg", ratio: 0.6047, tab: "Shop Wing 1, 3, 6, 9" },
-          { src: "assets/img/projects/station-1/m-det-6.jpg", ratio: 0.6047, tab: "Shop Wing 4, 7, 10" },
-          { src: "assets/img/projects/station-1/m-det-7.jpg", ratio: 0.6047, tab: "Shop Wing 2, 5, 8, 11" },
+          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.351, tab: "Building M Primary Details" },
+          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.351, tab: "Shop Wing Primary Details" },
         ],
       },
       {
@@ -609,14 +613,13 @@ const PROJECTS = [
         label: "Details",
         zoom: 2.2,
         images: [
-          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.3508, caption: "Sheet 1 of 2" },
-          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.3508, caption: "Sheet 2 of 2" },
+          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.351, caption: "Building M Primary Details" },
+          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.351, caption: "Shop Wing Primary Details" },
         ],
       },
       {
         layout: "carousel", // A7.3: the two balcony details in one frame, the training room exit in another, one scale
         hideOnMobile: true,
-        loupe: true,
         list: true,
         alignBottom: true,
         arrowsOut: true,
@@ -635,10 +638,11 @@ const PROJECTS = [
           { src: "assets/img/projects/station-1/m-add-exit.jpg", ratio: 2.454, caption: "Training Room Exit" },
         ],
       },
-      { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
+      { src: "assets/img/projects/station-1/m-section-sketch.jpg", index: "Section Sketch" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
       { divider: "Building B" },
       {
         layout: "carousel", // early elevation sketches
+        index: "Early Sketches",
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -651,6 +655,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // one window on the grid lines (the porch part plan under it on A2.3 left out)
+        index: "Plans",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -664,6 +669,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // same scale as Building M's elevations; the El. 236.25 level line at the same height on every slide
+        index: "Elevations",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -679,6 +685,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // interior elevations, up to two rows of a sheet per slide, all at one scale
+        index: "Interiors",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -690,24 +697,20 @@ const PROJECTS = [
           { src: "assets/img/projects/station-1/b-int-records.jpg", ratio: 5.8182, tab: "Records" },
           { src: "assets/img/projects/station-1/b-int-storage.jpg", ratio: 2.3392, tab: "Storage" },
           { src: "assets/img/projects/station-1/b-int-garage-309.jpg", ratio: 2.1843, tab: "Garage" },
-          { src: "assets/img/projects/station-1/b-int-office-308.jpg", ratio: 6.6528, tab: "Office" },
         ],
       },
       {
-        layout: "carousel", // A7.4 and A7.5 cut into columns, same as Building M's
+        layout: "carousel", // A7.4 and A7.5, each whole sheet on one slide; hover to read
+        index: "Details",
         spaceBefore: true,
         hideOnMobile: true,
-        loupe: true,
+        loupe: 6, // the files are 4800 wide, so 6x is still sharp
         list: true,
         arrowsOut: true,
-        width: "46.8%", // matches Building M's detail scale
+        width: "90%",
         images: [
-          { src: "assets/img/projects/station-1/b-det-1.jpg", ratio: 0.6284, tab: "Details 3, 5, 6, 8" },
-          { src: "assets/img/projects/station-1/b-det-2.jpg", ratio: 0.6284, tab: "Details 1, 4, 9" },
-          { src: "assets/img/projects/station-1/b-det-3.jpg", ratio: 0.6284, tab: "Details 2, 7, 18, 24" },
-          { src: "assets/img/projects/station-1/b-det-4.jpg", ratio: 0.6284, tab: "Details 1, 4, 7, 8, 11, 12" },
-          { src: "assets/img/projects/station-1/b-det-5.jpg", ratio: 0.6284, tab: "Details 2, 9, 9a" },
-          { src: "assets/img/projects/station-1/b-det-6.jpg", ratio: 0.6284, tab: "Details 3, 10, 15" },
+          { src: "assets/img/projects/station-1/b-det-sheet-1.jpg", ratio: 1.351, tab: "Building B Primary Details" },
+          { src: "assets/img/projects/station-1/b-det-sheet-2.jpg", ratio: 1.351, tab: "Building B Additional Details" },
         ],
       },
       {
@@ -716,73 +719,8 @@ const PROJECTS = [
         label: "Details",
         zoom: 2.2,
         images: [
-          { src: "assets/img/projects/station-1/b-det-sheet-1.jpg", ratio: 1.3508, caption: "Sheet 1 of 2" },
-          { src: "assets/img/projects/station-1/b-det-sheet-2.jpg", ratio: 1.3508, caption: "Sheet 2 of 2" },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "concord-way",
-    category: "practice",
-    title: "Concord Way",
-    year: "2024",
-    location: "Burlingame, CA",
-    type: "Single-Family Renovation",
-    status: "Built",
-    strip: "assets/img/projects/concord-way/strip.jpg", // pre-cropped close on one railing panel against the sky
-    stripFocus: "50% 50%",
-    stripMono: true, // shown in black and white so it takes a tint like the others
-    summary: [
-      "Concord Way is the renovation of a classic 1920s home in Burlingame that had fallen into disrepair and needed some love. The work was practical rather than transformative: remodeled bathrooms and a new toilet room, a refreshed kitchen, replacement windows, new paint inside and out, and a rebuilt deck off the back of the house.",
-      "The deck railing served as a crash course in architectural detailing. I had to learn the process of taking an architectural idea and crafting it into a built reality. It began with a pattern, square panels of crossed diagonals set between trimmed posts, which I then translated into a set of instructions a contractor could build from: sections through the post and rail showing how each layer of trim goes together, an enlarged panel with every member dimensioned, and elevations of each run. The finished railing, shown below, was built from those drawings.",
-    ],
-    images: [
-      {
-        layout: "carousel", // drawings: title block and notes cropped off; the sheet's own drawing label stands in for a caption
-        mobileSwipe: true,
-        images: [
-          { src: "assets/img/projects/concord-way/plan-1.jpg", ratio: 1.1495, tab: "First Floor" },
-          { src: "assets/img/projects/concord-way/plan-2.jpg", ratio: 1.1495, tab: "Second Floor" },
-        ],
-      },
-      {
-        layout: "carousel",
-        list: true,
-        mobileSwipe: true,
-        images: [
-          { src: "assets/img/projects/concord-way/elev-1.jpg", ratio: 1.2204, tab: "Front & Right" },
-          { src: "assets/img/projects/concord-way/elev-2.jpg", ratio: 1.2204, tab: "Rear & Left" },
-        ],
-      },
-      {
-        divider: "Railing",
-        note: "From drawing to built: the detail sheet issued to the contractor, then the finished railing.",
-      },
-      { src: "assets/img/projects/concord-way/railing-detail.jpg", caption: "Railing Details" },
-      {
-        layout: "carousel",
-        list: true,
-        mobileSwipe: true,
-        images: [
-          { src: "assets/img/projects/concord-way/railing-3.jpg", ratio: 1.3333, caption: "Railing Panel", tab: "Panel" },
-          { src: "assets/img/projects/concord-way/railing-4.jpg", ratio: 1.3285, caption: "Deck", tab: "Deck" },
-          { src: "assets/img/projects/concord-way/railing-2.jpg", ratio: 1.3333, caption: "Deck from the Garden", tab: "Garden" },
-          { src: "assets/img/projects/concord-way/railing-1.jpg", ratio: 1.3333, caption: "Deck from the Side Yard", tab: "Side Yard" },
-        ],
-      },
-      { divider: "Finished House" },
-      {
-        layout: "carousel",
-        list: true,
-        mobileSwipe: true,
-        images: [
-          { src: "assets/img/projects/concord-way/exterior-2.jpg", ratio: 1.3285, caption: "Front", tab: "Front" },
-          { src: "assets/img/projects/concord-way/exterior-1.jpg", ratio: 1.3285, caption: "Garage Approach", tab: "Garage" },
-          { src: "assets/img/projects/concord-way/interior-1.jpg", ratio: 1.3333, caption: "Living Room", tab: "Living Room" },
-          { src: "assets/img/projects/concord-way/interior-2.jpg", ratio: 1.3285, caption: "Hall to Dining Room", tab: "Hall" },
-          { src: "assets/img/projects/concord-way/interior-3.jpg", ratio: 1.3285, caption: "Dining Room", tab: "Dining Room" },
-          { src: "assets/img/projects/concord-way/kitchen.jpg", ratio: 1.3285, caption: "Kitchen", tab: "Kitchen" },
+          { src: "assets/img/projects/station-1/b-det-sheet-1.jpg", ratio: 1.351, caption: "Building B Primary Details" },
+          { src: "assets/img/projects/station-1/b-det-sheet-2.jpg", ratio: 1.351, caption: "Building B Additional Details" },
         ],
       },
     ],
@@ -1027,6 +965,71 @@ const PROJECTS = [
           { src: "assets/img/projects/burlingame-adu/m-ba1-2.jpg", ratio: 2.2497, caption: "Main House BA#1: South and West", tab: "Main House BA#1: South and West" },
           { src: "assets/img/projects/burlingame-adu/m-ba2-1.jpg", ratio: 2.2247, caption: "Main House BA#2: North and East", tab: "Main House BA#2: North and East" },
           { src: "assets/img/projects/burlingame-adu/m-ba2-2.jpg", ratio: 2.2247, caption: "Main House BA#2: South and West", tab: "Main House BA#2: South and West" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "concord-way",
+    category: "practice",
+    title: "Concord Way",
+    year: "2024",
+    location: "Burlingame, CA",
+    type: "Single-Family Renovation",
+    status: "Built",
+    strip: "assets/img/projects/concord-way/strip.jpg", // pre-cropped close on one railing panel against the sky
+    stripFocus: "50% 50%",
+    stripMono: true, // shown in black and white so it takes a tint like the others
+    summary: [
+      "Concord Way is the renovation of a classic 1920s home in Burlingame that had fallen into disrepair and needed some love. The work was practical rather than transformative: remodeled bathrooms and a new toilet room, a refreshed kitchen, replacement windows, new paint inside and out, and a rebuilt deck off the back of the house.",
+      "The deck railing served as a crash course in architectural detailing. I had to learn the process of taking an architectural idea and crafting it into a built reality. It began with a pattern, square panels of crossed diagonals set between trimmed posts, which I then translated into a set of instructions a contractor could build from: sections through the post and rail showing how each layer of trim goes together, an enlarged panel with every member dimensioned, and elevations of each run. The finished railing, shown below, was built from those drawings.",
+    ],
+    images: [
+      {
+        layout: "carousel", // drawings: title block and notes cropped off; the sheet's own drawing label stands in for a caption
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/concord-way/plan-1.jpg", ratio: 1.1495, tab: "First Floor" },
+          { src: "assets/img/projects/concord-way/plan-2.jpg", ratio: 1.1495, tab: "Second Floor" },
+        ],
+      },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/concord-way/elev-1.jpg", ratio: 1.2204, tab: "Front & Right" },
+          { src: "assets/img/projects/concord-way/elev-2.jpg", ratio: 1.2204, tab: "Rear & Left" },
+        ],
+      },
+      {
+        divider: "Railing",
+        note: "From drawing to built: the detail sheet issued to the contractor, then the finished railing.",
+      },
+      { src: "assets/img/projects/concord-way/railing-detail.jpg", caption: "Railing Details" },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/concord-way/railing-3.jpg", ratio: 1.3333, caption: "Railing Panel", tab: "Panel" },
+          { src: "assets/img/projects/concord-way/railing-4.jpg", ratio: 1.3285, caption: "Deck", tab: "Deck" },
+          { src: "assets/img/projects/concord-way/railing-2.jpg", ratio: 1.3333, caption: "Deck from the Garden", tab: "Garden" },
+          { src: "assets/img/projects/concord-way/railing-1.jpg", ratio: 1.3333, caption: "Deck from the Side Yard", tab: "Side Yard" },
+        ],
+      },
+      { divider: "Finished House" },
+      {
+        layout: "carousel",
+        list: true,
+        mobileSwipe: true,
+        images: [
+          { src: "assets/img/projects/concord-way/exterior-2.jpg", ratio: 1.3285, caption: "Front", tab: "Front" },
+          { src: "assets/img/projects/concord-way/exterior-1.jpg", ratio: 1.3285, caption: "Garage Approach", tab: "Garage" },
+          { src: "assets/img/projects/concord-way/interior-1.jpg", ratio: 1.3333, caption: "Living Room", tab: "Living Room" },
+          { src: "assets/img/projects/concord-way/interior-2.jpg", ratio: 1.3285, caption: "Hall to Dining Room", tab: "Hall" },
+          { src: "assets/img/projects/concord-way/interior-3.jpg", ratio: 1.3285, caption: "Dining Room", tab: "Dining Room" },
+          { src: "assets/img/projects/concord-way/kitchen.jpg", ratio: 1.3285, caption: "Kitchen", tab: "Kitchen" },
         ],
       },
     ],

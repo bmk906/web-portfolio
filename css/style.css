@@ -675,6 +675,56 @@ html.menu-entering .layout > :not(.menu) {
   margin-top: clamp(32px, 4.5vw, 72px);
 }
 
+.gallery .is-spaced-half {
+  margin-top: clamp(16px, 2.2vw, 36px);
+}
+
+/* roomy (desktop): more space between drawings on a long project page */
+@media (min-width: 761px) {
+  .gallery.is-roomy figure {
+    margin-bottom: clamp(36px, 4.5vw, 64px);
+  }
+}
+
+/* side index (desktop): the page's parts listed under the menu */
+.project-index {
+  position: fixed;
+  left: var(--gutter);
+  z-index: 14;
+}
+
+.project-index ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-index a {
+  display: block;
+  padding: 2px 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  transition: color 0.2s;
+}
+
+.project-index .is-sub a {
+  padding-left: 1.1em;
+  font-weight: 400;
+}
+
+.project-index li:not(.is-sub) + li:not(.is-sub),
+.project-index .is-sub + li:not(.is-sub) {
+  margin-top: 8px;
+}
+
+.project-index a:hover,
+.project-index a.is-active {
+  color: var(--ink);
+}
+
 /* loupe (desktop): a round magnifier that follows the pointer over a dense drawing */
 .loupe {
   position: fixed;
@@ -1046,8 +1096,13 @@ picture {
     margin-top: 16px;
   }
 
+  .gallery .is-spaced-half {
+    margin-top: 8px;
+  }
+
   .loupe,
-  .loupe-hint {
+  .loupe-hint,
+  .project-index {
     display: none;
   }
 

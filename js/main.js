@@ -335,6 +335,8 @@
       }"><svg viewBox="0 0 10 12" aria-hidden="true"><polygon points="${
         dir === "prev" ? "10,0 10,12 0,6" : "0,0 0,12 10,6"
       }"/></svg></button>`;
+    // spaceBefore: true for a new set of drawings, "half" for a related one
+    const spaced = (block) => (block.spaceBefore ? (block.spaceBefore === "half" ? " is-spaced-half" : " is-spaced") : "");
     const carouselHTML = (block) => {
       const slides = block.images
         .map((img, i) => {
@@ -346,7 +348,7 @@
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}${block.alignBottom ? " is-bottom" : ""}${block.loupe ? " has-loupe" : ""}${block.spaceBefore ? " is-spaced" : ""}"${block.id ? ` data-id="${block.id}"` : ""}${
+      <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}${block.alignBottom ? " is-bottom" : ""}${block.loupe ? " has-loupe" : ""}${spaced(block)}"${block.loupe ? ` data-loupe="${block.loupe === true ? 4 : block.loupe}"` : ""}${block.id ? ` data-id="${block.id}"` : ""}${
         block.list ? ` data-list="1"` : ""
       }${block.revealEarly ? ` data-early="${block.alignTo ?? 1}"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
       }${block.width || block.mobileSlide ? ` style="${block.width ? `--stage-w:${block.width};` : ""}${block.mobileSlide ? `--slide-w:${block.mobileSlide}` : ""}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
@@ -362,7 +364,7 @@
         if (block.layout === "carousel") return carouselHTML(block);
         // pan (mobile): one image at a time, enlarged, swiped sideways; follows the carousel named in follows
         if (block.layout === "pan")
-          return `<figure class="gallery-pan mobile-only${block.spaceBefore ? " is-spaced" : ""}" data-follows="${block.follows || ""}" style="--zoom:${block.zoom || 2.5};--pan-ratio:${Math.min(...block.images.map((img) => img.ratio))}"><div class="pan-view">${block.images
+          return `<figure class="gallery-pan mobile-only${spaced(block)}" data-follows="${block.follows || ""}" style="--zoom:${block.zoom || 2.5};--pan-ratio:${Math.min(...block.images.map((img) => img.ratio))}"><div class="pan-view">${block.images
             .map((img, i) => `<img class="pan-img${i ? "" : " is-active"}" src="${asset(img.src)}" alt="${escapeHTML(img.caption || p.title)}" loading="lazy" data-caption="${escapeHTML(img.caption || "")}" style="aspect-ratio:${img.ratio}">`)
             .join("")}</div><figcaption>${escapeHTML(block.label || "Enlarged")}: <span class="pan-name">${escapeHTML(block.images[0].caption || "")}</span>. Swipe to see the rest; keep swiping at the end for the next view</figcaption></figure>`;
         if (block.divider)
@@ -380,7 +382,7 @@
 
         if (!block.layout) {
           // besideText: on desktop a crop of this image sits beside the description instead
-          const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", (block.mobileOnly || block.besideText) && "mobile-only", block.spaceBefore && "is-spaced"].filter(Boolean);
+          const cls = [block.nativeWidth && "is-native", block.hideOnMobile && "hide-mobile", (block.mobileOnly || block.besideText) && "mobile-only", spaced(block).trim()].filter(Boolean);
           const attrs = (cls.length ? ` class="${cls.join(" ")}"` : "") + (block.nativeWidth ? ` style="--native-w:${block.nativeWidth}px"` : "");
           return `<figure${attrs}>${image(block)}${caption(block.caption, block.note, block.captionInset)}${list}</figure>`;
         }
@@ -417,15 +419,61 @@
         <button type="button" class="lede-more" hidden>Read more</button>
         ${besideHTML}
       </header>
-      <div class="gallery">${gallery}</div>
+      <div class="gallery${p.roomy ? " is-roomy" : ""}">${gallery}</div>
       <nav class="pager" aria-label="More projects">
         <a href="project.html?p=${prev.slug}"><span>Previous</span>${escapeHTML(prev.title)}</a>
         <a href="index.html#${p.category}" class="pager-index">Index</a>
         <a href="project.html?p=${next.slug}"><span>Next</span>${escapeHTML(next.title)}</a>
       </nav>`;
 
+    if (p.sideIndex) wireSideIndex(root, p);
     wireCarousels(root);
     wireReadMore(root);
+  }
+
+  /* Side index (desktop, projects with sideIndex): a short list of the page's parts under
+     the menu. Dividers are its headings; blocks with an index name are its entries. It
+     marks the part in view, and a click scrolls there. */
+  function wireSideIndex(root, p) {
+    const blocks = [...root.querySelector(".gallery").children];
+    let inSection = false;
+    const items = p.images
+      .map((block, i) => {
+        if (block.divider) inSection = true;
+        const label = block.divider || block.index;
+        return label ? { label, sub: inSection && !block.divider, el: blocks[i] } : null;
+      })
+      .filter(Boolean);
+    const nav = document.createElement("nav");
+    nav.className = "project-index";
+    nav.setAttribute("aria-label", "On this page");
+    nav.innerHTML = `<ol>${items.map((it, i) => `<li${it.sub ? ' class="is-sub"' : ""}><a href="#" data-i="${i}">${escapeHTML(it.label)}</a></li>`).join("")}</ol>`;
+    document.body.appendChild(nav);
+    const links = [...nav.querySelectorAll("a")];
+    const menu = document.querySelector(".menu");
+
+    links.forEach((a) =>
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 0;
+        const el = items[+a.dataset.i].el;
+        scrollTo({ top: el.getBoundingClientRect().top + scrollY - headerH - 32, behavior: "smooth" });
+      })
+    );
+    const update = () => {
+      nav.style.top = `${menu.getBoundingClientRect().bottom + 24}px`;
+      // the part in view: the last one whose top has passed a third of the way down the screen
+      let at = -1;
+      items.forEach((it, i) => {
+        if (it.el.offsetParent && it.el.getBoundingClientRect().top < innerHeight / 3) at = i;
+      });
+      let head = at;
+      while (head > 0 && items[head].sub) head--;
+      links.forEach((a, i) => a.classList.toggle("is-active", i === at || (i === head && items[at] && items[at].sub)));
+    };
+    update();
+    addEventListener("scroll", update, { passive: true });
+    addEventListener("resize", update);
   }
 
   /* Mobile: the description starts collapsed (a few lines fading out) with a Read more
@@ -508,7 +556,8 @@
         const appear = innerHeight * 0.75; // plan top position when the selector shows up
         const centred = innerHeight / 2 - s.height / 2; // plan top position when centred
         const t = Math.min(1, Math.max(0, (appear - s.top) / (appear - centred)));
-        const floor = menu.getBoundingClientRect().bottom + 28; // just below the menu
+        const index = document.querySelector(".project-index");
+        const floor = (index && getComputedStyle(index).display !== "none" ? index : menu).getBoundingClientRect().bottom + 28; // just below the menu (and its side index)
         let top = s.top + t * (s.height / 2 - h / 2);
         if (early) {
           top = Math.min(top, innerHeight / 2 - h / 2);
@@ -637,7 +686,7 @@
         const img = e.target.closest(".carousel-slide.is-active img");
         if (!img || !matchMedia("(min-width: 761px)").matches) return loupe.classList.remove("is-visible");
         const r = img.getBoundingClientRect();
-        const zoom = Math.min(4, Math.max(2, img.naturalWidth / r.width)); // 4x: notes readable, still some context
+        const zoom = Math.min(+stage.closest(".has-loupe").dataset.loupe || 4, Math.max(2, img.naturalWidth / r.width)); // never past the file's own resolution
         const half = loupe.offsetWidth / 2;
         loupe.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
         loupe.style.backgroundSize = `${r.width * zoom}px ${r.height * zoom}px`;
