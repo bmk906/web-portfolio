@@ -1002,10 +1002,10 @@ const PROJECTS = [
         list: true,
         mobileSwipe: true,
         images: [
-          { src: "assets/img/projects/concord-way/railing-3.jpg", ratio: 1.3333, caption: "Railing Panel", tab: "Panel" },
-          { src: "assets/img/projects/concord-way/railing-4.jpg", ratio: 1.3285, caption: "Deck", tab: "Deck" },
           { src: "assets/img/projects/concord-way/railing-2.jpg", ratio: 1.3333, caption: "Deck from the Garden", tab: "Garden" },
           { src: "assets/img/projects/concord-way/railing-1.jpg", ratio: 1.3333, caption: "Deck from the Side Yard", tab: "Side Yard" },
+          { src: "assets/img/projects/concord-way/railing-3.jpg", ratio: 1.3333, caption: "Railing Panel", tab: "Panel" },
+          { src: "assets/img/projects/concord-way/railing-4.jpg", ratio: 1.3285, caption: "Deck", tab: "Deck" },
         ],
       },
       { divider: "Finished House" },
