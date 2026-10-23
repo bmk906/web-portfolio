@@ -55,7 +55,7 @@
               A carousel can take arrowsOut: true (web) to fill the column, arrows in the margins.
               A pan can leave out follows: it then stands alone, swiped from one image to the next.
               Carousels, pans and single images can take spaceBefore / spaceAfter: true for extra
-              room above / below (a new set of drawings), "half" for less, "large" for more.
+              room above / below (a new set of drawings), "half" for less, "large" for more (spaceAfter also "medium").
               sideIndex: true (project, desktop) lists the page's dividers under the menu, plus
               any block with index: "Name"; roomy: true (project, desktop) spaces drawings out.
               Any image can take mobileSrc: "x.jpg" (+ mobileRatio) to use a different file on phones.
@@ -78,7 +78,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 38;
+const IMAGE_VERSION = 39;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -546,7 +546,7 @@ const PROJECTS = [
       {
         layout: "carousel", // one elevation per slide at one scale, the F.F. 0 level line at the same height on every slide
         spaceBefore: "large", // set apart a little more
-        spaceAfter: "large",
+        spaceAfter: "medium",
         mobileSwipe: true,
         list: true,
         arrowsOut: true,

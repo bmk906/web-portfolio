@@ -695,6 +695,10 @@ html.menu-entering .layout > :not(.menu) {
   margin-bottom: clamp(92px, 11.5vw, 176px);
 }
 
+.gallery figure.is-after-medium {
+  margin-bottom: clamp(76px, 9.5vw, 146px);
+}
+
 /* side index (desktop): the page's parts listed under the menu */
 .project-index {
   position: fixed;
@@ -1077,6 +1081,10 @@ picture {
 
   .gallery figure.is-after-large {
     margin-bottom: 44px;
+  }
+
+  .gallery figure.is-after-medium {
+    margin-bottom: 36px;
   }
 
   .project-index {
