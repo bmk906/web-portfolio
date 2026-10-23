@@ -709,9 +709,9 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 .project-index a {
-  display: block;
-  padding: 2px 0;
+  display: block; /* stacked tight, like the menu and the level selectors */
   font-size: 0.72rem;
+  line-height: 1.25;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -722,11 +722,6 @@ html.menu-entering .layout > :not(.menu) {
 .project-index .is-sub a {
   padding-left: 1.1em;
   font-weight: 400;
-}
-
-.project-index li:not(.is-sub) + li:not(.is-sub),
-.project-index .is-sub + li:not(.is-sub) {
-  margin-top: 8px;
 }
 
 .project-index a:hover,
