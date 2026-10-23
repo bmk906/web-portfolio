@@ -58,6 +58,8 @@
               room above / below (a new set of drawings), "half" for less, "large" for more (spaceAfter also "medium").
               sideIndex: true (project, desktop) lists the page's dividers under the menu, plus
               any block with index: "Name"; roomy: true (project, desktop) spaces drawings out.
+  stripWash   true: a line drawing's white paper is greyed under the tint, so the strip
+              reads as a field of colour (home page)
               Any image can take mobileSrc: "x.jpg" (+ mobileRatio) to use a different file on phones.
               { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
               with an optional description under it.
@@ -482,6 +484,7 @@ const PROJECTS = [
     status: "Construction Documents",
     strip: "assets/img/projects/station-1/strip.jpg", // pre-cropped on the hose tower in the early east sketch
     stripFocus: "50% 50%",
+    stripWash: true, // paper greyed so the tint fills the strip (remove to go back to the light version)
     stripMono: true,
     sideIndex: true, // desktop: the page's parts listed under the menu
     roomy: true, // desktop: more space between drawings
@@ -725,6 +728,7 @@ const PROJECTS = [
     status: "Schematic Design",
     strip: "assets/img/projects/hummingbird/strip.jpg", // pre-cropped on the tall stair window of the front elevation, shifted left (backups: strip-stair-centred.jpg; strip-gable.jpg, the right elevation's glass gable)
     stripFocus: "50% 50%",
+    stripWash: true, // paper greyed so the tint fills the strip (remove to go back to the light version)
     summary: [
       "Hummingbird is a small compound tucked deep in the Santa Cruz Mountains: a main residence, a barn for gathering and creative work like painting and crafts, and a cottage for guests. The owners named it Hummingbird because they wanted the property to feel like a place where hummingbirds gather.",
       "The main house centers on a living room whose doors open out onto a terrace. Around it are the main bedroom and bathroom, a guest room, and a library with a hidden bookshelf door.",
@@ -839,6 +843,7 @@ const PROJECTS = [
     status: "Under Construction",
     strip: "assets/img/projects/burlingame-adu/strip.jpg", // pre-cropped from the chosen scheme's sketch (option 1), on the front door
     stripFocus: "50% 50%",
+    stripWash: true, // paper greyed so the tint fills the strip (remove to go back to the light version)
     stripMono: true,
     summary: [
       "Part of a larger project to create a new dwelling unit in the backyard, a new garage, and a renovation of the existing bathrooms. We explored a multitude of options, including a one story scheme and two different two story schemes, and settled on a two story ADU to preserve as much yard space as possible.",

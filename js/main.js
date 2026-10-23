@@ -53,6 +53,8 @@
     return deck.pop();
   }
   const tinted = (p) => p.stripTint !== false && !/.svg$/.test(p.strip);
+  // stripWash: a drawing on white paper gets its paper greyed (.strip-wash) so the tint
+  // fills the whole strip, not just the lines
   // stripMask: the colour goes only where the mask is opaque, as a flat colour, cropped
   // the same way as the strip image
   function tintHTML(p, tint) {
@@ -93,6 +95,7 @@
           <a class="strip" href="project.html?p=${p.slug}" aria-label="${escapeHTML(p.title)}">
             <span class="strip-frame">
               <img src="${asset(p.strip)}" alt="" loading="lazy" style="${stripStyle(p)}">
+              ${tint && p.stripWash ? `<span class="strip-wash"></span>` : ""}
               ${tint ? tintHTML(p, tint) : ""}
               <span class="strip-title" aria-hidden="true">${escapeHTML(p.shortTitle || p.title)}</span>
             </span>

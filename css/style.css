@@ -362,6 +362,17 @@ html.menu-entering .layout > :not(.menu) {
   isolation: isolate; /* blend only with the strip image */
 }
 
+/* stripWash: white paper taken down to a light grey under the tint, so a line drawing
+   reads as a field of colour like the renders (fades with the tint on hover) */
+.strip-wash {
+  position: absolute;
+  inset: 0;
+  background: #c6c6c6;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+
 .strip-tint {
   position: absolute;
   inset: 0;
@@ -381,12 +392,14 @@ html.menu-entering .layout > :not(.menu) {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .strip:hover .strip-tint {
+  .strip:hover .strip-tint,
+  .strip:hover .strip-wash {
     opacity: 0;
   }
 }
 
-.strip:focus-visible .strip-tint {
+.strip:focus-visible .strip-tint,
+.strip:focus-visible .strip-wash {
   opacity: 0;
 }
 
