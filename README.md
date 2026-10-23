@@ -50,6 +50,34 @@ proofreads every change.
 - **Mobile descriptions** collapse to seven lines with a fade and a Read more button.
 - **Captions** must line up with the visible edge of the drawing (crop to content, or
   `captionInset`) and sit close under images — Ben is particular about this.
+- **Carousels of drawings share one scale and one crop window** (registered on grid lines
+  or level lines), so walls and floors hold still between slides. A smaller set at the
+  same scale is centred on a canvas as wide as the largest (e.g. Station 1 elevations,
+  details, interiors, the Building B sketches).
+- **Home page switch** between categories: a category un-greys once only 20% of the
+  strips above it still show below the header (`STRIPS_LEFT` in `main.js`).
+- **Options added for Station 1** (documented in the `projects.js` comment block, usable
+  anywhere): `sideIndex` (desktop list of the page's dividers under the menu; Station 1
+  shows Site / Building M / Building B only), `roomy` (more space between drawings,
+  desktop), `spaceBefore` / `spaceAfter` (`true`, `"half"`, `"large"`; after also
+  `"medium"`), a `pan` with no `follows` (mobile: whole detail sheets swiped across),
+  `stripWash` (see the open decision below). A hover magnifier ("loupe") was tried on the
+  detail sheets and removed — Ben: viewers look at the drawings as pictures, they aren't
+  plan checkers.
+
+## Practice drawings: privacy and credit
+- Crop sheets to the drawing area (no title block, stamp, notes column, client name or
+  address). Paint out addresses, house numbers, street names, permit numbers and client
+  names on signs (e.g. Station 1's district name on the East elevation sign).
+- The firm isn't named on project pages (the resume says where Ben works).
+- Hummingbird is on hold with the owners; never say so — its status reads
+  "Schematic Design".
+- Station 1's colour elevation sketches weren't drawn by Ben: they're credited
+  ("Early Sketch by Project Lead: …"), kept small (60% wide) and placed after each
+  building's drawn elevations rather than leading the section.
+- Statuses go by phase: Station 1 "Construction Documents" (change to "Under
+  Construction" when it breaks ground), Hummingbird "Schematic Design", Burlingame ADU
+  "Under Construction", Concord Way and Hillsborough "Built".
 
 ## Image processing (Windows, no Python, no ImageMagick)
 - Done with PowerShell + `System.Drawing` scripts (crop by pixel/fraction, resize, save
@@ -65,6 +93,14 @@ Take headless Edge screenshots and look at them:
 `msedge.exe --headless=new --disable-gpu --hide-scrollbars --window-size=1440,1100 --virtual-time-budget=3000 --screenshot=out.png "file:///C:/Users/bmk90/web-portfolio/project.html?p=<slug>"`
 Mobile: use a ~500px-wide window (headless Edge won't go narrower, so the right edge of
 very narrow shots is clipped — that's the tool, not the site).
+Scrolled screenshots come out blank in headless Edge: use a very tall window instead
+(e.g. 1440×13000), or for scroll behaviour, a throwaway copy of the page with a script
+that scrolls with `scrollTo({ top, behavior: "instant" })` and writes results into the
+DOM, read back with `--dump-dom`.
+
+In PowerShell image scripts, variable names are case-insensitive and dynamically scoped:
+a local `$k`, `$w` or `$h` inside a helper silently replaces `$K`, `$W`, `$H` used by the
+functions it calls. Use distinct names.
 
 ## Publishing changes
 Commit and push to `main`; Ben checks the live site with Ctrl+F5.
@@ -80,12 +116,37 @@ Use `sed` in Bash or a proper editor.
 ## Status and open items
 - Academic: all six done (A.01 Sinusoidal, A.02 North Beach Youth Center, A.03 Ziggurat
   of Leaves, A.04 Monti Prenestini, A.05 Wall of Flutes, A.06 Compression).
-- Practice: two placeholders; Ben is gathering drawings from work.
+- Practice: all five done (P.01 Station 1, P.02 Hummingbird, P.03 Burlingame ADU,
+  P.04 Concord Way, P.05 Hillsborough).
+- Next (Oct 2026): Ben is sending the site to friends, family and an architectural
+  headhunter (through his brother) for critique of the site and resume. The resume PDF
+  link waits until after that critique. He'll also reread every description.
+
+### Open decision: how the practice strips look (Oct 2026)
+Ben is torn between two looks and is showing screenshots of both to people. Both are a
+one-line switch:
+- **Light (current):** the three drawing strips (Station 1, Hummingbird, Burlingame
+  ADU) are line drawings on white paper, so the tint only lands on the lines. They read
+  pale and airy next to the two photo strips (Concord Way, Hillsborough), which fill the
+  frame. Pro: lightness, "pizzazz", the drawings read as drawings. Con: the row is less
+  cohesive than the academic row, where every strip is a full field of colour.
+- **Washed:** `stripWash: true` greys the paper under the tint (a `.strip-wash` layer,
+  multiply, #c6c6c6, fades on hover with the tint), so all five read as colour fields.
+  Pro: cohesive with the photos and with the academic row. Con: loses some of the
+  sparkle. To switch it on, uncomment `// stripWash: true` on those three entries in
+  `projects.js`; the strength is the one grey value in `.strip-wash` in `style.css`.
+- Separate fix already live: the **Concord Way strip** was muddy under the darker tints
+  (blue, green, violet) because its blue sky went medium-dark grey in black and white.
+  `strip.jpg` is now made about 45% from the blue channel, so the sky is lighter than
+  the railing and the warm tints keep their bold sky. The original is
+  `concord-way/strip-color.jpg`; a stronger version (85% blue) made the warm tints
+  pastel and was rejected.
 - Ben is still deciding on the beside-text site plan treatment (square, 2:3 and 3:4 were
   tried; square with the plan starting at the first line of text is current).
 - Wall of Flutes: "mirror 5" is the interior render; its board images still carry their
   own titles and the "ARC 583 / Benjamin Klinger" header (02) — could be painted out.
-- Resume PDF download link not added yet; where to put his email is undecided;
-  keep or drop Inter on the desktop resume is undecided.
+- Resume PDF download link not added yet (after the headhunter's critique); where to put
+  his email is undecided; keep or drop Inter on the desktop resume is undecided.
+- Still to decide: renaming "Concord Way" (a street name) and "Burlingame ADU".
 - If the site moves to a custom domain, update `og:url` and `og:image` in both HTML files
   (and re-scrape with Facebook's Sharing Debugger).
