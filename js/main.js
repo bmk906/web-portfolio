@@ -335,8 +335,11 @@
       }"><svg viewBox="0 0 10 12" aria-hidden="true"><polygon points="${
         dir === "prev" ? "10,0 10,12 0,6" : "0,0 0,12 10,6"
       }"/></svg></button>`;
-    // spaceBefore: true for a new set of drawings, "half" for a related one
-    const spaced = (block) => (block.spaceBefore ? (block.spaceBefore === "half" ? " is-spaced-half" : " is-spaced") : "");
+    // spaceBefore / spaceAfter: true for a new set of drawings, "half" for a related one,
+    // "large" to set a set apart
+    const size = (v) => (v === true ? "" : `-${v}`);
+    const spaced = (block) =>
+      (block.spaceBefore ? ` is-spaced${size(block.spaceBefore)}` : "") + (block.spaceAfter ? ` is-after${size(block.spaceAfter)}` : "");
     const carouselHTML = (block) => {
       const slides = block.images
         .map((img, i) => {
@@ -348,13 +351,13 @@
         .join("");
       const names = block.images.map((img) => img.tab || img.caption);
       return `
-      <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}${block.alignBottom ? " is-bottom" : ""}${block.loupe ? " has-loupe" : ""}${spaced(block)}"${block.loupe ? ` data-loupe="${block.loupe === true ? 4 : block.loupe}"` : ""}${block.id ? ` data-id="${block.id}"` : ""}${
+      <figure class="gallery-carousel${block.arrowsOut ? " is-arrows-out" : ""}${block.hideOnMobile ? " hide-mobile" : ""}${block.mobileOnly ? " mobile-only" : ""}${block.mobileSwipe ? " is-swipe" : ""}${block.alignBottom ? " is-bottom" : ""}${spaced(block)}"${block.id ? ` data-id="${block.id}"` : ""}${
         block.list ? ` data-list="1"` : ""
       }${block.revealEarly ? ` data-early="${block.alignTo ?? 1}"` : ""}${block.mobileSwipe ? ` data-swipe="1"` : ""
       }${block.width || block.mobileSlide ? ` style="${block.width ? `--stage-w:${block.width};` : ""}${block.mobileSlide ? `--slide-w:${block.mobileSlide}` : ""}"` : ""} data-tabs="${escapeHTML(JSON.stringify(names))}">
         <div class="carousel-body">${arrow("prev")}<div class="carousel-stage">${slides}</div>${arrow("next")}</div>${
           block.mobileSwipe ? `<div class="carousel-dots" aria-hidden="true">${block.images.map(() => "<span></span>").join("")}</div>` : ""
-        }${block.loupe ? `<p class="loupe-hint">Hover to enlarge</p>` : ""}
+        }
       </figure>`;
     };
 
@@ -540,8 +543,7 @@
         })
       );
       carousel.querySelectorAll(".carousel-arrow").forEach((a) => a.addEventListener("click", () => show(current + +a.dataset.step)));
-      // (a magnified carousel is read by hovering, so a click there doesn't turn the page)
-      if (!carousel.classList.contains("has-loupe")) stage.addEventListener("click", () => show(current + 1));
+      stage.addEventListener("click", () => show(current + 1));
 
       // Appears level with the top of the plan, slides to the plan's middle by the time the
       // plan is centred on screen, then holds there until the menu reaches it.
@@ -675,29 +677,6 @@
         else settle();
       });
     });
-
-    // loupe (desktop): a round magnifier follows the pointer over the drawing in view,
-    // showing the image at its full resolution, for sheets too dense to read at page size
-    const loupe = document.createElement("div");
-    loupe.className = "loupe";
-    document.body.appendChild(loupe);
-    root.querySelectorAll(".gallery-carousel.has-loupe .carousel-stage").forEach((stage) => {
-      const move = (e) => {
-        const img = e.target.closest(".carousel-slide.is-active img");
-        if (!img || !matchMedia("(min-width: 761px)").matches) return loupe.classList.remove("is-visible");
-        const r = img.getBoundingClientRect();
-        const zoom = Math.min(+stage.closest(".has-loupe").dataset.loupe || 4, Math.max(2, img.naturalWidth / r.width)); // never past the file's own resolution
-        const half = loupe.offsetWidth / 2;
-        loupe.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
-        loupe.style.backgroundSize = `${r.width * zoom}px ${r.height * zoom}px`;
-        loupe.style.backgroundPosition = `${half - (e.clientX - r.left) * zoom}px ${half - (e.clientY - r.top) * zoom}px`;
-        loupe.style.transform = `translate(${e.clientX - half}px, ${e.clientY - half}px)`;
-        loupe.classList.add("is-visible");
-      };
-      stage.addEventListener("mousemove", move);
-      stage.addEventListener("mouseleave", () => loupe.classList.remove("is-visible"));
-    });
-    window.addEventListener("scroll", () => loupe.classList.remove("is-visible"), { passive: true });
 
     // desktop: clicking a linked plan opens that level in its carousel and brings it into view
     root.querySelectorAll("[data-carousel]").forEach((el) =>

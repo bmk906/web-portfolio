@@ -53,11 +53,11 @@
               row can take maxWidth: "930px" (desktop) so a small source is never blown up.
               row can take mobileRow: true to stay side by side on phones.
               A carousel can take arrowsOut: true (web) to fill the column, arrows in the margins.
-              A carousel can take loupe: true (web): a magnifier follows the pointer over the
-              drawing, for sheets too dense to read at page size (a click no longer turns it).
               A pan can leave out follows: it then stands alone, swiped from one image to the next.
-              Carousels, pans and single images can take spaceBefore: true for extra room above
-              (a new set of drawings: plans, elevations, details).
+              Carousels, pans and single images can take spaceBefore / spaceAfter: true for extra
+              room above / below (a new set of drawings), "half" for less, "large" for more.
+              sideIndex: true (project, desktop) lists the page's dividers under the menu, plus
+              any block with index: "Name"; roomy: true (project, desktop) spaces drawings out.
               Any image can take mobileSrc: "x.jpg" (+ mobileRatio) to use a different file on phones.
               { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
               with an optional description under it.
@@ -518,7 +518,6 @@ const PROJECTS = [
       { divider: "Building M" },
       {
         layout: "carousel", // early elevation sketches
-        index: "Early Sketches",
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -530,7 +529,6 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // all six sheets cut with one window on the grid lines, so walls stay put between slides
-        index: "Plans",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -547,8 +545,8 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // one elevation per slide at one scale, the F.F. 0 level line at the same height on every slide
-        index: "Elevations",
-        spaceBefore: true,
+        spaceBefore: "large", // set apart a little more
+        spaceAfter: "large",
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -563,7 +561,6 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // interior elevations, two rows of a sheet per slide, all at one scale
-        index: "Interiors",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -582,7 +579,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // the kitchen's interior elevations (drawn at a larger scale), one row per slide
-        spaceBefore: "half",
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -594,17 +591,15 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // A7.1 and A7.2, each whole sheet on one slide; hover to read
-        index: "Details",
+        layout: "carousel", // A7.1 and A7.2, each whole sheet on one slide
         spaceBefore: true,
         hideOnMobile: true,
-        loupe: 6, // the files are 4800 wide, so 6x is still sharp
         list: true,
         arrowsOut: true,
         width: "90%",
         images: [
-          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.351, tab: "Building M Primary Details" },
-          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.351, tab: "Shop Wing Primary Details" },
+          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.351, tab: "Day Room Details" },
+          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.351, tab: "Shop Wing Details" },
         ],
       },
       {
@@ -613,8 +608,8 @@ const PROJECTS = [
         label: "Details",
         zoom: 2.2,
         images: [
-          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.351, caption: "Building M Primary Details" },
-          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.351, caption: "Shop Wing Primary Details" },
+          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.351, caption: "Day Room Details" },
+          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.351, caption: "Shop Wing Details" },
         ],
       },
       {
@@ -638,11 +633,10 @@ const PROJECTS = [
           { src: "assets/img/projects/station-1/m-add-exit.jpg", ratio: 2.454, caption: "Training Room Exit" },
         ],
       },
-      { src: "assets/img/projects/station-1/m-section-sketch.jpg", index: "Section Sketch" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
+      { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
       { divider: "Building B" },
       {
         layout: "carousel", // early elevation sketches
-        index: "Early Sketches",
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -655,7 +649,6 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // one window on the grid lines (the porch part plan under it on A2.3 left out)
-        index: "Plans",
         spaceBefore: true,
         mobileSwipe: true,
         list: true,
@@ -669,8 +662,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // same scale as Building M's elevations; the El. 236.25 level line at the same height on every slide
-        index: "Elevations",
-        spaceBefore: true,
+        spaceBefore: "large",
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -685,8 +677,8 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // interior elevations, up to two rows of a sheet per slide, all at one scale
-        index: "Interiors",
         spaceBefore: true,
+        spaceAfter: "large",
         mobileSwipe: true,
         list: true,
         alignBottom: true,
@@ -700,11 +692,9 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // A7.4 and A7.5, each whole sheet on one slide; hover to read
-        index: "Details",
+        layout: "carousel", // A7.4 and A7.5, each whole sheet on one slide
         spaceBefore: true,
         hideOnMobile: true,
-        loupe: 6, // the files are 4800 wide, so 6x is still sharp
         list: true,
         arrowsOut: true,
         width: "90%",
