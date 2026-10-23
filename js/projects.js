@@ -73,7 +73,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 35;
+const IMAGE_VERSION = 36;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -471,10 +471,195 @@ const PROJECTS = [
     slug: "station-1",
     category: "practice",
     title: "Station 1",
-    strip: "assets/img/placeholder-1.svg",
+    year: "2026",
+    location: "Sonoma County, CA",
+    type: "Civic",
+    status: "Ongoing",
+    strip: "assets/img/projects/station-1/strip.jpg", // pre-cropped on the hose tower in the early east sketch
     stripFocus: "50% 50%",
-    summary: "Placeholder description.",
-    images: [{ src: "assets/img/placeholder-1.svg" }],
+    stripMono: true,
+    summary: [
+      "Station 1 is a multi-phase renovation of a working firehouse in Sonoma County. The fire district covers a rural area that is critically at risk of wildfire, which makes good forestry and a well equipped fire department extremely important. The existing station suffers from limited sleeping quarters, no proper lobby or entrance, and a neglected, unpleasant breakroom for the firefighters.",
+      "We are adding a new wing with a day room and an upstairs theater room, and building a new lobby onto the front with glass storefront windows. The existing fire pole moves into the lobby to form a sort of museum area. We believe a firehouse is essentially the public face of government in a small town, and the entry should reflect that. Upstairs is completely rearranged to go from three dorm rooms to six, meeting the district's increased demand for staffing, and the admin area is reorganized into a usable chief's office, conference room, and dedicated admin offices. The kitchen is being renovated as well, and at the apparatus bay we are building an entire new level on top of the existing workshop and storage wing.",
+      "At the back of the site, a completely new building will house a gym, sauna, records room, and storage room, along with a garage for two new vehicles. The project is built in two phases so the station can keep running throughout. Phase 1 is the back building (Building B) and the second floor over the shop wing. Phase 2 is all of the work on the main firehouse (Building M), during which the firefighters live in temporary housing inside Building B and still have access to the apparatus bay.",
+    ],
+    images: [
+      // drawings: title blocks and notes cropped off; street names, permit numbers and the district's name on the sign painted out
+      {
+        layout: "carousel", // construction management plans, which double as the site plans: one window, so the site stays put
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/site-phase-1.jpg", ratio: 1.5052, tab: "Phase 1" },
+          { src: "assets/img/projects/station-1/site-phase-2.jpg", ratio: 1.5052, tab: "Phase 2" },
+        ],
+      },
+      {
+        layout: "carousel", // enlarged site plans, west and east halves at the same scale
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        width: "95%", // a little smaller so it fits a 14" laptop screen
+        images: [
+          { src: "assets/img/projects/station-1/site-dev-west.jpg", ratio: 1.128, tab: "West" },
+          { src: "assets/img/projects/station-1/site-dev-east.jpg", ratio: 1.128, tab: "East" },
+        ],
+      },
+      { src: "assets/img/projects/station-1/landscape.jpg" },
+      { divider: "Building M" },
+      {
+        layout: "carousel", // early elevation sketches
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/sketch-m-east.jpg", ratio: 2.608, caption: "Early Sketch: East", tab: "East" },
+          { src: "assets/img/projects/station-1/sketch-m-north.jpg", ratio: 3.3058, caption: "Early Sketch: North", tab: "North" },
+        ],
+      },
+      {
+        layout: "carousel", // all six sheets cut with one window on the grid lines, so walls stay put between slides
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        width: "95%",
+        images: [
+          { src: "assets/img/projects/station-1/m-plan-ground.jpg", ratio: 1.126, tab: "Ground Floor" },
+          { src: "assets/img/projects/station-1/m-plan-second.jpg", ratio: 1.126, tab: "Second Floor" },
+          { src: "assets/img/projects/station-1/m-ceiling-ground.jpg", ratio: 1.126, tab: "Ground Ceiling" },
+          { src: "assets/img/projects/station-1/m-ceiling-second.jpg", ratio: 1.126, tab: "Second Ceiling" },
+          { src: "assets/img/projects/station-1/m-roof.jpg", ratio: 1.126, tab: "Roof" },
+          { src: "assets/img/projects/station-1/m-roof-flat.jpg", ratio: 1.126, tab: "Flat Roof" },
+        ],
+      },
+      {
+        layout: "carousel", // one elevation per slide at one scale, the F.F. 0 level line at the same height on every slide
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/m-elev-east.jpg", ratio: 3.3403, tab: "East" },
+          { src: "assets/img/projects/station-1/m-elev-east-part.jpg", ratio: 3.3403, tab: "East, Part" },
+          { src: "assets/img/projects/station-1/m-elev-north.jpg", ratio: 3.3403, tab: "North" },
+          { src: "assets/img/projects/station-1/m-elev-west.jpg", ratio: 3.3403, tab: "West" },
+          { src: "assets/img/projects/station-1/m-elev-west-shop.jpg", ratio: 3.3403, tab: "West, Shop Wing" },
+          { src: "assets/img/projects/station-1/m-elev-south.jpg", ratio: 3.3403, tab: "South" }, // from A4.2
+        ],
+      },
+      {
+        layout: "carousel", // interior elevations, one sheet per slide at one scale (the kitchen is drawn at twice the scale)
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/m-int-day-lobby.jpg", ratio: 1.3502, tab: "Day Room & Lobby" },
+          { src: "assets/img/projects/station-1/m-int-admin.jpg", ratio: 1.3196, tab: "Admin" },
+          { src: "assets/img/projects/station-1/m-int-kitchen.jpg", ratio: 1.3468, tab: "Kitchen" },
+          { src: "assets/img/projects/station-1/m-int-second.jpg", ratio: 1.4134, tab: "Second Floor" },
+          { src: "assets/img/projects/station-1/m-int-dorm-bath.jpg", ratio: 1.3356, tab: "Dorms & Baths" },
+        ],
+      },
+      {
+        layout: "carousel", // A7.1 and A7.2 cut into columns of details that stack on one another, rows kept level
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        width: "55%",
+        images: [
+          { src: "assets/img/projects/station-1/m-det-1.jpg", ratio: 0.6047, tab: "Details 1, 5, 9" },
+          { src: "assets/img/projects/station-1/m-det-2.jpg", ratio: 0.6047, tab: "Details 2, 6" },
+          { src: "assets/img/projects/station-1/m-det-3.jpg", ratio: 0.6047, tab: "Details 3, 7, 11" },
+          { src: "assets/img/projects/station-1/m-det-4.jpg", ratio: 0.6047, tab: "Details 4, 8, 12" },
+          { src: "assets/img/projects/station-1/m-det-5.jpg", ratio: 0.6047, tab: "Shop Wing 1, 3, 6, 9" },
+          { src: "assets/img/projects/station-1/m-det-6.jpg", ratio: 0.6047, tab: "Shop Wing 4, 7, 10" },
+          { src: "assets/img/projects/station-1/m-det-7.jpg", ratio: 0.6047, tab: "Shop Wing 2, 5, 8, 11" },
+        ],
+      },
+      {
+        layout: "carousel", // A7.3: the balcony details and the training room exit (split in two), all at one scale
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        width: "60%",
+        images: [
+          { src: "assets/img/projects/station-1/m-add-7.jpg", ratio: 1.2432, tab: "Balcony Edge" },
+          { src: "assets/img/projects/station-1/m-add-8.jpg", ratio: 1.3021, tab: "Balcony at Wall" },
+          { src: "assets/img/projects/station-1/m-add-12a.jpg", ratio: 1.4854, tab: "Training Room Exit 1" },
+          { src: "assets/img/projects/station-1/m-add-12b.jpg", ratio: 1.5178, tab: "Training Room Exit 2" },
+        ],
+      },
+      { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level
+      { divider: "Building B" },
+      {
+        layout: "carousel", // early elevation sketches
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/sketch-b-east.jpg", ratio: 3.4302, caption: "Early Sketch: East", tab: "East" },
+          { src: "assets/img/projects/station-1/sketch-b-south.jpg", ratio: 2.7534, caption: "Early Sketch: South", tab: "South" },
+          { src: "assets/img/projects/station-1/sketch-b-north.jpg", ratio: 2.4177, caption: "Early Sketch: North", tab: "North" },
+        ],
+      },
+      {
+        layout: "carousel", // one window on the grid lines (the porch part plan under it on A2.3 left out)
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/b-plan.jpg", ratio: 1.5052, tab: "Floor" },
+          { src: "assets/img/projects/station-1/b-clerestory.jpg", ratio: 1.5052, tab: "Clerestory" },
+          { src: "assets/img/projects/station-1/b-ceiling.jpg", ratio: 1.5052, tab: "Ceiling" },
+          { src: "assets/img/projects/station-1/b-roof.jpg", ratio: 1.5052, tab: "Roof" },
+        ],
+      },
+      {
+        layout: "carousel", // same scale as Building M's elevations; the El. 236.25 level line at the same height on every slide
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        width: "78.2%",
+        images: [
+          { src: "assets/img/projects/station-1/b-elev-east.jpg", ratio: 3.6171, tab: "East" },
+          { src: "assets/img/projects/station-1/b-elev-north.jpg", ratio: 3.6171, tab: "North" },
+          { src: "assets/img/projects/station-1/b-elev-west.jpg", ratio: 3.6171, tab: "West" },
+          { src: "assets/img/projects/station-1/b-elev-south.jpg", ratio: 3.6171, tab: "South" },
+          { src: "assets/img/projects/station-1/b-elev-south-part.jpg", ratio: 3.6171, tab: "South, Part" },
+        ],
+      },
+      {
+        layout: "carousel", // interior elevations, one sheet per slide at one scale
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/b-int-exercise.jpg", ratio: 1.3617, tab: "Exercise" },
+          { src: "assets/img/projects/station-1/b-int-warehouse.jpg", ratio: 1.6495, tab: "Records & Storage" },
+          { src: "assets/img/projects/station-1/b-int-garage.jpg", ratio: 1.6503, tab: "Garage & Office" },
+        ],
+      },
+      {
+        layout: "carousel", // A7.4 and A7.5 cut into columns, same as Building M's
+        mobileSwipe: true,
+        list: true,
+        arrowsOut: true,
+        width: "57.1%", // matches Building M's detail scale
+        images: [
+          { src: "assets/img/projects/station-1/b-det-1.jpg", ratio: 0.6284, tab: "Details 3, 5, 6, 8" },
+          { src: "assets/img/projects/station-1/b-det-2.jpg", ratio: 0.6284, tab: "Details 1, 4, 9" },
+          { src: "assets/img/projects/station-1/b-det-3.jpg", ratio: 0.6284, tab: "Details 2, 7, 18, 24" },
+          { src: "assets/img/projects/station-1/b-det-4.jpg", ratio: 0.6284, tab: "Details 1, 4, 7, 8, 11, 12" },
+          { src: "assets/img/projects/station-1/b-det-5.jpg", ratio: 0.6284, tab: "Details 2, 9, 9a" },
+          { src: "assets/img/projects/station-1/b-det-6.jpg", ratio: 0.6284, tab: "Details 3, 10, 15" },
+        ],
+      },
+    ],
   },
   {
     slug: "concord-way",
