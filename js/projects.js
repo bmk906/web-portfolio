@@ -73,7 +73,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 34;
+const IMAGE_VERSION = 35;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -566,6 +566,17 @@ const PROJECTS = [
         images: [
           { src: "assets/img/projects/hummingbird/plan-first.jpg", ratio: 1.1883, tab: "First Floor" },
           { src: "assets/img/projects/hummingbird/plan-second.jpg", ratio: 1.1883, tab: "Second Floor" },
+        ],
+      },
+      {
+        layout: "carousel", // hand sketches of two elevations, cut with one window from the same sheet so they share a scale
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/hummingbird/sketch-front.jpg", ratio: 3.08, caption: "Sketch: Front", captionInset: "6%", tab: "Front Sketch" },
+          { src: "assets/img/projects/hummingbird/sketch-right.jpg", ratio: 3.08, caption: "Sketch: Right", captionInset: "7%", tab: "Right Sketch" },
         ],
       },
       {
