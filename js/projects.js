@@ -78,7 +78,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 39;
+const IMAGE_VERSION = 40;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -517,11 +517,12 @@ const PROJECTS = [
       { src: "assets/img/projects/station-1/landscape.jpg" },
       { divider: "Building M" },
       {
-        layout: "carousel", // early elevation sketches
+        layout: "carousel", // early elevation sketches (not his own drawing): kept small
         mobileSwipe: true,
         list: true,
         alignBottom: true,
         arrowsOut: true,
+        width: "60%",
         images: [
           { src: "assets/img/projects/station-1/sketch-m-east.jpg", ratio: 2.608, caption: "Early Sketch: East", tab: "East" },
           { src: "assets/img/projects/station-1/sketch-m-north.jpg", ratio: 3.3058, caption: "Early Sketch: North", tab: "North" },
@@ -636,15 +637,16 @@ const PROJECTS = [
       { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
       { divider: "Building B" },
       {
-        layout: "carousel", // early elevation sketches
+        layout: "carousel", // early elevation sketches (not his own drawing): kept small
         mobileSwipe: true,
         list: true,
         alignBottom: true,
         arrowsOut: true,
+        width: "60%",
         images: [
           { src: "assets/img/projects/station-1/sketch-b-east.jpg", ratio: 3.4302, caption: "Early Sketch: East", tab: "East" },
-          { src: "assets/img/projects/station-1/sketch-b-south.jpg", ratio: 2.7534, caption: "Early Sketch: South", tab: "South" },
-          { src: "assets/img/projects/station-1/sketch-b-north.jpg", ratio: 2.4177, caption: "Early Sketch: North", tab: "North" },
+          { src: "assets/img/projects/station-1/sketch-b-south.jpg", ratio: 4.4813, caption: "Early Sketch: South", captionInset: "19.3%", tab: "South" },
+          { src: "assets/img/projects/station-1/sketch-b-north.jpg", ratio: 3.9499, caption: "Early Sketch: North", captionInset: "19.4%", tab: "North" },
         ],
       },
       {
@@ -699,8 +701,8 @@ const PROJECTS = [
         arrowsOut: true,
         width: "90%",
         images: [
-          { src: "assets/img/projects/station-1/b-det-sheet-1.jpg", ratio: 1.351, tab: "Building B Primary Details" },
-          { src: "assets/img/projects/station-1/b-det-sheet-2.jpg", ratio: 1.351, tab: "Building B Additional Details" },
+          { src: "assets/img/projects/station-1/b-det-sheet-1.jpg", ratio: 1.351, tab: "Primary Details" },
+          { src: "assets/img/projects/station-1/b-det-sheet-2.jpg", ratio: 1.351, tab: "Additional Details" },
         ],
       },
       {
