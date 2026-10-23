@@ -135,12 +135,11 @@ one-line switch:
   Pro: cohesive with the photos and with the academic row. Con: loses some of the
   sparkle. To switch it on, uncomment `// stripWash: true` on those three entries in
   `projects.js`; the strength is the one grey value in `.strip-wash` in `style.css`.
-- Separate fix already live: the **Concord Way strip** was muddy under the darker tints
-  (blue, green, violet) because its blue sky went medium-dark grey in black and white.
-  `strip.jpg` is now made about 45% from the blue channel, so the sky is lighter than
-  the railing and the warm tints keep their bold sky. The original is
-  `concord-way/strip-color.jpg`; a stronger version (85% blue) made the warm tints
-  pastel and was rejected.
+- **Concord Way strip** stays the original (`concord-way/strip.jpg`), even though it goes a
+  little muddy under the darker tints (blue, green, violet): its blue sky turns medium-dark
+  grey in black and white. A version made about 45% from the blue channel
+  (`strip-bluesky.jpg`) gave the railing more contrast against the sky, but Ben set it
+  aside: it strips away the texture and the artistic grittiness that make the strip.
 - Ben is still deciding on the beside-text site plan treatment (square, 2:3 and 3:4 were
   tried; square with the plan starting at the first line of text is current).
 - Wall of Flutes: "mirror 5" is the interior render; its board images still carry their

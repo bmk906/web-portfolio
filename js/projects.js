@@ -80,7 +80,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 42;
+const IMAGE_VERSION = 43;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -972,7 +972,7 @@ const PROJECTS = [
     location: "Burlingame, CA",
     type: "Single-Family Renovation",
     status: "Built",
-    strip: "assets/img/projects/concord-way/strip.jpg", // pre-cropped close on one railing panel against the sky; black and white made partly from the blue channel so the sky stays lighter than the railing under the darker tints (backup: strip-color.jpg, the original)
+    strip: "assets/img/projects/concord-way/strip.jpg", // pre-cropped close on one railing panel against the sky (alternative: strip-bluesky.jpg, black and white partly from the blue channel for more contrast under the darker tints; tried and set aside, it loses the grit)
     stripFocus: "50% 50%",
     stripMono: true, // shown in black and white so it takes a tint like the others
     summary: [
