@@ -161,7 +161,9 @@
       root.setProperty("--header-hide", shrinkAt(y - HEADER_DELAY).toFixed(4));
     }
 
-    const PASSED = 0.85; // a project category also becomes active once the one above it is this far off screen
+    // a project category also becomes active once only this much of the strips above it
+    // still shows below the header (while most of its own strips are in view)
+    const STRIPS_LEFT = 0.2;
 
     function update() {
       const line = innerHeight * ACTIVE_LINE;
@@ -169,8 +171,11 @@
         if (s.getBoundingClientRect().top <= line) return true;
         // not the resume: its switch stays tied to the line, where the menu finishes shrinking
         if (!i || s.id === "resume") return false;
-        const prev = sections[i - 1].getBoundingClientRect();
-        return prev.bottom <= prev.height * (1 - PASSED);
+        const strip = sections[i - 1].querySelector(".strip-frame");
+        if (!strip) return false;
+        const r = strip.getBoundingClientRect();
+        const top = Math.max(0, header.getBoundingClientRect().bottom);
+        return r.bottom - top <= r.height * STRIPS_LEFT;
       }).pop() || sections[0];
       activate(current.id);
       if (!menuLocked) setShrink(scrollY);
