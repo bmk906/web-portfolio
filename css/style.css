@@ -670,6 +670,44 @@ html.menu-entering .layout > :not(.menu) {
   display: block;
 }
 
+/* spaceBefore: extra room above a new set of drawings (plans, elevations, details) */
+.gallery .is-spaced {
+  margin-top: clamp(32px, 4.5vw, 72px);
+}
+
+/* loupe (desktop): a round magnifier that follows the pointer over a dense drawing */
+.loupe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background-color: var(--paper);
+  background-repeat: no-repeat;
+  box-shadow: 0 0 0 1px var(--faint), 0 6px 24px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.loupe.is-visible {
+  opacity: 1;
+}
+
+.has-loupe .carousel-stage {
+  cursor: none;
+}
+
+.loupe-hint {
+  margin: 6px 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--mute);
+}
+
 /* place: images at set offsets and widths, tops aligned */
 .gallery-place .gallery-group {
   display: flex;
@@ -1001,6 +1039,15 @@ picture {
   }
 
   .hide-mobile {
+    display: none;
+  }
+
+  .gallery .is-spaced {
+    margin-top: 16px;
+  }
+
+  .loupe,
+  .loupe-hint {
     display: none;
   }
 

@@ -53,6 +53,11 @@
               row can take maxWidth: "930px" (desktop) so a small source is never blown up.
               row can take mobileRow: true to stay side by side on phones.
               A carousel can take arrowsOut: true (web) to fill the column, arrows in the margins.
+              A carousel can take loupe: true (web): a magnifier follows the pointer over the
+              drawing, for sheets too dense to read at page size (a click no longer turns it).
+              A pan can leave out follows: it then stands alone, swiped from one image to the next.
+              Carousels, pans and single images can take spaceBefore: true for extra room above
+              (a new set of drawings: plans, elevations, details).
               Any image can take mobileSrc: "x.jpg" (+ mobileRatio) to use a different file on phones.
               { divider: "Title", note: "..." } adds a section break (rule, subheading, rule)
               with an optional description under it.
@@ -73,7 +78,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 36;
+const IMAGE_VERSION = 37;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },
@@ -500,7 +505,7 @@ const PROJECTS = [
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
-        width: "95%", // a little smaller so it fits a 14" laptop screen
+        width: "81%", // smaller so it fits a 14" laptop screen
         images: [
           { src: "assets/img/projects/station-1/site-dev-west.jpg", ratio: 1.128, tab: "West" },
           { src: "assets/img/projects/station-1/site-dev-east.jpg", ratio: 1.128, tab: "East" },
@@ -521,21 +526,23 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // all six sheets cut with one window on the grid lines, so walls stay put between slides
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
-        width: "95%",
+        width: "76%",
         images: [
           { src: "assets/img/projects/station-1/m-plan-ground.jpg", ratio: 1.126, tab: "Ground Floor" },
           { src: "assets/img/projects/station-1/m-plan-second.jpg", ratio: 1.126, tab: "Second Floor" },
           { src: "assets/img/projects/station-1/m-ceiling-ground.jpg", ratio: 1.126, tab: "Ground Ceiling" },
           { src: "assets/img/projects/station-1/m-ceiling-second.jpg", ratio: 1.126, tab: "Second Ceiling" },
-          { src: "assets/img/projects/station-1/m-roof.jpg", ratio: 1.126, tab: "Roof" },
+          { src: "assets/img/projects/station-1/m-roof.jpg", ratio: 1.126, tab: "Tall Roof" },
           { src: "assets/img/projects/station-1/m-roof-flat.jpg", ratio: 1.126, tab: "Flat Roof" },
         ],
       },
       {
         layout: "carousel", // one elevation per slide at one scale, the F.F. 0 level line at the same height on every slide
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -549,25 +556,43 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // interior elevations, one sheet per slide at one scale (the kitchen is drawn at twice the scale)
+        layout: "carousel", // interior elevations, two rows of a sheet per slide, all at one scale
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         alignBottom: true,
         arrowsOut: true,
         images: [
-          { src: "assets/img/projects/station-1/m-int-day-lobby.jpg", ratio: 1.3502, tab: "Day Room & Lobby" },
-          { src: "assets/img/projects/station-1/m-int-admin.jpg", ratio: 1.3196, tab: "Admin" },
-          { src: "assets/img/projects/station-1/m-int-kitchen.jpg", ratio: 1.3468, tab: "Kitchen" },
-          { src: "assets/img/projects/station-1/m-int-second.jpg", ratio: 1.4134, tab: "Second Floor" },
-          { src: "assets/img/projects/station-1/m-int-dorm-bath.jpg", ratio: 1.3356, tab: "Dorms & Baths" },
+          { src: "assets/img/projects/station-1/m-int-dayroom.jpg", ratio: 2.7586, tab: "Day Room" },
+          { src: "assets/img/projects/station-1/m-int-lobby-hall.jpg", ratio: 2.8546, tab: "Lobby & Hall" },
+          { src: "assets/img/projects/station-1/m-int-training-hall.jpg", ratio: 2.6316, tab: "Training Room & Hall" },
+          { src: "assets/img/projects/station-1/m-int-offices.jpg", ratio: 2.8144, tab: "Offices & Copy" },
+          { src: "assets/img/projects/station-1/m-int-common.jpg", ratio: 2.6316, tab: "Common Room" },
+          { src: "assets/img/projects/station-1/m-int-hall-210.jpg", ratio: 3.3126, tab: "Upstairs Hall" },
+          { src: "assets/img/projects/station-1/m-int-dorm-bath-205.jpg", ratio: 2.6981, tab: "Dorm, Laundry & Bath" },
+          { src: "assets/img/projects/station-1/m-int-bath-217-toilet.jpg", ratio: 2.8571, tab: "Bath & Toilet" },
+        ],
+      },
+      {
+        layout: "carousel", // the kitchen's interior elevations (drawn at a larger scale), one row per slide
+        mobileSwipe: true,
+        list: true,
+        alignBottom: true,
+        arrowsOut: true,
+        images: [
+          { src: "assets/img/projects/station-1/m-int-kitchen-1.jpg", ratio: 3.3791, tab: "Kitchen: West & North" },
+          { src: "assets/img/projects/station-1/m-int-kitchen-2.jpg", ratio: 3.4115, tab: "Kitchen: East & South" },
+          { src: "assets/img/projects/station-1/m-int-kitchen-3.jpg", ratio: 3.4188, tab: "Kitchen: Island" },
         ],
       },
       {
         layout: "carousel", // A7.1 and A7.2 cut into columns of details that stack on one another, rows kept level
-        mobileSwipe: true,
+        spaceBefore: true,
+        hideOnMobile: true,
+        loupe: true,
         list: true,
         arrowsOut: true,
-        width: "55%",
+        width: "45%", // a whole column fits a 14" laptop screen; the loupe makes it readable
         images: [
           { src: "assets/img/projects/station-1/m-det-1.jpg", ratio: 0.6047, tab: "Details 1, 5, 9" },
           { src: "assets/img/projects/station-1/m-det-2.jpg", ratio: 0.6047, tab: "Details 2, 6" },
@@ -579,20 +604,38 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // A7.3: the balcony details and the training room exit (split in two), all at one scale
-        mobileSwipe: true,
+        layout: "pan", // mobile: each whole detail sheet, swiped across so the columns run on from one another
+        spaceBefore: true,
+        label: "Details",
+        zoom: 2.2,
+        images: [
+          { src: "assets/img/projects/station-1/m-det-sheet-1.jpg", ratio: 1.3508, caption: "Sheet 1 of 2" },
+          { src: "assets/img/projects/station-1/m-det-sheet-2.jpg", ratio: 1.3508, caption: "Sheet 2 of 2" },
+        ],
+      },
+      {
+        layout: "carousel", // A7.3: the two balcony details in one frame, the training room exit in another, one scale
+        hideOnMobile: true,
+        loupe: true,
         list: true,
         alignBottom: true,
         arrowsOut: true,
-        width: "60%",
+        width: "85%",
         images: [
-          { src: "assets/img/projects/station-1/m-add-7.jpg", ratio: 1.2432, tab: "Balcony Edge" },
-          { src: "assets/img/projects/station-1/m-add-8.jpg", ratio: 1.3021, tab: "Balcony at Wall" },
-          { src: "assets/img/projects/station-1/m-add-12a.jpg", ratio: 1.4854, tab: "Training Room Exit 1" },
-          { src: "assets/img/projects/station-1/m-add-12b.jpg", ratio: 1.5178, tab: "Training Room Exit 2" },
+          { src: "assets/img/projects/station-1/m-add-balcony.jpg", ratio: 2.0579, tab: "Balcony" },
+          { src: "assets/img/projects/station-1/m-add-exit.jpg", ratio: 2.454, tab: "Training Room Exit" },
         ],
       },
-      { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level
+      {
+        layout: "pan", // mobile: the same two frames, swiped across
+        label: "Details",
+        zoom: 2,
+        images: [
+          { src: "assets/img/projects/station-1/m-add-balcony.jpg", ratio: 2.0579, caption: "Balcony" },
+          { src: "assets/img/projects/station-1/m-add-exit.jpg", ratio: 2.454, caption: "Training Room Exit" },
+        ],
+      },
+      { src: "assets/img/projects/station-1/m-section-sketch.jpg" }, // hand section, rotated 1 degree so the slab line is level; the raised ceiling detail moved down beside it
       { divider: "Building B" },
       {
         layout: "carousel", // early elevation sketches
@@ -608,6 +651,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // one window on the grid lines (the porch part plan under it on A2.3 left out)
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -620,6 +664,7 @@ const PROJECTS = [
       },
       {
         layout: "carousel", // same scale as Building M's elevations; the El. 236.25 level line at the same height on every slide
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         arrowsOut: true,
@@ -633,23 +678,29 @@ const PROJECTS = [
         ],
       },
       {
-        layout: "carousel", // interior elevations, one sheet per slide at one scale
+        layout: "carousel", // interior elevations, up to two rows of a sheet per slide, all at one scale
+        spaceBefore: true,
         mobileSwipe: true,
         list: true,
         alignBottom: true,
         arrowsOut: true,
         images: [
-          { src: "assets/img/projects/station-1/b-int-exercise.jpg", ratio: 1.3617, tab: "Exercise" },
-          { src: "assets/img/projects/station-1/b-int-warehouse.jpg", ratio: 1.6495, tab: "Records & Storage" },
-          { src: "assets/img/projects/station-1/b-int-garage.jpg", ratio: 1.6503, tab: "Garage & Office" },
+          { src: "assets/img/projects/station-1/b-int-exercise-306.jpg", ratio: 2.6381, tab: "Exercise" },
+          { src: "assets/img/projects/station-1/b-int-sauna-bath.jpg", ratio: 2.8855, tab: "Sauna & Bathroom" },
+          { src: "assets/img/projects/station-1/b-int-records.jpg", ratio: 5.8182, tab: "Records" },
+          { src: "assets/img/projects/station-1/b-int-storage.jpg", ratio: 2.3392, tab: "Storage" },
+          { src: "assets/img/projects/station-1/b-int-garage-309.jpg", ratio: 2.1843, tab: "Garage" },
+          { src: "assets/img/projects/station-1/b-int-office-308.jpg", ratio: 6.6528, tab: "Office" },
         ],
       },
       {
         layout: "carousel", // A7.4 and A7.5 cut into columns, same as Building M's
-        mobileSwipe: true,
+        spaceBefore: true,
+        hideOnMobile: true,
+        loupe: true,
         list: true,
         arrowsOut: true,
-        width: "57.1%", // matches Building M's detail scale
+        width: "46.8%", // matches Building M's detail scale
         images: [
           { src: "assets/img/projects/station-1/b-det-1.jpg", ratio: 0.6284, tab: "Details 3, 5, 6, 8" },
           { src: "assets/img/projects/station-1/b-det-2.jpg", ratio: 0.6284, tab: "Details 1, 4, 9" },
@@ -657,6 +708,16 @@ const PROJECTS = [
           { src: "assets/img/projects/station-1/b-det-4.jpg", ratio: 0.6284, tab: "Details 1, 4, 7, 8, 11, 12" },
           { src: "assets/img/projects/station-1/b-det-5.jpg", ratio: 0.6284, tab: "Details 2, 9, 9a" },
           { src: "assets/img/projects/station-1/b-det-6.jpg", ratio: 0.6284, tab: "Details 3, 10, 15" },
+        ],
+      },
+      {
+        layout: "pan", // mobile: each whole detail sheet, swiped across
+        spaceBefore: true,
+        label: "Details",
+        zoom: 2.2,
+        images: [
+          { src: "assets/img/projects/station-1/b-det-sheet-1.jpg", ratio: 1.3508, caption: "Sheet 1 of 2" },
+          { src: "assets/img/projects/station-1/b-det-sheet-2.jpg", ratio: 1.3508, caption: "Sheet 2 of 2" },
         ],
       },
     ],
