@@ -730,7 +730,7 @@ const PROJECTS = [
     stripFocus: "50% 50%",
     // stripWash: true, // paper greyed so the tint fills the strip; off for now (2026-10-22), he is comparing both
     summary: [
-      "Hummingbird is a small compound tucked deep in the Santa Cruz Mountains: a main residence, a barn for gathering and creative work like painting and crafts, and a cottage for guests. The owners named it Hummingbird because they wanted the property to feel like a place where hummingbirds gather.",
+      "Hummingbird is a small, brand-new compound tucked deep in the Santa Cruz Mountains. The project will consist of a main residence, a barn for gathering and creative work like painting and crafts, and a guest cottage. The name comes from the owners' desire to live in a place where hummingbirds gather.",
       "The main house centers on a living room whose doors open out onto a terrace. Around it are the main bedroom and bathroom, a guest room, and a library with a hidden bookshelf door.",
       "The lot slopes steeply, so the topography is the big challenge. We plan to use retaining walls and grading to shape the land around the buildings, while still letting the house settle into the existing landscape.",
     ],
