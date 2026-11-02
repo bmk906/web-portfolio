@@ -75,6 +75,13 @@ proofreads every change.
 - Station 1's colour elevation sketches weren't drawn by Ben: they're credited
   ("Early Sketch by Project Lead: …"), kept small (60% wide) and placed after each
   building's drawn elevations rather than leading the section.
+- Burlingame ADU's sketches (the three option elevations and the two sketch plans) are
+  the project lead's too: credited ("Sketch by Project Lead: …") but kept on top, since
+  they're the option studies that lead to the scheme.
+- Home strips may use the project lead's sketches (Station 1, Burlingame): a strip is
+  there to draw the click, and the project page carries the credit. Trial strips cut from
+  Ben's own elevations were too busy with clouds and notes; he may bring clean PDF exports
+  to try again.
 - Statuses go by phase: Station 1 "Construction Documents" (change to "Under
   Construction" when it breaks ground), Hummingbird "Schematic Design", Burlingame ADU
   "Under Construction", Concord Way and Hillsborough "Built".

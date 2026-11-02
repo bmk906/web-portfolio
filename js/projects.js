@@ -853,24 +853,24 @@ const PROJECTS = [
       "The clients were excited about us picking fixtures and finishes in the bathrooms and have been extremely involved throughout the process. This project is currently under construction.",
     ],
     images: [
-      // sketches: cropped to the drawing (the handwritten label carried the address)
+      // sketches by the project lead (credited in the captions; kept on top as the option studies): cropped to the drawing (the handwritten label carried the address)
       {
         layout: "carousel",
         list: true, // mobile: stacked (no swipe) so each sketch shows at full width
         alignBottom: true,
         arrowsOut: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/option-2.jpg", ratio: 2.9144, caption: "Two Story ADU, Option 1", tab: "Two Story 1" },
-          { src: "assets/img/projects/burlingame-adu/option-3.jpg", ratio: 3.7647, caption: "Two Story ADU, Option 2", tab: "Two Story 2" },
-          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Single Story ADU with Attached Garage", tab: "Single Story" },
+          { src: "assets/img/projects/burlingame-adu/option-2.jpg", ratio: 2.9144, caption: "Sketch by Project Lead: Two Story ADU, Option 1", tab: "Two Story 1" },
+          { src: "assets/img/projects/burlingame-adu/option-3.jpg", ratio: 3.7647, caption: "Sketch by Project Lead: Two Story ADU, Option 2", tab: "Two Story 2" },
+          { src: "assets/img/projects/burlingame-adu/option-1.jpg", ratio: 3.2553, caption: "Sketch by Project Lead: Single Story ADU with Attached Garage", tab: "Single Story" },
         ],
       },
       {
         layout: "place", // web: each floor sits under its elevation in Two Story Option 1 above, at that sketch's scale
         hideOnMobile: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.9%", left: "7.06%", width: "25.9%" },
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.9%", left: "27.75%", width: "25.9%" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Sketch by Project Lead: Ground Floor", captionInset: "8.9%", left: "7.06%", width: "25.9%" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Sketch by Project Lead: Second Floor", captionInset: "8.9%", left: "27.75%", width: "25.9%" },
         ],
       },
       {
@@ -880,8 +880,8 @@ const PROJECTS = [
         mobileSlide: "69%", // about 0.8x the usual size; the sketches show their flaws when large
         list: true,
         images: [
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Ground Floor", captionInset: "8.9%", tab: "Ground Floor" },
-          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Second Floor", captionInset: "8.9%", tab: "Second Floor" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-1.jpg", ratio: 1.0336, caption: "Sketch by Project Lead: Ground Floor", captionInset: "8.9%", tab: "Ground Floor" },
+          { src: "assets/img/projects/burlingame-adu/sketch-plan-2.jpg", ratio: 1.0336, caption: "Sketch by Project Lead: Second Floor", captionInset: "8.9%", tab: "Second Floor" },
         ],
       },
       // drawings: title block and notes cropped off, each drawing on its own at one scale per sheet;
