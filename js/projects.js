@@ -1037,7 +1037,7 @@ const PROJECTS = [
     title: "Hillsborough",
     year: "2024",
     location: "Hillsborough, CA",
-    type: "Single-Family Residence",
+    type: "Single-Family Renovation",
     status: "Built",
     strip: "assets/img/projects/hillsborough/strip.jpg", // pre-cropped from the island photo, centred between the range hood and the skylight
     stripFocus: "50% 50%",
