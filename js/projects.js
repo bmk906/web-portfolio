@@ -80,7 +80,7 @@
 */
 
 // Bump whenever an image file is replaced under the same name, so browsers fetch the new one
-const IMAGE_VERSION = 43;
+const IMAGE_VERSION = 44;
 
 const CATEGORIES = [
   { id: "academic", label: "Academic", prefix: "A" },

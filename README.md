@@ -13,7 +13,7 @@ serve the folder over http (e.g. `npx http-server` or any static server) instead
 ## Files
 - `index.html` — home: menu, project strips, and the resume at the bottom (edit the HTML directly). The
   Download PDF link serves `assets/Benjamin-Klinger-Resume.pdf`, the "Open to relocation" version, copied
-  from `C:\Users\bmk90\Documents\Professional\Resume - Open to relocation\`. The PDF is built from
+  from `C:\Users\bmk90\Documents\Professional\resume\Resume - Open to relocation\`. The PDF is built from
   `C:\Users\bmk90\Documents\Professional\resume\resume.html` (`export.ps1`; `-Options local` = the SF version).
   Keep the site's resume text in step with the PDF (it leaves out location and Selected Projects).
 - `project.html` — one template for every project (`project.html?p=<slug>`)
