@@ -160,5 +160,8 @@ one-line switch:
   dates; dash bullets); Inter was dropped. Mobile keeps its own
   layout, text only. Where to put his email is undecided.
 - Still to decide: renaming "Concord Way" (a street name) and "Burlingame ADU".
-- If the site moves to a custom domain, update `og:url` and `og:image` in both HTML files
+- **Unlisted (Nov 2026):** both HTML files carry `<meta name="robots" content="noindex">` so searching
+  Ben's name doesn't surface the site; he shares it by link. Remove both tags when he wants it findable
+  (no robots.txt on purpose: blocking crawlers would stop them seeing the noindex).
+- Custom domain planned: `benjaminklinger.com` (Porkbun). When it moves, update `og:url` and `og:image` in both HTML files
   (and re-scrape with Facebook's Sharing Debugger).
