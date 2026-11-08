@@ -52,6 +52,27 @@
     if (!deck.length) shuffleTints();
     return deck.pop();
   }
+
+  /* Resume heads: the small numbers (01-05) get the same colours, freshly shuffled on
+     every load (the colours written in index.html are the fallback). Yellow is left out
+     (too pale for small text), and red and orange never sit one above the other in a
+     column (01 over 03 over 05 on the left, 02 over 04 on the right). */
+  (function colourResumeNumbers() {
+    const heads = [...document.querySelectorAll(".resume .rhead")];
+    if (heads.length !== 5) return;
+    const pool = TINTS.filter((c) => c !== "#F0B323");
+    const warm = ["#D8342A", "#E8732E"];
+    const stacked = [[0, 2], [2, 4], [1, 3]];
+    let order;
+    do {
+      order = [...pool];
+      for (let i = order.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [order[i], order[j]] = [order[j], order[i]];
+      }
+    } while (stacked.some(([a, b]) => warm.includes(order[a]) && warm.includes(order[b])));
+    heads.forEach((h, i) => h.style.setProperty("--c", order[i]));
+  })();
   const tinted = (p) => p.stripTint !== false && !/.svg$/.test(p.strip);
   // stripWash: a drawing on white paper gets its paper greyed (.strip-wash) so the tint
   // fills the whole strip, not just the lines

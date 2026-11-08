@@ -30,11 +30,7 @@
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <meta name="description" content="Portfolio of Benjamin Klinger, architectural designer.">
-  <!-- TRIAL: Inter for the desktop resume (see TRIAL block in style.css) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/style.css?v=96">
+  <link rel="stylesheet" href="css/style.css?v=97">
 </head>
 <body data-page="index">
 
@@ -63,22 +59,22 @@
             <span>03</span>
             <span>Resume</span>
           </h2>
-          <!-- add href="assets/resume.pdf" once the final PDF is in place -->
-          <a class="eyebrow text-link">Download PDF</a>
+          <a class="eyebrow text-link" href="assets/Benjamin-Klinger-Resume.pdf" download="Benjamin-Klinger-Resume.pdf">Download PDF</a>
         </div>
 
-        <!-- Rows of [main column | side column]; each row's rule spans both columns -->
+        <!-- Rows of [main column | side column]. Desktop: each block has a numbered head
+             (colored number, bar, title on a rule) like the PDF resume; mobile: plain heads and rules -->
         <div class="resume-body">
           <div class="resume-row">
             <section class="resume-block">
-              <h3>Profile</h3>
-              <p class="resume-profile">Architectural designer with 3+ years of experience at a small practice, taking projects from sketch to construction. Focused on transforming designs from concept to built reality. Seeking a detail-driven practice that values the craft of Architecture.</p>
+              <h3 class="rhead" style="--c:#D8342A"><span class="rnum">01</span><span class="rttl">Profile</span></h3>
+              <p class="resume-profile">Architectural designer with 3+ years of experience at a small design practice, taking projects from sketch to construction. Experience spans residential, school, and civic projects through schematic design, design development, construction documents, bidding, and construction administration. Collaborates directly with clients, consultants, and contractors to resolve design and construction issues. Seeking a detail-driven practice that values the craft of Architecture.</p>
             </section>
 
             <section class="resume-block">
-              <h3>Education</h3>
+              <h3 class="rhead" style="--c:#1E4FA0"><span class="rnum">02</span><span class="rttl">Education</span></h3>
               <ul class="plain-list edu-list">
-                <!-- desktop: school, then "B.Arch 2023" below; mobile: logo, rule, then the details -->
+                <!-- desktop: school, then "B.Arch | 2023" below; mobile: logo, rule, then the details -->
                 <li class="edu-school">
                   <img class="edu-logo" src="assets/img/um-logo.png" alt="University of Miami logo">
                   <strong>University of Miami</strong>
@@ -94,10 +90,12 @@
                Experience follows Experience directly; mobile: stacks in this order -->
           <div class="resume-row resume-row--split">
             <section class="resume-block resume-exp">
-              <h3>Experience</h3>
+              <h3 class="rhead" style="--c:#2F7D52"><span class="rnum">03</span><span class="rttl">Experience</span></h3>
               <div class="entry">
-                <h4>Dreiling Terrones Architecture <span class="entry-title">— Project Manager</span></h4>
-                <p class="entry-role">Burlingame, CA <span class="sep">|</span> 2023 — Present</p>
+                <div class="entry-head">
+                  <h4>Dreiling Terrones Architecture <span class="entry-title">— Project Manager</span></h4>
+                  <p class="entry-role">Burlingame, CA <span class="sep">|</span> 2023 — Present</p>
+                </div>
                 <ul>
                   <li>Deliver residential and institutional projects ranging from ADUs and single-family homes to schools and a fire station.</li>
                   <li>Develop projects across all phases, including schematic design, design development, construction documents, bidding, and construction administration.</li>
@@ -110,7 +108,8 @@
             </section>
 
             <section class="resume-block resume-side">
-              <h3>Core Skills</h3>
+              <h3 class="rhead rhead-desk" style="--c:#E8732E"><span class="rnum">04</span><span class="rttl">Skills</span></h3>
+              <h3 class="skill-sub">Core Skills</h3>
               <ul class="plain-list flow-list">
                 <li>Concept Development</li>
                 <li>Construction Detailing</li>
@@ -122,7 +121,7 @@
                 <li>Hand Sketching</li>
               </ul>
 
-              <h3 class="resume-subhead">Software</h3>
+              <h3 class="resume-subhead skill-sub">Software</h3>
               <ul class="plain-list flow-list">
                 <li>AutoCAD</li>
                 <li>Grasshopper</li>
@@ -138,20 +137,26 @@
             </section>
 
             <section class="resume-block resume-prev">
-              <h3>Previous Experience</h3>
+              <h3 class="rhead" style="--c:#6A3D9A"><span class="rnum">05</span><span class="rttl">Previous Experience</span></h3>
               <div class="entry">
-                <h4>Ethos Architecture <span class="entry-title">— Intern</span></h4>
-                <p class="entry-role">Summer 2023</p>
+                <div class="entry-head">
+                  <h4>Ethos Architecture <span class="entry-title">— Intern</span></h4>
+                  <p class="entry-role">Summer 2023</p>
+                </div>
                 <p>Drafted working drawings for a new branch of restaurant chain, Modern Market.</p>
               </div>
               <div class="entry">
-                <h4>Rad Lab, University of Miami <span class="entry-title">— Volunteer</span></h4>
-                <p class="entry-role">2018 — 2020</p>
+                <div class="entry-head">
+                  <h4>Rad Lab, University of Miami <span class="entry-title">— Volunteer</span></h4>
+                  <p class="entry-role">2018 — 2020</p>
+                </div>
                 <p>Created and tested Arduino prototypes for smart-home applications.</p>
               </div>
               <div class="entry">
-                <h4>George Mason University <span class="entry-title">— Intern</span></h4>
-                <p class="entry-role">Summer 2018</p>
+                <div class="entry-head">
+                  <h4>George Mason University <span class="entry-title">— Intern</span></h4>
+                  <p class="entry-role">Summer 2018</p>
+                </div>
                 <p>Analyzed and plotted hurricane data in MATLAB to study how hurricanes affect total precipitation across the U.S.</p>
               </div>
             </section>
@@ -162,6 +167,6 @@
   </main>
 
   <script src="js/projects.js?v=105"></script>
-  <script src="js/main.js?v=95"></script>
+  <script src="js/main.js?v=96"></script>
 </body>
 </html>

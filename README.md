@@ -8,7 +8,11 @@ Open `index.html` in a browser. Everything works from the file system, except CS
 serve the folder over http (e.g. `npx http-server` or any static server) instead.
 
 ## Files
-- `index.html` — home: menu, project strips, and the resume at the bottom (edit the HTML directly; put the PDF at `assets/resume.pdf`)
+- `index.html` — home: menu, project strips, and the resume at the bottom (edit the HTML directly). The
+  Download PDF link serves `assets/Benjamin-Klinger-Resume.pdf`, the "Open to relocation" version, copied
+  from `C:\Users\bmk90\Documents\Professional\Resume - Open to relocation\`. The PDF is built from
+  `C:\Users\bmk90\Documents\Professional\resume\resume.html` (`export.ps1`; `-Options local` = the SF version).
+  Keep the site's resume text in step with the PDF (it leaves out location and Selected Projects).
 - `project.html` — one template for every project (`project.html?p=<slug>`)
 - `js/projects.js` — **all project content lives here**; the comment block at its top documents every layout and option
 - `js/main.js` — renders the strips and project pages
@@ -151,8 +155,10 @@ one-line switch:
   tried; square with the plan starting at the first line of text is current).
 - Wall of Flutes: "mirror 5" is the interior render; its board images still carry their
   own titles and the "ARC 583 / Benjamin Klinger" header (02) — could be painted out.
-- Resume PDF download link not added yet (after the headhunter's critique); where to put
-  his email is undecided; keep or drop Inter on the desktop resume is undecided.
+- Resume (Nov 2026): desktop takes the PDF's motifs (Barlow, small colored two-digit numbers in the
+  "01 Academic" style, numbered row by row, colored from the strip palette, reshuffled on every load by main.js (no yellow; red and orange never stacked in a column; the colors in index.html are the fallback); title rules; right-aligned
+  dates; dash bullets); Inter was dropped. Mobile keeps its own
+  layout, text only. Where to put his email is undecided.
 - Still to decide: renaming "Concord Way" (a street name) and "Burlingame ADU".
 - If the site moves to a custom domain, update `og:url` and `og:image` in both HTML files
   (and re-scrape with Facebook's Sharing Debugger).

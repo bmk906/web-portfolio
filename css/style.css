@@ -9,6 +9,26 @@
   font-display: swap;
 }
 
+/* Barlow: the resume face (desktop), matching the PDF resume. OFL, see assets/fonts/OFL.txt */
+@font-face {
+  font-family: "Barlow";
+  src: url("../assets/fonts/Barlow-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow";
+  src: url("../assets/fonts/Barlow-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Barlow";
+  src: url("../assets/fonts/Barlow-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
 /* ---------- Tokens ---------- */
 
 :root {
@@ -1270,13 +1290,6 @@ picture {
   border-top: 1px solid var(--ink);
 }
 
-/* TRIAL: Inter for all resume text on desktop (loaded from Google Fonts in index.html).
-   To revert to Arial, delete this block and the Inter <link> in index.html. */
-@media (min-width: 761px) {
-  .resume {
-    font-family: "Inter", var(--font);
-  }
-}
 
 /* desktop: skills/software span both rows on the right, so Previous Experience
    sits right under Experience (no rule) however long the side column is */
@@ -1385,6 +1398,62 @@ picture {
   margin-top: 3px;
 }
 
+/* Desktop: motifs from the PDF resume. Barlow; each block's head is a small colored
+   two-digit number (the site's "01 Academic" style, PDF section colors) and the title on a
+   rule (these rules replace the row rules); meta right-aligned on the entry line; dash
+   bullets; skills subheads. */
+@media (min-width: 761px) {
+  .resume {
+    font-family: "Barlow", var(--font);
+  }
+  .resume-row {
+    border-top: 0;
+  }
+  .resume-block .rhead {
+    display: flex;
+    gap: 1.1em;
+    align-items: baseline;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--ink);
+  }
+  .rnum {
+    color: var(--c);
+  }
+  .resume-block .skill-sub {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .resume-block .resume-subhead.skill-sub {
+    margin-top: 18px;
+  }
+  .edu-sep {
+    display: inline;
+  }
+  .entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .entry-head .entry-role {
+    margin: 0 0 4px;
+    white-space: nowrap;
+  }
+  .entry ul {
+    padding-left: 1.1em;
+    list-style: none;
+  }
+  .entry ul li::before {
+    content: "–";
+    display: inline-block;
+    width: 1.1em;
+    margin-left: -1.1em;
+  }
+}
+
 /* ---------- Mobile ---------- */
 
 @media (max-width: 760px) {
@@ -1489,6 +1558,12 @@ picture {
   /* stacked: the side block gets its own rule */
   .resume-block + .resume-block {
     border-top: 1px solid var(--ink);
+  }
+
+  /* the desktop head pieces (number, bar, "Skills") stay off on mobile */
+  .rnum,
+  .rhead-desk {
+    display: none;
   }
 
   /* skills + software run on as one line, separated by dots, wrapping when full */
