@@ -1,6 +1,9 @@
 # Portfolio
 Architecture portfolio of Benjamin Klinger — plain HTML/CSS/JS, no build step.
-Live at https://bmk906.github.io/web-portfolio/ (GitHub Pages, deploys on push to `main`).
+Live at https://benjaminklinger.com/ (GitHub Pages with a custom domain, deploys on push to `main`;
+the old https://bmk906.github.io/web-portfolio/ address redirects there). Domain registered at Porkbun
+(auto-renew); DNS: four A records to GitHub's 185.199.108-111.153 and `www` CNAME to `bmk906.github.io`.
+The `CNAME` file in the repo root holds the domain: don't delete it.
 
 ## Preview
 Open `index.html` in a browser. Everything works from the file system, except CSS masks
@@ -163,5 +166,5 @@ one-line switch:
 - **Unlisted (Nov 2026):** both HTML files carry `<meta name="robots" content="noindex">` so searching
   Ben's name doesn't surface the site; he shares it by link. Remove both tags when he wants it findable
   (no robots.txt on purpose: blocking crawlers would stop them seeing the noindex).
-- Custom domain planned: `benjaminklinger.com` (Porkbun). When it moves, update `og:url` and `og:image` in both HTML files
+- Custom domain `benjaminklinger.com` (Nov 2026): `og:url` and `og:image` in both HTML files point there
   (and re-scrape with Facebook's Sharing Debugger).
