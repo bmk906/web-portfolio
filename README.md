@@ -92,6 +92,16 @@ proofreads every change.
 - Statuses go by phase: Station 1 "Construction Documents" (change to "Under
   Construction" when it breaks ground), Hummingbird "Schematic Design", Burlingame ADU
   "Under Construction", Concord Way and Hillsborough "Built".
+- Types: Hillsborough is "Single-Family Renovation" (Ben's correction, Nov 2026; the resume matches).
+- **Crops from packed sheets (Station 1 A4.2, Nov 2026):** the drawings sit so close that a shared crop
+  window catches the bubble or label of the drawing above or below. Paint those out surgically: find the
+  blank row between the stray piece and the drawing's own bubble/marker, and clear only a narrow strip
+  above it. Never clear a whole band of rows: that is how East's section markers lost their tops and
+  West's "4" label got clipped (both since restored from the sheet). When restoring from the sheet, copy
+  only the element that was cut, or the neighbour's piece comes back too (happened at East's AA bubble).
+  Building B's crops sit on the sheet at scale ~0.605 (sheet pixels to image pixels); East's top-left is
+  about (172, 1546) and West's (149, 2539) on the 7200 px `jpeg ver` sheet. North and both South images
+  are composites (each drawing placed on a shared canvas), not straight crops.
 
 ## Image processing (Windows, no Python, no ImageMagick)
 - Done with PowerShell + `System.Drawing` scripts (crop by pixel/fraction, resize, save
@@ -161,10 +171,13 @@ one-line switch:
 - Resume (Nov 2026): desktop takes the PDF's motifs (Barlow, small colored two-digit numbers in the
   "01 Academic" style, numbered row by row, colored from the strip palette, reshuffled on every load by main.js (no yellow; red and orange never stacked in a column; the colors in index.html are the fallback); title rules; right-aligned
   dates; dash bullets); Inter was dropped. Mobile keeps its own
-  layout, text only. Where to put his email is undecided.
+  layout, text only. Where to put his email is undecided. The resume's own notes and decisions are in
+  `C:\Users\bmk90\Documents\Professional\resume\README.md`; keep the site's resume text in step with it.
 - Still to decide: renaming "Concord Way" (a street name) and "Burlingame ADU".
 - **Unlisted (Nov 2026):** both HTML files carry `<meta name="robots" content="noindex">` so searching
   Ben's name doesn't surface the site; he shares it by link. Remove both tags when he wants it findable
   (no robots.txt on purpose: blocking crawlers would stop them seeing the noindex).
+- Email: `ben@benjaminklinger.com` forwards to Ben's Gmail (Porkbun email forwarding; receive only). Keep
+  the MX and SPF records in Porkbun's DNS. Ben applies with bmk906@gmail.com.
 - Custom domain `benjaminklinger.com` (Nov 2026): `og:url` and `og:image` in both HTML files point there
   (and re-scrape with Facebook's Sharing Debugger).
