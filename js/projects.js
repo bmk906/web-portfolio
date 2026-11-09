@@ -98,7 +98,7 @@ const PROJECTS = [
     strip: "assets/img/projects/sinusoidal/07.jpg",
     stripFocus: "58% 50%", // centred on the mullion just right of the middle
     summary: [
-      "Set in a developing neighborhood in Toronto, Sinusoidal is a market hall: a floor of market stalls beneath a single undulating roof, with a mezzanine café above.",
+      "Set in a developing neighborhood in Toronto, Sinusoidal features a floor of market stalls beneath a single undulating roof, with a mezzanine café above.",
       "The project is a study in thin-shell structures, aiming for a roof that is striking, efficient, and responsive to its site. It began as a field of modular cells shaped by the site. Layering sine waves across those cells produced a continuous shell, and varying the wave amplitudes from cell to cell let the roof meet the ground in a variety of ways. Stepping the heights of neighboring cells opens bands of clerestory light, and the troughs of the waves collect and store rainwater.",
     ],
     images: [

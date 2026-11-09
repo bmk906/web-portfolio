@@ -146,9 +146,8 @@ Use `sed` in Bash or a proper editor.
   headhunter (through his brother) for critique of the site and resume. The resume PDF
   link waits until after that critique. He'll also reread every description.
 
-### Open decision: how the practice strips look (Oct 2026)
-Ben is torn between two looks and is showing screenshots of both to people. Both are a
-one-line switch:
+### Practice strips: light (decided Nov 2026)
+Ben keeps the light look; washed stays available as a one-line switch if he changes his mind:
 - **Light (current):** the three drawing strips (Station 1, Hummingbird, Burlingame
   ADU) are line drawings on white paper, so the tint only lands on the lines. They read
   pale and airy next to the two photo strips (Concord Way, Hillsborough), which fill the
@@ -171,12 +170,16 @@ one-line switch:
 - Resume (Nov 2026): desktop takes the PDF's motifs (Barlow, small colored two-digit numbers in the
   "01 Academic" style, numbered row by row, colored from the strip palette, reshuffled on every load by main.js (no yellow; red and orange never stacked in a column; the colors in index.html are the fallback); title rules; right-aligned
   dates; dash bullets); Inter was dropped. Mobile keeps its own
-  layout, text only. Where to put his email is undecided. The resume's own notes and decisions are in
+  layout, text only. His email (bmk906@gmail.com, the one on the resume and applications) sits in the
+  resume header line before Download PDF, as a mailto link in lower case. The resume's own notes and decisions are in
   `C:\Users\bmk90\Documents\Professional\resume\README.md`; keep the site's resume text in step with it.
-- Still to decide: renaming "Concord Way" (a street name) and "Burlingame ADU".
+- Names stay (Nov 2026): Concord Way keeps its name (built, owners are friends). Station 1 is the touchy one
+  (public, in bidding): keep it stripped of anything identifying.
+- Wall of Flutes boards keep their "ARC 583 / Benjamin Klinger" header: it shows the work is from a class.
 - **Unlisted (Nov 2026):** both HTML files carry `<meta name="robots" content="noindex">` so searching
   Ben's name doesn't surface the site; he shares it by link. Remove both tags when he wants it findable
-  (no robots.txt on purpose: blocking crawlers would stop them seeing the noindex).
+  (no robots.txt on purpose: blocking crawlers would stop them seeing the noindex). Kept on: Ben picks
+  which firms he applies to.
 - Email: `ben@benjaminklinger.com` forwards to Ben's Gmail (Porkbun email forwarding; receive only). Keep
   the MX and SPF records in Porkbun's DNS. Ben applies with bmk906@gmail.com.
 - Custom domain `benjaminklinger.com` (Nov 2026): `og:url` and `og:image` in both HTML files point there

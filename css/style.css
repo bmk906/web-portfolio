@@ -1281,6 +1281,27 @@ picture {
   margin: 0;
 }
 
+/* email + Download PDF on one line; the address stays lower case */
+.resume-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 0 0.9em;
+}
+
+.resume-email {
+  text-transform: none;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+  border-bottom: 1px solid transparent;
+}
+
+.resume-email:hover,
+.resume-email:focus-visible {
+  border-bottom-color: currentColor;
+}
+
 /* two columns, like the PDF: wide main column + narrow side column,
    in rows so each dividing rule runs under both */
 .resume-row {
