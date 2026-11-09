@@ -169,8 +169,8 @@ Ben keeps the light look; washed stays available as a one-line switch if he chan
   own titles and the "ARC 583 / Benjamin Klinger" header (02) — could be painted out.
 - Resume (Nov 2026): desktop takes the PDF's motifs (Barlow, small colored two-digit numbers in the
   "01 Academic" style, numbered row by row, colored from the strip palette, reshuffled on every load by main.js (no yellow; red and orange never stacked in a column; the colors in index.html are the fallback); title rules; right-aligned
-  dates; dash bullets); Inter was dropped. Mobile keeps its own
-  layout, text only. His email (bmk906@gmail.com, the one on the resume and applications) sits in the
+  dates; dash bullets); Inter was dropped. Mobile keeps its own layout but has the coloured 01-05 numbers too (Nov 2026; no red/orange neighbours in its single column).
+  His email (bmk906@gmail.com, the one on the resume and applications) sits in the
   resume header line before Download PDF, as a mailto link in lower case. The resume's own notes and decisions are in
   `C:\Users\bmk90\Documents\Professional\resume\README.md`; keep the site's resume text in step with it.
 - Names stay (Nov 2026): Concord Way keeps its name (built, owners are friends). Station 1 is the touchy one
