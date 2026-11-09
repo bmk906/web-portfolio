@@ -171,7 +171,8 @@ Ben keeps the light look; washed stays available as a one-line switch if he chan
   "01 Academic" style, numbered row by row, colored from the strip palette, reshuffled on every load by main.js (no yellow; red and orange never stacked in a column; the colors in index.html are the fallback); title rules; right-aligned
   dates; dash bullets); Inter was dropped. Mobile keeps its own layout but has the coloured 01-05 numbers too (Nov 2026; no red/orange neighbours in its single column).
   His email (bmk906@gmail.com, the one on the resume and applications) sits in the
-  resume header line before Download PDF, as a mailto link in lower case. The resume's own notes and decisions are in
+  resume header as a mailto link in lower case: on desktop it starts on the Education column's left edge with
+  Download PDF on its right edge (no dot); on mobile, a row under "03 Resume". The resume's own notes and decisions are in
   `C:\Users\bmk90\Documents\Professional\resume\README.md`; keep the site's resume text in step with it.
 - Names stay (Nov 2026): Concord Way keeps its name (built, owners are friends). Station 1 is the touchy one
   (public, in bidding): keep it stripped of anything identifying.

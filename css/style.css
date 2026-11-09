@@ -1281,12 +1281,22 @@ picture {
   margin: 0;
 }
 
-/* email + Download PDF on one line; the address stays lower case */
+/* desktop: the header uses the resume rows' two columns, so the email starts on the
+   Education column's left edge and Download PDF ends on its right edge */
+@media (min-width: 761px) {
+  .resume-top {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    column-gap: clamp(32px, 4vw, 64px);
+  }
+}
+
+/* email left, Download PDF right; the address stays lower case */
 .resume-links {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: baseline;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 0 0.9em;
 }
 
@@ -1311,14 +1321,6 @@ picture {
     padding-bottom: 14px; /* room between the Download PDF underline and the first rule */
   }
 
-  .resume-links {
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
-
-  .resume-dot {
-    display: none;
-  }
 }
 
 /* two columns, like the PDF: wide main column + narrow side column,
