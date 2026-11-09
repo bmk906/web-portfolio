@@ -286,7 +286,7 @@ const PROJECTS = [
     stripFocus: "50% 50%",
     stripMono: true, // shown in black and white so it takes a tint like the others
     summary: [
-      "Monti Prenestini is a mountain range about an hour east of Rome, home to sweeping views, abundant wildlife, and a handful of medieval hill towns now at risk of depopulation. Our goal was a campaign to market the range to Romans as a destination for day trips. Using GIS, we mapped its points of interest and traced routes tailored to different visitors, from cyclists and hikers to horseback riders and pilgrims.",
+      "Monti Prenestini is a mountain range about an hour east of Rome, home to sweeping views, abundant wildlife, and a handful of medieval hill towns now at risk of depopulation. Our goal was to launch a marketing campaign targeting Romans looking for a destination for day trips and weekend getaways. Using GIS, we mapped its points of interest and traced routes tailored to different visitors, from cyclists and hikers to horseback riders and pilgrims.",
       "Our second goal was to strengthen transit within the mountains, making it easier for residents to commute to Rome and travel between towns. We focused on the gateway to the range: Zagarolo, where trains from Rome arrive at an uninviting station. We redesigned the plaza outside it to mark the passage out of the city and into a new landscape, sinking the entire plaza into the ground. An oscillating staircase, part seating and part circulation, steps down into it. Built from locally sourced limestone, it echoes the ancient terraces found throughout the mountains.",
     ],
     images: [
