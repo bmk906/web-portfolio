@@ -56,13 +56,14 @@
   /* Resume heads: the small numbers (01-05) get the same colours, freshly shuffled on
      every load (the colours written in index.html are the fallback). Yellow is left out
      (too pale for small text), and red and orange never sit one above the other in a
-     column (01 over 03 over 05 on the left, 02 over 04 on the right). */
+     column (01 over 03 over 05 on the left, 02 over 04 on the right), nor next to each
+     other in the single mobile column (01-02, 02-03, 03-04, 04-05). */
   (function colourResumeNumbers() {
     const heads = [...document.querySelectorAll(".resume .rhead")];
     if (heads.length !== 5) return;
     const pool = TINTS.filter((c) => c !== "#F0B323");
     const warm = ["#D8342A", "#E8732E"];
-    const stacked = [[0, 2], [2, 4], [1, 3]];
+    const stacked = [[0, 2], [2, 4], [1, 3], [0, 1], [1, 2], [2, 3], [3, 4]];
     let order;
     do {
       order = [...pool];

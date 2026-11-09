@@ -1308,6 +1308,7 @@ picture {
     flex-direction: column;
     align-items: stretch;
     gap: 0.9rem;
+    padding-bottom: 14px; /* room between the Download PDF underline and the first rule */
   }
 
   .resume-links {
@@ -1599,10 +1600,25 @@ picture {
     border-top: 1px solid var(--ink);
   }
 
-  /* the desktop head pieces (number, bar, "Skills") stay off on mobile */
-  .rnum,
-  .rhead-desk {
-    display: none;
+  /* coloured numbers on mobile too, like the desktop heads; the Skills block gets its
+     "04 Skills" head, with Core Skills / Software as sentence-case subheads under it */
+  .rhead {
+    display: flex;
+    gap: 1.1em;
+    align-items: baseline;
+  }
+  .rnum {
+    color: var(--c);
+  }
+  .resume-block .skill-sub {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .resume-block .resume-subhead.skill-sub {
+    margin-top: 18px;
   }
 
   /* skills + software run on as one line, separated by dots, wrapping when full */
