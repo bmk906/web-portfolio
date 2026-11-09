@@ -1302,6 +1302,24 @@ picture {
   border-bottom-color: currentColor;
 }
 
+/* mobile: "03 Resume" on its own line, then email left / Download PDF right */
+@media (max-width: 760px) {
+  .resume-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.9rem;
+  }
+
+  .resume-links {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+
+  .resume-dot {
+    display: none;
+  }
+}
+
 /* two columns, like the PDF: wide main column + narrow side column,
    in rows so each dividing rule runs under both */
 .resume-row {
